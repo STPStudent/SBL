@@ -11,7 +11,7 @@ public class UnitComponent : MonoBehaviour, IEnumerable
     private float acceleration = 3;
     private Rigidbody2D rigidBodyComponent;
     private bool used;
-    private Vector2 finishPosition = Vector2.zero;
+    internal Vector2 finishPosition = Vector2.zero;
     private new SpriteRenderer renderer;
     // Start is called before the first frame update
     public float MaxHealth;
@@ -30,13 +30,9 @@ public class UnitComponent : MonoBehaviour, IEnumerable
     void OnCollisionEnter2D(Collision2D other) 
     {
         // Collision would usually be on another component, putting it all here for simplicity
-        if(other.gameObject.name.IndexOf("PapaPotato") != -1
-        && gameObject.name.IndexOf("PapaPotato") == -1
-        ||other.gameObject.name.IndexOf("Evil") != -1
-        && gameObject.name.IndexOf("Evil") == -1)
+        if(other.gameObject.tag == "Unit")
         {
             var force = other.relativeVelocity.magnitude;
-            rigidBodyComponent.velocity = rigidBodyComponent.velocity - 100 * other.relativeVelocity;
             if (force > DamageForceThreshold) 
             {
                 CurrentHealth -= (int)((force - DamageForceThreshold) * DamageForceScale);
@@ -49,8 +45,20 @@ public class UnitComponent : MonoBehaviour, IEnumerable
     {
         rigidBodyComponent = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
-        CurrentHealth = MaxHealth - 20;
-        UnitSelect.AddUnit(this);
+        CurrentHealth = MaxHealth;
+        if(PlayerIndex == 0)
+            UnitControl.AddUnit(this);
+        else
+            EvilBrain.AddUnit(this);
+    }
+
+    public void DestroyUnit()
+    {
+        if(previousComponent != null)
+            previousComponent.nextComponent = nextComponent;
+        if(nextComponent != null)
+            nextComponent.previousComponent = previousComponent;
+        Destroy(this.gameObject);
     }
 
     public IEnumerator<UnitComponent> GetEnumerator()
@@ -89,15 +97,9 @@ public class UnitComponent : MonoBehaviour, IEnumerable
             Mathf.Clamp(transform.position.y, MainCamera.leftY + 1, MainCamera.rightY - 1),
             transform.position.z
         );
-        if(Input.GetMouseButtonDown(1)
-        && used)
-        {
-            finishPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
  
         var a = finishPosition - startPosition;
 
-        //Переворачивает спрайт по оси X
         if (a.x < 0)
             renderer.flipX = false;
         else
