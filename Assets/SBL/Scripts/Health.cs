@@ -14,6 +14,11 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(unit.CurrentHealth < 0.1)
+        {
+            unit.DestroyUnit();
+            Destroy(unit.gameObject);
+        }
         var scale = transform.localScale;
         var helthLen = unit.CurrentHealth / unit.MaxHealth;
         transform.localScale = new Vector3(1 - helthLen, 1, 0);

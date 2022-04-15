@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UnitSelect : MonoBehaviour
+public class UnitControl : MonoBehaviour
 {
     [SerializeField] private int maxUnits = 100;
     [SerializeField] private Image mainRect;
@@ -96,6 +96,12 @@ public class UnitSelect : MonoBehaviour
             canDraw = false;
 			SetSelect();
         }
+
+		if(Input.GetMouseButtonDown(1))
+		{
+			foreach (var comp in unitSelected)
+            	comp.finishPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		}
 
         Draw();
 
