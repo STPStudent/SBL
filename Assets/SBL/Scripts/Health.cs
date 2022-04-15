@@ -14,9 +14,9 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*var scale = transform.localScale;
+        var scale = transform.localScale;
         var helthLen = unit.CurrentHealth / unit.MaxHealth;
         transform.localScale = new Vector3(1 - helthLen, 1, 0);
-        transform.localPosition = new Vector3(helthLen / 2, 0, 0);*/
+        transform.localPosition = new Vector3(helthLen / 2, 0, 0);
     }
 }

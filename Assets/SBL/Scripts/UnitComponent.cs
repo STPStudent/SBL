@@ -30,18 +30,11 @@ public class UnitComponent : MonoBehaviour, IEnumerable
     void OnCollisionEnter2D(Collision2D other) 
     {
         // Collision would usually be on another component, putting it all here for simplicity
-        if(other.gameObject.name.IndexOf("PapaPotato") != -1
-        && gameObject.name.IndexOf("PapaPotato") == -1
-        ||other.gameObject.name.IndexOf("Evil") != -1
-        && gameObject.name.IndexOf("Evil") == -1)
+        var force = other.relativeVelocity.magnitude;
+        if (force > DamageForceThreshold) 
         {
-            var force = other.relativeVelocity.magnitude;
-            rigidBodyComponent.velocity = rigidBodyComponent.velocity - 100 * other.relativeVelocity;
-            if (force > DamageForceThreshold) 
-            {
-                CurrentHealth -= (int)((force - DamageForceThreshold) * DamageForceScale);
-                CurrentHealth = Mathf.Max(0, CurrentHealth);
-            }
+            CurrentHealth -= (int)((force - DamageForceThreshold) * DamageForceScale);
+            CurrentHealth = Mathf.Max(0, CurrentHealth);
         }
     }
 
@@ -97,7 +90,7 @@ public class UnitComponent : MonoBehaviour, IEnumerable
  
         var a = finishPosition - startPosition;
 
-        //Переворачивает спрайт по оси X
+        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ X
         if (a.x < 0)
             renderer.flipX = false;
         else

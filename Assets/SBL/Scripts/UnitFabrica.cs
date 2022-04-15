@@ -28,8 +28,8 @@ public class UnitFabrica : MonoBehaviour
         {
             unitCount--;
             ResourcesFabric.resourcesCount -= unitCost;
-            var x = GameObject.Find("PapaPotato");
-            Instantiate(x, transform.position + Vector3.left, Quaternion.identity);
+            var x = GameObject.Find("PapaFork");
+            Instantiate(x, transform.position + Vector3.right, Quaternion.identity);
         }
     }
 }
