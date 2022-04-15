@@ -1547,6 +1547,7 @@ MonoBehaviour:
   unitCount: 100
   unitCost: 1
   type: 0
+  name: PapaFork
 --- !u!50 &464201804
 Rigidbody2D:
   serializedVersion: 4
@@ -6392,7 +6393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561874ff6d60cca479d918e099226a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   PlayerIndex: 0
   MaxHealth: 100
   DamageForceThreshold: 1
