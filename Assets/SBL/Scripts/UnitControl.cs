@@ -75,7 +75,8 @@ public class UnitControl : MonoBehaviour
 	{
 		foreach(var unit in unitSelected)
 		{
-			unit.Deselect();
+			if(unit != null)
+				unit.Deselect();
 		}
 		unitSelected = new List<UnitComponent>();
 	}
