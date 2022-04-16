@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 180100475}
   - component: {fileID: 180100474}
   - component: {fileID: 180100473}
+  - component: {fileID: 180100478}
   m_Layer: 0
   m_Name: EvilPotato
   m_TagString: Unit
@@ -609,7 +610,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -711,6 +712,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!250 &180100478
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180100472}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: 1000
+  m_ForceVariation: 100
+  m_DistanceScale: 100
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 100
+  m_AngularDrag: 1000
 --- !u!1 &241214812
 GameObject:
   m_ObjectHideFlags: 0
@@ -4138,7 +4159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCount: 16
-  unitCost: 5
+  unitCost: 1
   type: 0
   unit: {fileID: 180100473}
   resources: {fileID: 1606998183}
@@ -6655,6 +6676,7 @@ GameObject:
   - component: {fileID: 2124899935}
   - component: {fileID: 2124899934}
   - component: {fileID: 2124899940}
+  - component: {fileID: 2124899939}
   m_Layer: 0
   m_Name: PapaFork
   m_TagString: Unit
@@ -6690,7 +6712,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -6792,6 +6814,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!250 &2124899939
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124899933}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceMagnitude: -10
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 100
+  m_AngularDrag: 0
 --- !u!95 &2124899940
 Animator:
   serializedVersion: 3
