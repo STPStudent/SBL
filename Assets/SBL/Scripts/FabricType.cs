@@ -2,9 +2,11 @@ using UnityEngine;
 using System.Collections;
 
 public enum FabricUnitType{
-    potato
+    potato,
+    fork
 }
 
 public enum FabricResourceType{
-    potato
+    potato,
+    fork
 }

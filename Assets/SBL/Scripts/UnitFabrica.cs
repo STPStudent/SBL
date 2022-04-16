@@ -8,7 +8,8 @@ public class UnitFabrica : MonoBehaviour
     [SerializeField] private int unitCount = 16;
     [SerializeField] private int unitCost = 5;
     [SerializeField] private FabricUnitType type;
-    [SerializeField] private string name;
+    [SerializeField] private UnitComponent unit;
+    [SerializeField] private ResourcesFabric resources;
     private bool a;
     private Collision2D alsmd;
     // Start is called before the first frame update
@@ -21,13 +22,12 @@ public class UnitFabrica : MonoBehaviour
     void OnMouseOver()
     {
         if(Input.GetMouseButtonDown(0)
-        && unitCost <= ResourcesFabric.resourcesCount
+        && unitCost <= resources.resourcesCount
         && unitCount > 0)
         {
             unitCount--;
-            ResourcesFabric.resourcesCount -= unitCost;
-            var x = GameObject.Find(name);
-            Instantiate(x, transform.position + Vector3.right, Quaternion.identity);
+            resources.resourcesCount -= unitCost;
+            Instantiate(unit, transform.position + Vector3.right, Quaternion.identity);
         }
     }
 }

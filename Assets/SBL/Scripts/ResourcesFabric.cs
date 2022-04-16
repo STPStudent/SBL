@@ -13,7 +13,7 @@ public class ResourcesFabric : MonoBehaviour
     [SerializeField] private int countAddAfterWait = 3;
     private float lastTime;
     private float deltaTime;
-    public static int resourcesCount = 0;
+    public int resourcesCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +34,7 @@ public class ResourcesFabric : MonoBehaviour
             lastTime = timeNow;
             resourcesCount ++;
         }
-        text.text = resourcesCount.ToString();
+        if(type == FabricResourceType.fork)
+            text.text = resourcesCount.ToString();
     }
 }
