@@ -17,6 +17,7 @@ public class UnitControl : MonoBehaviour
 	// Start is called before the first frame update
 	public static void AddUnit(UnitComponent comp)
 	{
+		Debug.Log(units);
 		units.nextComponent = comp;
 		comp.previousComponent = units;
 		units = comp;
@@ -73,9 +74,8 @@ public class UnitControl : MonoBehaviour
 	public static void SetDeselect()
 	{
 		foreach(var unit in unitSelected)
-		{
-			unit.Deselect();
-		}
+			if(unit != null)
+				unit.Deselect();
 		unitSelected = new List<UnitComponent>();
 	}
 
