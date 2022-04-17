@@ -91,12 +91,6 @@ public class UnitComponent : MonoBehaviour, IEnumerable
     void Update()
     {
         var startPosition = rigidBodyComponent.position;
-        transform.position = new Vector3
-        (
-            Mathf.Clamp(transform.position.x, MainCamera.leftX + 1, MainCamera.rightX - 1),
-            Mathf.Clamp(transform.position.y, MainCamera.leftY + 1, MainCamera.rightY - 1),
-            transform.position.z
-        );
  
         var a = finishPosition - startPosition;
 
