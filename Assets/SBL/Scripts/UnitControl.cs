@@ -14,7 +14,7 @@ public class UnitControl : MonoBehaviour
 	private static UnitComponent units;
 	private static List<UnitComponent> unitSelected;
 	private static int unitCount = 0;
-	// Start is called before the first frame update
+	
 	public static void AddUnit(UnitComponent comp)
 	{
 		//Добовляет юнита в связаный список
@@ -86,7 +86,6 @@ public class UnitControl : MonoBehaviour
 		unitSelected = new List<UnitComponent>();
 	}
 
-	// Update is called once per frame
 	void Update()
     {
 		//Когда нажимают левую кнопку мыши отменяет выделеине

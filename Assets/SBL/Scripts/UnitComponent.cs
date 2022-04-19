@@ -13,7 +13,6 @@ public class UnitComponent : MonoBehaviour, IEnumerable
     private bool used;
     internal Vector2 finishPosition = Vector2.zero;
     private new SpriteRenderer renderer;
-    // Start is called before the first frame update
     public float MaxHealth;
     public float DamageForceThreshold = 1f;
     public float DamageForceScale = 5f;
@@ -92,7 +91,7 @@ public class UnitComponent : MonoBehaviour, IEnumerable
         used = true;
         renderer.material.color = Color.green;
     }
-    // Update is called once per frame
+    
     void Update()
     {
         //находит вектор направления из текущей точки в указаную

@@ -7,9 +7,9 @@ public class EvilBrain : MonoBehaviour
     [SerializeField] private MainBilding player;
     [SerializeField] private EvilSpawner spawner;
     public static UnitComponent units;
-    // Start is called before the first frame update
     public static void AddUnit(UnitComponent comp)
 	{
+        //Добавляет юнита бота в список
 		units.nextComponent = comp;
 		comp.previousComponent = units;
 		units = comp;
@@ -20,15 +20,9 @@ public class EvilBrain : MonoBehaviour
         units = new UnitComponent();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(spawner.unitCost <= spawner.resources.resourcesCount
-        && spawner.unitCount > 0)
-        {
-            spawner.resources.resourcesCount -= spawner.unitCost;
-            Instantiate(spawner.unit, spawner.transform.position + Vector3.left, Quaternion.identity);
-        }
+        //Задаем направление каждому юниту
         foreach(var comp in units)
             comp.finishPosition = player.transform.position;
         

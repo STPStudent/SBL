@@ -9,15 +9,15 @@ public class EvilSpawner : MonoBehaviour
     [SerializeField] public FabricUnitType type;
     [SerializeField] public UnitComponent unit;
     [SerializeField] public ResourcesFabric resources;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        //Если выполняются условие делает спавн юнита бота
+        if(unitCost <= resources.resourcesCount
+        && unitCount > 0)
+        {
+            resources.resourcesCount -= unitCost;
+            Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
+        }
     }
 }
