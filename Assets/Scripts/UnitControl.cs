@@ -11,7 +11,7 @@ public class UnitControl : MonoBehaviour
     private Vector2 startPosition, endPosition;
     private Color original, clear, curColor;
     private bool canDraw;
-	private static UnitComponent units;
+	public static UnitComponent units;
 	private static List<UnitComponent> unitSelected;
 	private static int unitCount = 0;
 	
