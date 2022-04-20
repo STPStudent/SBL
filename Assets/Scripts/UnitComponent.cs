@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitComponent : MonoBehaviour, IEnumerable
+public class UnitComponent : MonoBehaviour, IEnumerable<UnitComponent>
 {
     [SerializeField] private UnitType type;
     [SerializeField] public int PlayerIndex;
@@ -71,6 +71,18 @@ public class UnitComponent : MonoBehaviour, IEnumerable
                 pathItem = pathItem.previousComponent;
             }
     }
+
+    /*public IEnumerator<UnitComponent> Skip(this UnitComponent units, int n)
+    {
+        foreach(var unit in units)
+        {
+            while (n != 0){
+                n--;
+                continue;
+            }
+            yield return unit;
+        }
+    }*/
 
     IEnumerator IEnumerable.GetEnumerator()
     {

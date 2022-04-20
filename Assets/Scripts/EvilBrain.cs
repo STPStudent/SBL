@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EvilBrain : MonoBehaviour
 {
     [SerializeField] private MainBilding player;
     [SerializeField] private EvilSpawner spawner;
-    private UnitControl playerUnits;
+    private UnitComponent playerUnits;
     public static UnitComponent units;
     public static void AddUnit(UnitComponent comp)
 	{
@@ -24,14 +25,15 @@ public class EvilBrain : MonoBehaviour
     void Update()
     {
         //Задаем направление каждому юниту
-        //playerUnits = UnitControl.units;
+        playerUnits = UnitControl.units;
         foreach(var comp in units)
         {
             comp.finishPosition = player.transform.position;
-            /*foreach(var unit in playerUnits){
-                if((comp.transform.position - unit.transform.position).magnitude < 10)
+            foreach(var unit in playerUnits.Where(x => x.previousComponent != null))
+            {
+                if(unit != null)
                     comp.finishPosition = unit.transform.position;
-            }*/
+            }
         }
     }
 }
