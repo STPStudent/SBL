@@ -28,6 +28,7 @@ public class ResourcesFabric : MonoBehaviour
             return;
         }
         var timeNow = Time.realtimeSinceStartup;
+        Debug.Log("");
         if(timeNow - lastTime - deltaTime > secondsWait)
         {
             lastTime = timeNow;
