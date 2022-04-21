@@ -14,13 +14,12 @@ public class ResourcesFabric : MonoBehaviour
     private float lastTime;
     private float deltaTime;
     public int resourcesCount = 0;
-    // Start is called before the first frame update
+
     void Start()
     {
         lastTime = Time.realtimeSinceStartup;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(PauseMenu.GameIsPause)

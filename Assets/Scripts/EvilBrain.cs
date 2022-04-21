@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EvilBrain : MonoBehaviour
 {
     [SerializeField] private MainBilding player;
     [SerializeField] private EvilSpawner spawner;
+    private UnitComponent playerUnits;
     public static UnitComponent units;
-    // Start is called before the first frame update
     public static void AddUnit(UnitComponent comp)
 	{
+        //Добавляет юнита бота в список
 		units.nextComponent = comp;
 		comp.previousComponent = units;
 		units = comp;
@@ -20,17 +22,21 @@ public class EvilBrain : MonoBehaviour
         units = new UnitComponent();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(spawner.unitCost <= spawner.resources.resourcesCount
-        && spawner.unitCount > 0)
-        {
-            spawner.resources.resourcesCount -= spawner.unitCost;
-            Instantiate(spawner.unit, spawner.transform.position + Vector3.left, Quaternion.identity);
-        }
+        //Задаем направление каждому юниту
+        playerUnits = UnitControl.units;
         foreach(var comp in units)
+        {
             comp.finishPosition = player.transform.position;
-        
+            if(playerUnits.FirstOrDefault() == null)
+                continue;
+            foreach(var unit in playerUnits.Where(x => x.previousComponent != null 
+                                                && x.previousComponent.name == x.name))
+            {
+                if(unit != null)
+                    comp.finishPosition = unit.transform.position;
+            }
+        }
     }
 }

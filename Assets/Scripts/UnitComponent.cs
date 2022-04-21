@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitComponent : MonoBehaviour, IEnumerable
+public class UnitComponent : MonoBehaviour, IEnumerable<UnitComponent>
 {
     [SerializeField] private UnitType type;
     [SerializeField] public int PlayerIndex;
@@ -13,36 +13,32 @@ public class UnitComponent : MonoBehaviour, IEnumerable
     private bool used;
     internal Vector2 finishPosition = Vector2.zero;
     private new SpriteRenderer renderer;
-    // Start is called before the first frame update
     public float MaxHealth;
     public float DamageForceThreshold = 1f;
     public float DamageForceScale = 5f;
 
     public float CurrentHealth { get; private set; }
-    private Vector2[] moweDirection = new Vector2[] 
-    { 
-        Vector2.up,
-        Vector2.down,
-        Vector2.left,
-        Vector2.right
-    };
 
     void OnCollisionEnter2D(Collision2D other) 
     {
-        // Collision would usually be on another component, putting it all here for simplicity
-        if(other.gameObject.tag == "Unit")
+        ///Сейчас проверяет тег если это юнит то выполнябтся условия 
+        if(other.gameObject.tag != gameObject.tag)
         {
-            var force = other.relativeVelocity.magnitude;
-            if (force > DamageForceThreshold) 
-            {
-                CurrentHealth -= (int)((force - DamageForceThreshold) * DamageForceScale);
-                CurrentHealth = Mathf.Max(0, CurrentHealth);
-            }
+            //Вычитает из здоровья значение урона
+            //если здоровье меньше нуля делает его нулем
+            CurrentHealth -= (int)(DamageForceScale);
+            CurrentHealth = Mathf.Max(0, CurrentHealth);
         }
     }
 
     void Start()
     {
+        //При создании юнита  ищем компонент 
+        //Rigidbody, который отвечает за физику обьекта
+        //SpriteRenderer который отвечает за спрайт обьекта
+        //Устанавливаем начальное здорвье на максимальное значение
+        //В зависимости от того какому игроку пренадлежит юнит
+        //добавляет его в соответсвующии разделы
         rigidBodyComponent = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         CurrentHealth = MaxHealth;
@@ -54,6 +50,9 @@ public class UnitComponent : MonoBehaviour, IEnumerable
 
     public void DestroyUnit()
     {
+        //Когда погибает юнит уберает ссылки на себя
+        //у других членов связаного списка
+        //А потом destoy уничтожает игровой обьект(себя)
         if(previousComponent != null)
             previousComponent.nextComponent = nextComponent;
         if(nextComponent != null)
@@ -63,6 +62,7 @@ public class UnitComponent : MonoBehaviour, IEnumerable
 
     public IEnumerator<UnitComponent> GetEnumerator()
     {
+        //Позволяет бегать по связаному списку
         yield return this;
         var pathItem = previousComponent;
             while (pathItem != null)
@@ -78,20 +78,24 @@ public class UnitComponent : MonoBehaviour, IEnumerable
     }
     public void Deselect()
     {
+        //Отменяет выделение юнита
+        //И возращает старый цвет
         used = false;
         renderer.material.color = Color.white;
     }
 
     public void Select()
     {
+        //Выделяет юнита 
+        //и меняет ему цвет на более зеленый
         used = true;
         renderer.material.color = Color.green;
     }
-    // Update is called once per frame
+    
     void Update()
     {
+        //находит вектор направления из текущей точки в указаную
         var startPosition = rigidBodyComponent.position;
- 
         var a = finishPosition - startPosition;
 
         if (a.x < 0)
@@ -108,4 +112,15 @@ public class UnitComponent : MonoBehaviour, IEnumerable
         }
         rigidBodyComponent.velocity = a.normalized * acceleration;
     }
+
+    void OnMouseOver()
+    {
+        renderer.material.color = Color.red;
+        CursorControl.MouseAttak();
+    }
+    void OnMouseExit()
+    {
+        renderer.material.color = Color.white;
+    }
+
 }

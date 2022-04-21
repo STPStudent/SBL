@@ -12,13 +12,7 @@ public class UnitFabrica : MonoBehaviour
     [SerializeField] private ResourcesFabric resources;
     private bool a;
     private Collision2D alsmd;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void OnMouseOver()
     {
         if(Input.GetMouseButtonDown(0)

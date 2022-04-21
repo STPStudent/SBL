@@ -6,11 +6,11 @@ public class MainCamera : MonoBehaviour
 {
     [SerializeField] private float minZoom, maxZoom;
     [SerializeField] private float mapWidth, mapHeight;
-    // Start is called before the first frame update
     internal static float leftX, rightX, leftY, rightY;
+
     void Start()
     {
-        var tilemap = GameObject.Find("Tilemap");
+        //Смотрим границы поля
         leftX = -mapWidth/2;
         leftY = -mapHeight/2;
         rightX = mapWidth/2;
@@ -19,8 +19,13 @@ public class MainCamera : MonoBehaviour
 
     private Vector3 GetNewCameraPosition(Vector3 direction)
     {
+        //Получаем координаты куда переместилась камера
+        //Делаем проверку не выходит ли она за границы
         var leftDownAngle = transform.position - Camera.main.ScreenToWorldPoint(Vector2.zero);
-        var rightUpAngle = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)) - transform.position;
+        var rightUpAngle = 
+        Camera.main.ScreenToWorldPoint(
+            new Vector2(Screen.width, Screen.height)
+        ) - transform.position;
         var k = transform.position + direction / 25;
         return new Vector3
         (
@@ -30,9 +35,9 @@ public class MainCamera : MonoBehaviour
         );
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Смотрим игра на паузе или нет
         if(PauseMenu.GameIsPause)
             return;
         

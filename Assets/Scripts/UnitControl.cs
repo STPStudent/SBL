@@ -11,13 +11,13 @@ public class UnitControl : MonoBehaviour
     private Vector2 startPosition, endPosition;
     private Color original, clear, curColor;
     private bool canDraw;
-	private static UnitComponent units;
+	public static UnitComponent units;
 	private static List<UnitComponent> unitSelected;
 	private static int unitCount = 0;
-	// Start is called before the first frame update
+	
 	public static void AddUnit(UnitComponent comp)
 	{
-		Debug.Log(units);
+		//Добовляет юнита в связаный список
 		units.nextComponent = comp;
 		comp.previousComponent = units;
 		units = comp;
@@ -25,6 +25,8 @@ public class UnitControl : MonoBehaviour
 	}
     void Awake()
     {
+		//Запускается до начала прогрузки обьктов
+		//устанавливает начальные значения
 		unitCount = 0;
 		units = new UnitComponent();
 		unitSelected = new List<UnitComponent>();
@@ -37,6 +39,7 @@ public class UnitControl : MonoBehaviour
 
     void Draw()
 	{
+		//Рисует прямоугольник по координатам верторов start position и endposition
 		endPosition = Input.mousePosition;
 		if(startPosition == endPosition || !canDraw) 
             return;
@@ -50,13 +53,15 @@ public class UnitControl : MonoBehaviour
 		);
 
 		mainRect.rectTransform.sizeDelta = new Vector2(rect.width, rect.height);
+		var sizeDelta = mainRect.rectTransform.sizeDelta;
 
-		mainRect.rectTransform.anchoredPosition = new Vector2(rect.x + mainRect.rectTransform.sizeDelta.x/2, 
-			Mathf.Max(endPosition.y, startPosition.y) - mainRect.rectTransform.sizeDelta.y/2);
+		mainRect.rectTransform.anchoredPosition = new Vector2(rect.x + sizeDelta.x/2, 
+			Mathf.Max(endPosition.y, startPosition.y) - sizeDelta.y/2);
 	}
 
 	void SetSelect()
 	{
+		//Ищет какие юниты находятся внутри прямоугольника и выделяет их
 		foreach(var unit in units)
 		{
 			if(unit != null)
@@ -73,15 +78,17 @@ public class UnitControl : MonoBehaviour
 
 	public static void SetDeselect()
 	{
+		//Отменяет выделение юнитов
 		foreach(var unit in unitSelected)
 			if(unit != null)
 				unit.Deselect();
 		unitSelected = new List<UnitComponent>();
 	}
 
-	// Update is called once per frame
 	void Update()
     {
+		//Когда нажимают левую кнопку мыши отменяет выделеине
+		//и говорит что мы можем рисовать прямоугольник
         if(Input.GetMouseButtonDown(0))
         {
             rect = new Rect();
@@ -89,14 +96,15 @@ public class UnitControl : MonoBehaviour
             canDraw = true;
 			SetDeselect();
         }
-
+		//Когда отпускают левую кнопку мыши
+		//убирает цвет нарисованому прямоугольнику
         if (Input.GetMouseButtonUp(0))
         {
             curColor = clear;
             canDraw = false;
 			SetSelect();
         }
-
+		//Когда нажимают правую кнопку мыши для каждого выбраного юника меняет финишную позицию
 		if(Input.GetMouseButtonDown(1))
 		{
 			foreach (var comp in unitSelected)
