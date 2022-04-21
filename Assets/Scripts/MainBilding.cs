@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class MainBilding : HealthControl
 {
-    // Start is called before the first frame update
+    [SerializeField] private GameObject result;
+    
     void Start()
     {
         this.SetHealth();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void DestroyObject()
     {
-        
+        PauseMenu.GameIsPause = true;
+        Time.timeScale = 0f;
+        result.SetActive(true);
     }
 }
