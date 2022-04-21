@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourcesFabric : MonoBehaviour
+public class ResourcesFabric : HealthControl
 {
     [SerializeField] private Text text;
     [SerializeField] private FabricResourceType type;
@@ -17,6 +17,7 @@ public class ResourcesFabric : MonoBehaviour
 
     void Start()
     {
+        this.SetHealth();
         lastTime = Time.realtimeSinceStartup;
     }
 

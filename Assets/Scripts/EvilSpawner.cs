@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EvilSpawner : MonoBehaviour
+public class EvilSpawner : HealthControl
 {
     [SerializeField] public int unitCount = 16;
     [SerializeField] public int unitCost = 5;
     [SerializeField] public FabricUnitType type;
     [SerializeField] public UnitComponent unit;
     [SerializeField] public ResourcesFabric resources;
+
+    void Start()
+    {
+        SetHealth();
+    }
     
     void Update()
     {

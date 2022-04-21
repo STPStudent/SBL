@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private UnitComponent unit;
+    [SerializeField] private HealthControl objectHP;
     void Start()
     {
         
@@ -14,10 +14,10 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(unit.CurrentHealth < 0.1)
-            unit.DestroyUnit();
+        if(objectHP.CurrentHealth < 0.1)
+            objectHP.DestroyObject();
         var scale = transform.localScale;
-        var helthLen = unit.CurrentHealth / unit.MaxHealth;
+        var helthLen = objectHP.CurrentHealth / objectHP.MaxHealth;
         transform.localScale = new Vector3(1 - helthLen, 1, 0);
         transform.localPosition = new Vector3(helthLen / 2, 0, 0);
     }
