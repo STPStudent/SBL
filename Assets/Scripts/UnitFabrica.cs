@@ -15,7 +15,6 @@ public class UnitFabrica : MonoBehaviour
     
     void OnMouseOver()
     {
-        Debug.Log("akdfksef");
         if(Input.GetMouseButtonDown(0)
         && unitCost <= resources.resourcesCount
         && unitCount > 0)

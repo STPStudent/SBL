@@ -29,7 +29,10 @@ public class EvilBrain : MonoBehaviour
         foreach(var comp in units)
         {
             comp.finishPosition = player.transform.position;
-            foreach(var unit in playerUnits.Where(x => x.previousComponent != null))
+            if(playerUnits.FirstOrDefault() == null)
+                continue;
+            foreach(var unit in playerUnits.Where(x => x.previousComponent != null 
+                                                && x.previousComponent.name == x.name))
             {
                 if(unit != null)
                     comp.finishPosition = unit.transform.position;

@@ -72,18 +72,6 @@ public class UnitComponent : MonoBehaviour, IEnumerable<UnitComponent>
             }
     }
 
-    /*public IEnumerator<UnitComponent> Skip(this UnitComponent units, int n)
-    {
-        foreach(var unit in units)
-        {
-            while (n != 0){
-                n--;
-                continue;
-            }
-            yield return unit;
-        }
-    }*/
-
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
@@ -124,4 +112,15 @@ public class UnitComponent : MonoBehaviour, IEnumerable<UnitComponent>
         }
         rigidBodyComponent.velocity = a.normalized * acceleration;
     }
+
+    void OnMouseOver()
+    {
+        renderer.material.color = Color.red;
+        CursorControl.MouseAttak();
+    }
+    void OnMouseExit()
+    {
+        renderer.material.color = Color.white;
+    }
+
 }

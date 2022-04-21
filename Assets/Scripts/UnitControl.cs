@@ -18,7 +18,6 @@ public class UnitControl : MonoBehaviour
 	public static void AddUnit(UnitComponent comp)
 	{
 		//Добовляет юнита в связаный список
-		Debug.Log(units);
 		units.nextComponent = comp;
 		comp.previousComponent = units;
 		units = comp;
