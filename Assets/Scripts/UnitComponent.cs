@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitComponent : MonoBehaviour, IEnumerable<UnitComponent>
+public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
 {
     [SerializeField] private UnitType type;
     [SerializeField] public int PlayerIndex;
@@ -13,23 +13,7 @@ public class UnitComponent : MonoBehaviour, IEnumerable<UnitComponent>
     private bool used;
     internal Vector2 finishPosition = Vector2.zero;
     private new SpriteRenderer renderer;
-    public float MaxHealth;
-    public float DamageForceThreshold = 1f;
-    public float DamageForceScale = 5f;
-
-    public float CurrentHealth { get; private set; }
-
-    void OnCollisionEnter2D(Collision2D other) 
-    {
-        ///Сейчас проверяет тег если это юнит то выполнябтся условия 
-        if(other.gameObject.tag != gameObject.tag)
-        {
-            //Вычитает из здоровья значение урона
-            //если здоровье меньше нуля делает его нулем
-            CurrentHealth -= (int)(DamageForceScale);
-            CurrentHealth = Mathf.Max(0, CurrentHealth);
-        }
-    }
+    
 
     void Start()
     {
@@ -41,14 +25,14 @@ public class UnitComponent : MonoBehaviour, IEnumerable<UnitComponent>
         //добавляет его в соответсвующии разделы
         rigidBodyComponent = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
-        CurrentHealth = MaxHealth;
+        this.SetHealth();
         if(PlayerIndex == 0)
             UnitControl.AddUnit(this);
         else
             EvilBrain.AddUnit(this);
     }
 
-    public void DestroyUnit()
+    public override void DestroyObject()
     {
         //Когда погибает юнит уберает ссылки на себя
         //у других членов связаного списка

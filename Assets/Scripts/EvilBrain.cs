@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EvilBrain : MonoBehaviour
+public class EvilBrain : HealthControl
 {
     [SerializeField] private MainBilding player;
     [SerializeField] private EvilSpawner spawner;
@@ -20,6 +20,11 @@ public class EvilBrain : MonoBehaviour
     void Awake()
     {
         units = new UnitComponent();
+    }
+    
+    void Start()
+    {
+        this.SetHealth();
     }
 
     void Update()

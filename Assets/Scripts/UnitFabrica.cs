@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class UnitFabrica : MonoBehaviour
+public class UnitFabrica : HealthControl
 {
     [SerializeField] private int unitCount = 16;
     [SerializeField] private int unitCost = 5;
@@ -12,6 +12,10 @@ public class UnitFabrica : MonoBehaviour
     [SerializeField] private ResourcesFabric resources;
     private bool a;
     private Collision2D alsmd;
+    void Start()
+    {
+        this.SetHealth();
+    }
     
     void OnMouseOver()
     {
