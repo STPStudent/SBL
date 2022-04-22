@@ -10,7 +10,7 @@ public class ResourcesFabric : HealthControl
     [SerializeField] private FabricResourceType type;
     private bool overflowed;
     [SerializeField] private int secondsWait = 5;
-    [SerializeField] private int countAddAfterWait = 3;
+    [SerializeField] private int countAddAfterWait = 1;
     private float lastTime;
     private float deltaTime;
     public int resourcesCount = 0;
@@ -32,7 +32,7 @@ public class ResourcesFabric : HealthControl
         if(timeNow - lastTime - deltaTime > secondsWait)
         {
             lastTime = timeNow;
-            resourcesCount ++;
+            resourcesCount += countAddAfterWait;
         }
         if(text != null)
             text.text = resourcesCount.ToString();
