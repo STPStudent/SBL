@@ -34,7 +34,7 @@ public class ResourcesFabric : HealthControl
             lastTime = timeNow;
             resourcesCount ++;
         }
-        if(type == FabricResourceType.fork)
+        if(text != null)
             text.text = resourcesCount.ToString();
     }
 }
