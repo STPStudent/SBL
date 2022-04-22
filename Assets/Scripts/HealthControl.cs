@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthControl : MonoBehaviour
 {
-    public float MaxHealth;
+    public float MaxHealth = 100;
     public float CurrentHealth;
     public float DamageForceThreshold = 1f;
     public float DamageForceScale = 5f;
@@ -18,17 +18,19 @@ public class HealthControl : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) 
     {
         ///Сейчас проверяет тег если это юнит то выполнябтся условия 
-        if(other.gameObject.tag != gameObject.tag)
+        if(other.gameObject.tag != gameObject.tag
+        && other.gameObject.tag != "Border")
         {
             //Вычитает из здоровья значение урона
             //если здоровье меньше нуля делает его нулем
-            GetDamage();
+            var attack = gameObject;
+            GetDamage(other.gameObject.GetComponent<HealthControl>().DamageForceScale);
         }
     }
 
-    public void GetDamage()
+    public void GetDamage(float damage)
     {
-        CurrentHealth -= (int)(DamageForceScale);
+        CurrentHealth -= (damage);
         CurrentHealth = Mathf.Max(0, CurrentHealth);
     }
 

@@ -4,7 +4,7 @@ using System.Threading;
 using UnityEngine;
 using System;
 
-public class TowerScript : MonoBehaviour
+public class TowerScript : HealthControl
 {
     [SerializeField] private Bomb _bomb;
     
