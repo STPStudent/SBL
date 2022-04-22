@@ -4444,7 +4444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be41bf87bc6be7e498ae002a6faff6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cursorTexture: {fileID: 0}
+  _cursorNormalTexture: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
+  _cursorAtackTexture: {fileID: 2800000, guid: 218e791789a366e429881c95f194d596, type: 3}
   _cursorMode: 0
   _hotSpot: {x: 0, y: 0}
 --- !u!4 &789745015

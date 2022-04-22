@@ -99,12 +99,11 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
 
     void OnMouseOver()
     {
-        renderer.material.color = Color.red;
-        CursorControl.MouseAttak();
+        CursorControl.SetAttakCursor();
     }
     void OnMouseExit()
     {
-        renderer.material.color = Color.white;
+        CursorControl.SetNormalCursor();
     }
 
 }
