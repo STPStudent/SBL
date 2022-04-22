@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,9 @@ public class EvilSpawner : HealthControl
         && unitCount > 0)
         {
             resources.resourcesCount -= unitCost;
-            Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
+            var name = unit.gameObject.name;
+            var newUnit = Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
+            newUnit.gameObject.name = name + Guid.NewGuid().ToString();
         }
     }
 }
