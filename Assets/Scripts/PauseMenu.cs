@@ -12,11 +12,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject resourses;
     public GameObject settings;
 
-    private void Start()
-    {
-        resourses = GameObject.Find("Resourse");
-        settings = GameObject.Find("Setting").transform.GetChild(0).gameObject;
-    }
     // Update is called once per frame
     void Update()
     {
