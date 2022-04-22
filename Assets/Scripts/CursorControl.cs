@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class CursorControl : MonoBehaviour
 {
-    [SerializeField] public Texture2D _cursorTexture;
+    [SerializeField] public Texture2D _cursorNormalTexture;
+    [SerializeField] public Texture2D _cursorAtackTexture;
     [SerializeField] public  CursorMode _cursorMode = CursorMode.Auto;
     [SerializeField] public Vector2 _hotSpot = Vector2.zero;
-    public static Texture2D cursorTexture;
+    public static Texture2D cursorNormalTexture;
+    public static Texture2D cursorAtackTexture;
     public static  CursorMode cursorMode;
     public static Vector2 hotSpot;
 
     void Start()
     {
-        cursorTexture = _cursorTexture;
+        cursorNormalTexture = _cursorNormalTexture;
+        cursorAtackTexture = _cursorAtackTexture;
         cursorMode = _cursorMode;
         hotSpot = _hotSpot;
     }
-    public static void MouseAttak()
+    public static void SetAttakCursor()
     {
-        var k = Texture2D.redTexture;
-        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        Cursor.SetCursor(cursorAtackTexture, hotSpot, cursorMode);
+    }
+
+    public static void SetNormalCursor()
+    {
+        Cursor.SetCursor(cursorNormalTexture, hotSpot, cursorMode);
     }
 }
