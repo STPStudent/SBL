@@ -19,7 +19,7 @@ public class HealthControl : MonoBehaviour
     {
         ///Сейчас проверяет тег если это юнит то выполнябтся условия 
         if(other.gameObject.tag != gameObject.tag
-        && other.gameObject.tag != "Border")
+        && other.gameObject.tag != "Untagged")
         {
             //Вычитает из здоровья значение урона
             //если здоровье меньше нуля делает его нулем
