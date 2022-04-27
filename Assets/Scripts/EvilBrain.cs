@@ -9,6 +9,7 @@ public class EvilBrain : HealthControl
     [SerializeField] private EvilSpawner spawner;
     private UnitComponent playerUnits;
     public static UnitComponent units;
+    public static int unitCount = 0;
     public static void AddUnit(UnitComponent comp)
 	{
         //Добавляет юнита бота в список
@@ -31,17 +32,9 @@ public class EvilBrain : HealthControl
     {
         //Задаем направление каждому юниту
         playerUnits = UnitControl.units;
-        foreach(var comp in units)
+        if(UnitControl.unitCount < 6)
         {
-            comp.finishPosition = player.transform.position;
-            if(playerUnits.FirstOrDefault() == null)
-                continue;
-            foreach(var unit in playerUnits.Where(x => x.previousComponent != null 
-                                                && x.previousComponent.name == x.name))
-            {
-                if(unit != null)
-                    comp.finishPosition = unit.transform.position;
-            }
+            
         }
     }
 }
