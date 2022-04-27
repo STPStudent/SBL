@@ -9,23 +9,30 @@ public class Build : MonoBehaviour, IPointerDownHandler
 {
     private bool IsBuilding;
     public GameObject Fabric;
-    public GameObject mainCam;
+    public int Cost;
+    [SerializeField] private ResourcesFabric resources;
+    public Texture2D cursor;
+    [SerializeField] private Texture2D normalCursor;
 
-    public void LateUpdate()
+    public void Update()
     {
         if (IsBuilding)
             if (Input.GetMouseButtonDown(1))
             {
                 IsBuilding = false;
-                Debug.Log("false");
                 var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Instantiate(Fabric, coordinates, Quaternion.identity);
+                Instantiate(Fabric, new Vector3(coordinates.x, coordinates.y, 0), Quaternion.identity);
+                Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
             }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        IsBuilding = true;
-        Debug.Log("true");
+        if (resources.resourcesCount >= Cost)
+        {
+            IsBuilding = true;
+            resources.resourcesCount -= Cost;
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
+        }
     }
 }
