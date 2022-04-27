@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class Bomb : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Bomb : MonoBehaviour
     private Vector3 direction;
     
     
-    private int dir = 1;
+    private Vector3 dir;
     
     
     
@@ -20,7 +21,8 @@ public class Bomb : MonoBehaviour
 
     private void Start()
     {
-        
+        gameObject.GetComponent<HealthControl>().SetHealth();
+
     }
 
     private void Awake()
@@ -28,12 +30,16 @@ public class Bomb : MonoBehaviour
         //sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
+    
+
     private void Update()
     {
-
-        transform.position =
-            Vector3.MoveTowards(transform.position, -direction * 2, speed * Time.deltaTime);
-        dir = -dir;
+        if(GameObject.FindGameObjectsWithTag("Bot").Length > 6)
+        {
+            direction = GameObject.FindGameObjectsWithTag("Bot")[6].transform.position;
+            transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);
+        }
+        
         //Задаем направление bomb
 
     }
