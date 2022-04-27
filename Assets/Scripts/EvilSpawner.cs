@@ -14,9 +14,10 @@ public class EvilSpawner : HealthControl
     void Start()
     {
         SetHealth();
+        EvilBrain.Spawners.Add(this);
     }
     
-    void Update()
+    public async void Spawn()
     {
         //Если выполняются условие делает спавн юнита бота
         if(unitCost <= resources.resourcesCount
@@ -25,7 +26,7 @@ public class EvilSpawner : HealthControl
             resources.resourcesCount -= unitCost;
             var name = unit.gameObject.name;
             var newUnit = Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
-            newUnit.gameObject.name = name + Guid.NewGuid().ToString();
+            newUnit.gameObject.name = name;
         }
     }
 }

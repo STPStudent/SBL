@@ -20,7 +20,6 @@ public class Bomb : HealthControl
 
     private void Update()
     {
-
         transform.position =
             Vector3.MoveTowards(transform.position, -direction * 2, speed * Time.deltaTime);
         dir = -dir;
