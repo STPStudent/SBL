@@ -99,7 +99,7 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
 
     void OnMouseOver()
     {
-        CursorControl.SetAttakCursor();
+        CursorControl.SetAttackCursor();
     }
     void OnMouseExit()
     {
