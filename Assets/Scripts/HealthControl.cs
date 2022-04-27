@@ -23,6 +23,7 @@ public class HealthControl : MonoBehaviour
         {
             //Вычитает из здоровья значение урона
             //если здоровье меньше нуля делает его нулем
+            Debug.Log(other.gameObject.tag);
             var attack = gameObject;
             GetDamage(other.gameObject.GetComponent<HealthControl>().DamageForceScale);
         }
