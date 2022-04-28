@@ -10,10 +10,14 @@ public class TowerScript : HealthControl
     private int frameCount = 0;
     public int interval;
     
+    void Start()
+    {
+        SetHealth();
+    }
 	void Update()
     {
-     frameCount++;
-     if (frameCount % interval == 0)
+        frameCount++;
+        if (frameCount % interval == 0)
  		{
 			Vector3 position = transform.position;
             position.y += 3.0F; //чтоб из вершины башни
@@ -21,19 +25,4 @@ public class TowerScript : HealthControl
             newBomb.Direction = GameObject.FindGameObjectWithTag("Bot").transform.position;
 		}
     }
-    
- /*void OnCollisionEnter2D(Collision2D other) 
-    {
-        if(other.gameObject.tag != gameObject.tag)
-        {
-            Vector3 position = transform.position;
-            position.y += 3.0F; //чтоб из вершины башни
-            Bomb newBomb = Instantiate(_bomb, position, Quaternion.identity) as Bomb;
-            newBomb.Direction = other.gameObject.transform.position;
-        }
-    }*/
-
-    
-    
-    
 }

@@ -16,6 +16,11 @@ public class EvilSpawner : HealthControl
         SetHealth();
         EvilBrain.Spawners.Add(this);
     }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log(gameObject.name);
+    }
     
     public async void Spawn()
     {

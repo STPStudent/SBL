@@ -54,7 +54,7 @@ public class EvilBrain : HealthControl
         }
 
         foreach(var unit in units)
-            unit.finishPosition =  new Vector2(15, -5);
+            unit.finishPosition =  new Vector2(42, 6);
 
         foreach(var unit in units)
             foreach(var comp in playerUnits)
@@ -76,11 +76,16 @@ public class EvilBrain : HealthControl
     private void CreateBilding()
     {
         resourcesCount = Spawners[0].resources.resourcesCount;
-        if(resourcesCount > 15)
+        if(resourcesCount > 15
+        && Spawners.Count < 4)
         {
             var x = Random.Range(0.0f, 15.0f);
             var y = Random.Range(0.0f, Mathf.Sqrt(225 - x*x));
-            Instantiate(Spawners[Random.Range(0,1)], 
+            Debug.Log(x/y);
+            if(x*x + y*y < 81
+            || (x/y > Mathf.Tan(1)))
+                return;
+            Instantiate(Spawners[Spawners.Count % 2], 
                 new Vector3(-x, -y, 0.0f) + transform.position, 
                 Quaternion.identity);
             Spawners[0].resources.resourcesCount -= 15;
@@ -91,7 +96,8 @@ public class EvilBrain : HealthControl
     {
         //Задаем направление каждому юниту
         playerUnits = UnitControl.units;
-        ControlArmy();
+        if(Spawners.Count > 2)
+            ControlArmy();
         CreateBilding();
     }
 }
