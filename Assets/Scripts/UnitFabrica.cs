@@ -19,6 +19,7 @@ public class UnitFabrica : HealthControl
     
     void OnMouseOver()
     {
+        Debug.Log(Input.GetMouseButtonDown(0));
         if(Input.GetMouseButtonDown(0)
         && unitCost <= resources.resourcesCount
         && unitCount > 0)

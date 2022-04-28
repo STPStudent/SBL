@@ -28,9 +28,9 @@ public class HealthControl : MonoBehaviour
         }
     }
 
-    public void GetDamage()
+    public void GetDamage(float damage)
     {
-        CurrentHealth -= (int)(DamageForceScale);
+        CurrentHealth -= (int)damage;
         CurrentHealth = Mathf.Max(0, CurrentHealth);
     }
 
