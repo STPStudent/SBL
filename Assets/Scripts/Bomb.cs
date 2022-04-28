@@ -3,34 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 
-public class Bomb : MonoBehaviour
+public class Bomb : HealthControl
 {
     private float speed = 3;
     private Vector3 direction;
-    
-    
     private Vector3 dir;
-    
-    
-    
-    public Vector3 Direction
-    {
-        set { direction = value; }
-    }
     private SpriteRenderer sprite;
 
     private void Start()
     {
-        gameObject.GetComponent<HealthControl>().SetHealth();
-
+        SetHealth();
     }
 
-    private void Awake()
+    public Vector3 Direction
     {
-        //sprite = GetComponentInChildren<SpriteRenderer>();
+        set => direction = value;
     }
-
-    
 
     private void Update()
     {
@@ -39,9 +27,6 @@ public class Bomb : MonoBehaviour
             direction = GameObject.FindGameObjectsWithTag("Bot")[6].transform.position;
             transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);
         }
-        
         //Задаем направление bomb
-
     }
-    
 }
