@@ -24,9 +24,7 @@ public class EvilSpawner : HealthControl
         && unitCount > 0)
         {
             resources.resourcesCount -= unitCost;
-            var name = unit.gameObject.name;
-            var newUnit = Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
-            newUnit.gameObject.name = name;
+            Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
         }
     }
 }

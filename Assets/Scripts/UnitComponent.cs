@@ -42,6 +42,10 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
         if(nextComponent != null)
             nextComponent.previousComponent = previousComponent;
         Destroy(this.gameObject);
+        if(PlayerIndex == 0)
+            UnitControl.unitCount--;
+        else
+            EvilBrain.unitCount--;
     }
 
     public IEnumerator<UnitComponent> GetEnumerator()
