@@ -13,7 +13,7 @@ public class UnitControl : MonoBehaviour
     private bool canDraw;
 	public static UnitComponent units;
 	private static List<UnitComponent> unitSelected;
-	private static int unitCount = 0;
+	public static int unitCount = 0;
 	
 	public static void AddUnit(UnitComponent comp)
 	{
