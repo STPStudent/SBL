@@ -11,6 +11,8 @@ public class EvilBrain : HealthControl
     public static UnitComponent units;
     public static int unitCount = 0;
     public int resourcesCount = 0;
+    private int attackCount = 0;
+    private int defenseCount = 0;
     public static void AddUnit(UnitComponent comp)
 	{
         //Добавляет юнита бота в список
@@ -18,6 +20,7 @@ public class EvilBrain : HealthControl
 		comp.previousComponent = units;
 		units = comp;
         unitCount++;
+        Debug.Log(unitCount);
 	}
 
     void Awake()
@@ -31,15 +34,15 @@ public class EvilBrain : HealthControl
         this.SetHealth();
     }
 
-    private void SetPoint(string goal, GameObject player)
+    private void SetPoint(string goal, GameObject[] k)
     {
-        if(player.gameObject.name.Contains(goal)
-        && player.transform.position.magnitude < 50)
-            foreach(var unit in units)
-            {
-                unit.finishPosition = player.gameObject.transform.position;
-                Debug.Log(player.gameObject);
-            }
+        foreach(var player in k)
+            if(player.gameObject.name.Contains(goal)
+            && player.transform.position.magnitude < 50)
+                foreach(var unit in units)
+                {
+                    unit.finishPosition = player.gameObject.transform.position;
+                }
     }
 
     private void ControlArmy()
@@ -56,19 +59,47 @@ public class EvilBrain : HealthControl
         foreach(var unit in units)
             unit.finishPosition =  new Vector2(42, 6);
 
-        foreach(var unit in units)
-            foreach(var comp in playerUnits)
+        foreach(var comp in playerUnits)
+        {
+            foreach(var unit in units)
                 if(unit != null && comp != null &&
                 (unit.transform.position - comp.transform.position).magnitude < 7)
                     unit.finishPosition = comp.transform.position;
-        
+        }
+
         if(unitCount > 10)
         {
             var k = GameObject.FindGameObjectsWithTag("Player");
-            foreach(var v in k)
+            SetPoint("PlayerMainBuild", k);
+            SetPoint("Fabric", k);
+            SetPoint("Tower", k);
+            SetPoint("Recourse", k);
+        }
+
+        attackCount = 0;
+        foreach(var comp in playerUnits)
+        {
+            if(comp == null)
+                continue;
+            var len = (comp.transform.position - transform.position).magnitude;
+            if(len < 20)
             {
-                SetPoint("Fabric", v);
-                SetPoint("Recourse", v);
+                attackCount++;
+                var k = Random.Range(0, Spawners.Count);
+                while(Spawners[k].transform.position.magnitude > 50)
+                    k = Random.Range(0, Spawners.Count);
+                defenseCount = 0;
+                foreach(var unit in units)
+                    if(unit != null 
+                    && (unit.transform.position - transform.position).magnitude < 20
+                    && len < (unit.finishPosition - new Vector2(transform.position.x, transform.position.y)).magnitude)
+                    {
+                        unit.finishPosition = comp.transform.position;
+                        defenseCount++;
+                    }
+                Debug.Log(attackCount);
+                if(defenseCount < attackCount)
+                    Spawners[k].Spawn();
             }
         }
     }
@@ -81,7 +112,6 @@ public class EvilBrain : HealthControl
         {
             var x = Random.Range(0.0f, 15.0f);
             var y = Random.Range(0.0f, Mathf.Sqrt(225 - x*x));
-            Debug.Log(x/y);
             if(x*x + y*y < 81
             || (x/y > Mathf.Tan(1)))
                 return;
