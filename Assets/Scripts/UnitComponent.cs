@@ -88,7 +88,7 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
             renderer.flipX = true;
 
 
-        if(a.magnitude < 0.1
+        if(a.magnitude < 2
         || finishPosition == Vector2.zero)
         {
             rigidBodyComponent.velocity = Vector2.zero;

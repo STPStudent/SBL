@@ -17,7 +17,6 @@ public class EvilBrain : HealthControl
 		comp.previousComponent = units;
 		units = comp;
         unitCount++;
-        Debug.Log(unitCount);
 	}
 
     void Awake()
@@ -31,13 +30,23 @@ public class EvilBrain : HealthControl
         this.SetHealth();
     }
 
+    private void SetPoint(string goal, GameObject player)
+    {
+        if(player.gameObject.name.Contains(goal)
+        && player.transform.position.magnitude < 50)
+            foreach(var unit in units)
+            {
+                unit.finishPosition = player.gameObject.transform.position;
+                Debug.Log(player.gameObject);
+            }
+    }
+
     private void ControlArmy()
     {
-        if(unitCount < 3 * Spawners.Count
+        if(unitCount < 5
         || unitCount * 3 < UnitControl.unitCount * 2)
         {
-            for(var i = 0; i < Mathf.Max(3 * Spawners.Count, UnitControl.unitCount * 2 / 3) - unitCount; i++)
-                Spawners[i % Spawners.Count].Spawn();
+            Spawners[Random.Range(0, Spawners.Count)].Spawn();
         }
 
         foreach(var unit in units)
@@ -54,11 +63,8 @@ public class EvilBrain : HealthControl
             var k = GameObject.FindGameObjectsWithTag("Player");
             foreach(var v in k)
             {
-                if(v.gameObject.name.Contains("Recourse"))
-                {
-                    foreach(var unit in units)
-                        unit.finishPosition = v.gameObject.transform.position;
-                }
+                SetPoint("Fabric", v);
+                SetPoint("Recourse", v);
             }
         }
     } 
