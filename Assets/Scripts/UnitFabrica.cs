@@ -14,7 +14,7 @@ public class UnitFabrica : HealthControl
     private Collision2D alsmd;
     void Start()
     {
-        this.SetHealth();
+        SetHealth();
     }
     
     void OnMouseOver()

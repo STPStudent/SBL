@@ -22,6 +22,7 @@ public class Build : MonoBehaviour, IPointerDownHandler
                 IsBuilding = false;
                 var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Instantiate(Fabric, new Vector3(coordinates.x, coordinates.y, 0), Quaternion.identity);
+                resources.resourcesCount -= Cost;
                 Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
             }
     }
@@ -31,7 +32,6 @@ public class Build : MonoBehaviour, IPointerDownHandler
         if (resources.resourcesCount >= Cost)
         {
             IsBuilding = true;
-            resources.resourcesCount -= Cost;
             Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
         }
     }
