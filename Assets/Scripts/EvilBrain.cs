@@ -20,8 +20,12 @@ public class EvilBrain : MonoBehaviour
 		comp.previousComponent = units;
 		units = comp;
         unitCount++;
-        Debug.Log(unitCount);
 	}
+
+    public static void DeleteSpawner(EvilSpawner spawner)
+    {
+        Spawners.Remove(spawner);
+    }
 
     void Awake()
     {
@@ -69,6 +73,14 @@ public class EvilBrain : MonoBehaviour
             SetPoint("Fabric", k);
             SetPoint("Tower", k);
             //SetPoint("Recourse", k);
+        }
+
+        foreach(var comp in playerUnits)
+        {
+            foreach(var unit in units)
+                if(unit != null && comp != null &&
+                (unit.transform.position - comp.transform.position).magnitude < 7)
+                    unit.finishPosition = comp.transform.position;
         }
 
         attackCount = 0;

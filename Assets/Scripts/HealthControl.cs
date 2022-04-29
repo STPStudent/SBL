@@ -15,8 +15,11 @@ public class HealthControl : MonoBehaviour
         CurrentHealth = MaxHealth;
     }
 
-    void OnCollisionEnter2D(Collision2D other) 
+    void OnCollisionStay2D(Collision2D other) 
     {
+        var timeNow = Time.time;
+        if(timeNow - Mathf.Floor(timeNow) > 0.4)
+            return;
         ///Сейчас проверяет тег если это юнит то выполнябтся условия 
         if(other.gameObject.tag != gameObject.tag
         && other.gameObject.tag != "Untagged")
