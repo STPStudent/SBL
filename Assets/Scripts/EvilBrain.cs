@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EvilBrain : HealthControl
+public class EvilBrain : MonoBehaviour
 {
     [SerializeField] private MainBilding player;
     public static List<EvilSpawner> Spawners;
@@ -29,11 +29,6 @@ public class EvilBrain : HealthControl
         Spawners = new List<EvilSpawner>();
     }
     
-    void Start()
-    {
-        this.SetHealth();
-    }
-
     private void SetPoint(string goal, GameObject[] k)
     {
         foreach(var player in k)
@@ -73,7 +68,7 @@ public class EvilBrain : HealthControl
             SetPoint("PlayerMainBuild", k);
             SetPoint("Fabric", k);
             SetPoint("Tower", k);
-            SetPoint("Recourse", k);
+            //SetPoint("Recourse", k);
         }
 
         attackCount = 0;
