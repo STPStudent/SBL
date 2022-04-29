@@ -17,13 +17,12 @@ public class HealthControl : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D other) 
     {
-        var timeNow = Time.time;
-        if(timeNow - Mathf.Floor(timeNow) > 0.4)
-            return;
         ///Сейчас проверяет тег если это юнит то выполнябтся условия 
         if(other.gameObject.tag != gameObject.tag
         && other.gameObject.tag != "Untagged")
         {
+            if(Time.time % 3 < 1.5)
+                return;
             //Вычитает из здоровья значение урона
             //если здоровье меньше нуля делает его нулем
             var attack = gameObject;
