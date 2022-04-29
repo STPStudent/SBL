@@ -56,9 +56,9 @@ public class MainCamera : MonoBehaviour
 
         var mousePosition = Input.mousePosition;
         var direction = Vector3.zero;
-        if(mousePosition.x > Screen.width - 1)
+        if(mousePosition.x > Screen.width - 10)
             direction += Vector3.right;
-        if(mousePosition.y > Screen.height - 1)
+        if(mousePosition.y > Screen.height - 10)
             direction += Vector3.up;
         if(mousePosition.x < 1)
             direction += Vector3.left;
