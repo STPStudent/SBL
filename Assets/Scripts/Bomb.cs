@@ -19,6 +19,7 @@ public class Bomb : HealthControl
     {
         set => direction = value;
     }
+    
 
     private void Update()
     {

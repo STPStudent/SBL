@@ -104,6 +104,7 @@ public class EvilBrain : MonoBehaviour
                         unit.finishPosition = comp.transform.position;
                         defenseCount++;
                     }
+                Debug.Log(defenseCount);
                 Debug.Log(attackCount);
                 if(defenseCount < attackCount)
                     Spawners[k].Spawn();
@@ -119,8 +120,7 @@ public class EvilBrain : MonoBehaviour
         {
             var x = Random.Range(0.0f, 15.0f);
             var y = Random.Range(0.0f, Mathf.Sqrt(225 - x*x));
-            if(x*x + y*y < 81
-            || (x/y > Mathf.Tan(1)))
+            if(x*x + y*y < 81)
                 return;
             Instantiate(Spawners[Spawners.Count % 2], 
                 new Vector3(-x, -y, 0.0f) + transform.position, 
