@@ -17,9 +17,10 @@ public class EvilSpawner : HealthControl
         EvilBrain.Spawners.Add(this);
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    public override void DestroyObject()
     {
-        Debug.Log(gameObject.name);
+        EvilBrain.DeleteSpawner(this);
+        Destroy(this.gameObject);
     }
     
     public async void Spawn()
