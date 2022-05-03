@@ -28,9 +28,11 @@ public class TowerScript : HealthControl
             {
 			    Vector3 position = transform.position;
                 position.y += 4.5F; //чтоб из вершины башни
-                Bomb newBomb = Instantiate(_bomb, position, Quaternion.identity) as Bomb;
                 foreach (var unit in units)
                 {
+                    if((position - unit.transform.position).magnitude > 15)
+                        continue;
+                    Bomb newBomb = Instantiate(_bomb, position, Quaternion.identity) as Bomb;
                     newBomb.Direction = unit.transform.position;
                     break;
                 }
