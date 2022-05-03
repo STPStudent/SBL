@@ -1,33 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading;
 
-public class Bomb : HealthControl
+public class Bomb : MonoBehaviour
 {
     private float speed = 3;
-    private Vector3 direction;
-    private Vector3 dir;
-    private SpriteRenderer sprite;
-
-    private void Start()
-    {
-        SetHealth();
-    }
+    private Vector3 direction = Vector3.zero;
+    private int frameCount = 0;
+    public int bombLifeLongevity;
 
     public Vector3 Direction
     {
-        set => direction = value;
+        get { return direction; }
+        set { direction = value; }
     }
-    
 
+    
     private void Update()
     {
-        if(GameObject.FindGameObjectsWithTag("Bot").Length > 6)
+        frameCount++;
+        if (frameCount == bombLifeLongevity)
         {
-            direction = GameObject.FindGameObjectsWithTag("Bot")[6].transform.position;
-            transform.position = Vector3.MoveTowards(transform.position, direction, speed * Time.deltaTime);
+            frameCount = 0;
+            Destroy(gameObject);
         }
+
         //Задаем направление bomb
+        transform.position = Vector3.MoveTowards(transform.position, Direction, speed * Time.deltaTime);
+    }
+    
+    void OnCollisionEnter2D(Collision2D other) 
+    {
+        //уничтожение бомбы при столкновении с любым предметом
+        Destroy(gameObject);
     }
 }

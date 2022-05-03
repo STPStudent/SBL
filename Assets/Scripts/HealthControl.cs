@@ -14,6 +14,16 @@ public class HealthControl : MonoBehaviour
     {
         CurrentHealth = MaxHealth;
     }
+    
+    void OnCollisionEnter2D(Collision2D other) 
+    {
+        ///Этот метод нужен для получения урона от бомбы
+        if(other.gameObject.tag == "BombPlayer" && gameObject.tag == "Bot" ||
+           other.gameObject.tag == "BombBot" && gameObject.tag == "Player")
+        {
+            GetDamage(10);
+        }
+    }
 
     void OnCollisionStay2D(Collision2D other) 
     {
