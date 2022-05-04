@@ -10,11 +10,13 @@ public class EvilSpawner : HealthControl
     [SerializeField] public FabricUnitType type;
     [SerializeField] public UnitComponent unit;
     [SerializeField] public ResourcesFabric resources;
-
+    [SerializeField] private float deltaTime;
+    private float lastTime;
     void Start()
     {
         SetHealth();
         EvilBrain.Spawners.Add(this);
+        lastTime = Time.time;
     }
 
     public override void DestroyObject()
@@ -26,9 +28,12 @@ public class EvilSpawner : HealthControl
     public async void Spawn()
     {
         //Если выполняются условие делает спавн юнита бота
+        var time = Time.time;
         if(unitCost <= resources.resourcesCount
-        && unitCount > 0)
+        && unitCount > 0
+        && time - lastTime > deltaTime)
         {
+            lastTime = time;
             resources.resourcesCount -= unitCost;
             Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
         }

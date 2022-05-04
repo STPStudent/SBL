@@ -4053,6 +4053,7 @@ MonoBehaviour:
   type: 0
   unit: {fileID: 180100473}
   resources: {fileID: 1606998183}
+  deltaTime: 5
 --- !u!50 &761031164
 Rigidbody2D:
   serializedVersion: 4
@@ -6874,6 +6875,7 @@ MonoBehaviour:
   type: 0
   unit: {fileID: 1412451251}
   resources: {fileID: 1606998183}
+  deltaTime: 5
 --- !u!50 &974067944
 Rigidbody2D:
   serializedVersion: 4
@@ -10404,6 +10406,7 @@ MonoBehaviour:
   type: 0
   unit: {fileID: 2124899934}
   resources: {fileID: 57560246}
+  deltaTime: 5
 --- !u!50 &1475393180
 Rigidbody2D:
   serializedVersion: 4
@@ -11233,6 +11236,7 @@ MonoBehaviour:
   type: 0
   unit: {fileID: 2038648587}
   resources: {fileID: 57560246}
+  deltaTime: 0
 --- !u!50 &1609624838
 Rigidbody2D:
   serializedVersion: 4
