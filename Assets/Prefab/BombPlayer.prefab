@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7fcd22614d60d478b80f1f262f2834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombLifeLongevity: 1000
+  bombLifeLongevity: 600
 --- !u!60 &6327449400938858849
 PolygonCollider2D:
   m_ObjectHideFlags: 0
