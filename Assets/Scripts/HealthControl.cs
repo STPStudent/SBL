@@ -14,27 +14,21 @@ public class HealthControl : MonoBehaviour
     {
         CurrentHealth = MaxHealth;
     }
-    
-    void OnCollisionEnter2D(Collision2D other) 
-    {
-        ///Этот метод нужен для получения урона от бомбы
-        if(other.gameObject.tag == "BombPlayer" && gameObject.tag == "Bot" ||
-           other.gameObject.tag == "BombBot" && gameObject.tag == "Player")
-        {
-            GetDamage(10);
-        }
-    }
 
-    void OnCollisionStay2D(Collision2D other) 
+    void OnCollisionEnter2D(Collision2D other) 
     {
         ///Сейчас проверяет тег если это юнит то выполнябтся условия 
         if(other.gameObject.tag != gameObject.tag
         && other.gameObject.tag != "Untagged")
         {
-            if(Time.time % 3 < 1.5)
-                return;
             //Вычитает из здоровья значение урона
             //если здоровье меньше нуля делает его нулем
+            if(other.gameObject.tag == "BombPlayer" ||
+           other.gameObject.tag == "BombBot")
+            {
+                GetDamage(10);
+                return;
+            }
             var attack = gameObject;
             GetDamage(other.gameObject.GetComponent<HealthControl>().DamageForceScale);
         }
