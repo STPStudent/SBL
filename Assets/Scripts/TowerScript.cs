@@ -7,24 +7,24 @@ public class TowerScript : HealthControl
 {
     [SerializeField] private Bomb _bomb;
     [SerializeField] private int Radius;
-    private int frameCount = 0;
-    public int interval;
+    [SerializeField] private float deltaTime = 0;
+    private float lastShot;
 
     public static UnitComponent units;
     
     void Start()
     {
         SetHealth();
+        lastShot = Time.time;
     }
 	void Update()
     {
-        frameCount++;
-        if (frameCount % interval == 0)
+        if (Time.time - lastShot > deltaTime)
         {
+            lastShot = Time.time;
             if (gameObject.tag == "Player")
                 units = EvilBrain.units;
             else units = UnitControl.units;
-            frameCount = 0;
             if (units != null)
             {
 			    Vector3 position = transform.position;

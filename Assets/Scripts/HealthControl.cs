@@ -23,12 +23,13 @@ public class HealthControl : MonoBehaviour
         {
             //Вычитает из здоровья значение урона
             //если здоровье меньше нуля делает его нулем
-            if(other.gameObject.tag == "BombPlayer" ||
-           other.gameObject.tag == "BombBot")
+            if(other.gameObject.name.Contains("BombPlayer") ||
+           other.gameObject.name.Contains("BombEvil"))
             {
                 GetDamage(10);
                 return;
             }
+            Debug.Log(other.gameObject.name);
             var attack = gameObject;
             GetDamage(other.gameObject.GetComponent<HealthControl>().DamageForceScale);
         }

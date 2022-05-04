@@ -6,32 +6,41 @@ public class Bomb : MonoBehaviour
 {
     private float speed = 3;
     private Vector3 direction = Vector3.zero;
-    private int frameCount = 0;
-    public int bombLifeLongevity;
+    [SerializeField] private float lifeTime = 0;
+    private float lifeStart;
+    [SerializeField] private int BombSpeed = 1; 
+    private Rigidbody2D rigidBodyComponent;
 
     public Vector3 Direction
     {
         get { return direction; }
         set { direction = value; }
     }
-
     
+    void Start()
+    {
+        lifeStart = Time.time;
+        rigidBodyComponent = GetComponent<Rigidbody2D>();
+        //Задаем направление bomb
+        rigidBodyComponent.velocity = 
+        (Direction - transform.position).normalized * BombSpeed;
+    }
+
     private void Update()
     {
-        frameCount++;
-        if (frameCount == bombLifeLongevity)
+        if (Time.time - lifeStart >= lifeTime)
         {
-            frameCount = 0;
             Destroy(gameObject);
         }
-
-        //Задаем направление bomb
-        transform.position = Vector3.MoveTowards(transform.position, Direction, speed * Time.deltaTime);
     }
     
     void OnCollisionEnter2D(Collision2D other) 
     {
         //уничтожение бомбы при столкновении с любым предметом
-        Destroy(gameObject);
+        if(gameObject.tag != other.gameObject.tag
+        && other.gameObject.tag != "Untagged")
+        {
+            Destroy(gameObject);
+        }
     }
 }
