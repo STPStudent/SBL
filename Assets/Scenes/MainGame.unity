@@ -5814,7 +5814,7 @@ MonoBehaviour:
   DamageForceScale: 1
   _bomb: {fileID: 6327449400938858878, guid: b37b5658a2ca29d4a8da2c168101faef, type: 3}
   Radius: 15
-  interval: 100
+  deltaTime: 0
 --- !u!212 &804773375
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13900,7 +13900,7 @@ MonoBehaviour:
   DamageForceScale: 1
   _bomb: {fileID: 8268424299518160429, guid: 0024e0c74bb450748b16812231aa96b1, type: 3}
   Radius: 15
-  interval: 200
+  deltaTime: 2
 --- !u!212 &2119968674
 SpriteRenderer:
   m_ObjectHideFlags: 0
