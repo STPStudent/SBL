@@ -55,9 +55,6 @@ public class EvilBrain : MonoBehaviour
             Spawners[k].Spawn();
         }
 
-        foreach(var unit in units)
-            unit.finishPosition =  new Vector2(42, 6);
-
         foreach(var comp in playerUnits)
         {
             foreach(var unit in units)
@@ -116,14 +113,27 @@ public class EvilBrain : MonoBehaviour
     {
         resourcesCount = Spawners[0].resources.resourcesCount;
         if(resourcesCount > 15
-        && Spawners.Count < 4)
+        && (Spawners.Count < 4
+        || resourcesCount > Spawners.Count * 6))
         {
-            var x = Random.Range(0.0f, 15.0f);
-            var y = Random.Range(0.0f, Mathf.Sqrt(225 - x*x));
-            if(x*x + y*y < 81)
+            var x = Random.Range(-10.0f, 10.0f);
+            var right = Mathf.Sqrt(10.0f *10.0f - x*x);
+            var y = Random.Range(-right, right);
+            var allBildings = GameObject.FindGameObjectsWithTag(this.gameObject.tag);
+            var newBuildPlace = new Vector3(-x,-y,0) 
+            + allBildings[Random.Range(0, allBildings.Length)].transform.position;
+            if((new Vector3(-x,-y,0)).magnitude < 7
+            || !MainCamera.IsBounds(newBuildPlace))
                 return;
+            foreach(var obj in allBildings)
+            {
+                if((obj.transform.position - newBuildPlace).magnitude < 7){
+                    Debug.Log(obj);
+                    return;
+                }
+            }
             Instantiate(Spawners[Spawners.Count % 2], 
-                new Vector3(-x, -y, 0.0f) + transform.position, 
+                newBuildPlace, 
                 Quaternion.identity);
             Spawners[0].resources.resourcesCount -= 15;
         }
