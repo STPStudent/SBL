@@ -6,6 +6,7 @@ using UnityEngine;
 public class EvilBrain : MonoBehaviour
 {
     [SerializeField] private MainBilding player;
+    [SerializeField] private MainBilding bot;
     public static List<EvilSpawner> Spawners;
     private UnitComponent playerUnits;
     public static UnitComponent units;
@@ -109,11 +110,15 @@ public class EvilBrain : MonoBehaviour
         }
     }
 
-    private void CreateBilding(int coust, GameObject bilding)
+    private void CreateBilding<T>(
+        int coust, 
+        GameObject building
+    ) where T : Component
     {
+        var anotherBuilding = GetComponents<T>();
         if(resourcesCount > coust
-        && (Spawners.Count < 4
-        || resourcesCount > coust * bildingCount * 6))
+        && Spawners.Count < 4
+        || resourcesCount > coust * (anotherBuilding.Length + 1) * 6)
         {
             var x = Random.Range(-10.0f, 10.0f);
             var right = Mathf.Sqrt(10.0f *10.0f - x*x);
@@ -129,10 +134,10 @@ public class EvilBrain : MonoBehaviour
             foreach(var obj in allBildings)
                 if((obj.transform.position - newBuildPlace).magnitude < 7)
                     return;
-            Instantiate(bilding, 
+            Instantiate(building, 
                 newBuildPlace, 
                 Quaternion.identity);
-            Spawners[0].resources.resourcesCount -= 15;
+            bot.resourcesCount -= coust;
             bildingCount ++;
         }
     }
@@ -140,10 +145,12 @@ public class EvilBrain : MonoBehaviour
     async void Update()
     {
         //Задаем направление каждому юниту
-        resourcesCount = Spawners[0].resources.resourcesCount;
+        resourcesCount = bot.resourcesCount;
         playerUnits = UnitControl.units;
         if(Spawners.Count > 2)
             ControlArmy();
-        CreateBilding(15, Spawners[Random.Range(0,2)].gameObject);
+        var spawner = Spawners[Random.Range(0,2)];
+        CreateBilding<EvilSpawner>(15, 
+            spawner.gameObject);
     }
 }
