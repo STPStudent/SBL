@@ -6,6 +6,8 @@ using UnityEngine;
 public class EvilBrain : MonoBehaviour
 {
     [SerializeField] private MainBilding player;
+    [SerializeField] private MainBilding bot;
+    [SerializeField] private TowerScript Tower;
     public static List<EvilSpawner> Spawners;
     private UnitComponent playerUnits;
     public static UnitComponent units;
@@ -13,6 +15,7 @@ public class EvilBrain : MonoBehaviour
     public int resourcesCount = 0;
     private int attackCount = 0;
     private int defenseCount = 0;
+    private int bildingCount = 0;
     public static void AddUnit(UnitComponent comp)
 	{
         //Добавляет юнита бота в список
@@ -22,10 +25,8 @@ public class EvilBrain : MonoBehaviour
         unitCount++;
 	}
 
-    public static void DeleteSpawner(EvilSpawner spawner)
-    {
-        Spawners.Remove(spawner);
-    }
+    public static void DeleteSpawner(EvilSpawner spawner) 
+        => Spawners.Remove(spawner);
 
     void Awake()
     {
@@ -54,9 +55,6 @@ public class EvilBrain : MonoBehaviour
                 k = Random.Range(0, Spawners.Count);
             Spawners[k].Spawn();
         }
-
-        foreach(var unit in units)
-            unit.finishPosition =  new Vector2(42, 6);
 
         foreach(var comp in playerUnits)
         {
@@ -99,7 +97,8 @@ public class EvilBrain : MonoBehaviour
                 foreach(var unit in units)
                     if(unit != null 
                     && (unit.transform.position - transform.position).magnitude < 20
-                    && len < (unit.finishPosition - new Vector2(transform.position.x, transform.position.y)).magnitude)
+                    && len < (unit.finishPosition 
+                        - new Vector2(transform.position.x, transform.position.y)).magnitude)
                     {
                         unit.finishPosition = comp.transform.position;
                         defenseCount++;
@@ -112,29 +111,49 @@ public class EvilBrain : MonoBehaviour
         }
     }
 
-    private void CreateBilding()
+    private void CreateBilding<T>(
+        int coust, 
+        GameObject building
+    ) where T : Component
     {
-        resourcesCount = Spawners[0].resources.resourcesCount;
-        if(resourcesCount > 15
-        && Spawners.Count < 4)
+        var anotherBuilding = GetComponents<T>();
+        if(resourcesCount > coust
+        && Spawners.Count < 4
+        || resourcesCount > coust * (anotherBuilding.Length + 1) * 6)
         {
-            var x = Random.Range(0.0f, 15.0f);
-            var y = Random.Range(0.0f, Mathf.Sqrt(225 - x*x));
-            if(x*x + y*y < 81)
+            var x = Random.Range(-10.0f, 10.0f);
+            var right = Mathf.Sqrt(10.0f *10.0f - x*x);
+            var y = Random.Range(-right, right);
+            var allBildings = GameObject
+            .FindGameObjectsWithTag(this.gameObject.tag);
+            var newBuildPlace = new Vector3(-x,-y,0) 
+            + allBildings[Random.Range(0, allBildings.Length)]
+                .transform.position;
+            if((new Vector3(-x,-y,0)).magnitude < 7
+            || !MainCamera.IsBounds(newBuildPlace))
                 return;
-            Instantiate(Spawners[Spawners.Count % 2], 
-                new Vector3(-x, -y, 0.0f) + transform.position, 
+            foreach(var obj in allBildings)
+                if((obj.transform.position - newBuildPlace).magnitude < 7)
+                    return;
+            Instantiate(building, 
+                newBuildPlace, 
                 Quaternion.identity);
-            Spawners[0].resources.resourcesCount -= 15;
+            bot.resourcesCount -= coust;
+            bildingCount ++;
         }
     }
 
     async void Update()
     {
         //Задаем направление каждому юниту
+        resourcesCount = bot.resourcesCount;
         playerUnits = UnitControl.units;
         if(Spawners.Count > 2)
             ControlArmy();
-        CreateBilding();
+        var spawner = Spawners[Random.Range(0,2)];
+        CreateBilding<EvilSpawner>(15, 
+            spawner.gameObject);
+        CreateBilding<TowerScript>(20, 
+            Tower.gameObject);
     }
 }

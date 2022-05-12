@@ -9,7 +9,7 @@ public class EvilSpawner : HealthControl
     [SerializeField] public int unitCost = 5;
     [SerializeField] public FabricUnitType type;
     [SerializeField] public UnitComponent unit;
-    [SerializeField] public ResourcesFabric resources;
+    [SerializeField] public MainBilding mainBilding;
     [SerializeField] private float deltaTime;
     private float lastTime;
     void Start()
@@ -29,12 +29,12 @@ public class EvilSpawner : HealthControl
     {
         //Если выполняются условие делает спавн юнита бота
         var time = Time.time;
-        if(unitCost <= resources.resourcesCount
+        if(unitCost <= mainBilding.resourcesCount
         && unitCount > 0
         && time - lastTime > deltaTime)
         {
             lastTime = time;
-            resources.resourcesCount -= unitCost;
+            mainBilding.resourcesCount -= unitCost;
             Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
         }
     }
