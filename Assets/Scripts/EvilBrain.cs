@@ -13,6 +13,7 @@ public class EvilBrain : MonoBehaviour
     public int resourcesCount = 0;
     private int attackCount = 0;
     private int defenseCount = 0;
+    private int bildingCount = 0;
     public static void AddUnit(UnitComponent comp)
 	{
         //Добавляет юнита бота в список
@@ -22,10 +23,8 @@ public class EvilBrain : MonoBehaviour
         unitCount++;
 	}
 
-    public static void DeleteSpawner(EvilSpawner spawner)
-    {
-        Spawners.Remove(spawner);
-    }
+    public static void DeleteSpawner(EvilSpawner spawner) 
+        => Spawners.Remove(spawner);
 
     void Awake()
     {
@@ -96,7 +95,8 @@ public class EvilBrain : MonoBehaviour
                 foreach(var unit in units)
                     if(unit != null 
                     && (unit.transform.position - transform.position).magnitude < 20
-                    && len < (unit.finishPosition - new Vector2(transform.position.x, transform.position.y)).magnitude)
+                    && len < (unit.finishPosition 
+                        - new Vector2(transform.position.x, transform.position.y)).magnitude)
                     {
                         unit.finishPosition = comp.transform.position;
                         defenseCount++;
@@ -109,42 +109,41 @@ public class EvilBrain : MonoBehaviour
         }
     }
 
-    private void CreateBilding()
+    private void CreateBilding(int coust, GameObject bilding)
     {
-        resourcesCount = Spawners[0].resources.resourcesCount;
-        if(resourcesCount > 15
+        if(resourcesCount > coust
         && (Spawners.Count < 4
-        || resourcesCount > Spawners.Count * 6))
+        || resourcesCount > coust * bildingCount * 6))
         {
             var x = Random.Range(-10.0f, 10.0f);
             var right = Mathf.Sqrt(10.0f *10.0f - x*x);
             var y = Random.Range(-right, right);
-            var allBildings = GameObject.FindGameObjectsWithTag(this.gameObject.tag);
+            var allBildings = GameObject
+            .FindGameObjectsWithTag(this.gameObject.tag);
             var newBuildPlace = new Vector3(-x,-y,0) 
-            + allBildings[Random.Range(0, allBildings.Length)].transform.position;
+            + allBildings[Random.Range(0, allBildings.Length)]
+                .transform.position;
             if((new Vector3(-x,-y,0)).magnitude < 7
             || !MainCamera.IsBounds(newBuildPlace))
                 return;
             foreach(var obj in allBildings)
-            {
-                if((obj.transform.position - newBuildPlace).magnitude < 7){
-                    Debug.Log(obj);
+                if((obj.transform.position - newBuildPlace).magnitude < 7)
                     return;
-                }
-            }
-            Instantiate(Spawners[Spawners.Count % 2], 
+            Instantiate(bilding, 
                 newBuildPlace, 
                 Quaternion.identity);
             Spawners[0].resources.resourcesCount -= 15;
+            bildingCount ++;
         }
     }
 
     async void Update()
     {
         //Задаем направление каждому юниту
+        resourcesCount = Spawners[0].resources.resourcesCount;
         playerUnits = UnitControl.units;
         if(Spawners.Count > 2)
             ControlArmy();
-        CreateBilding();
+        CreateBilding(15, Spawners[Random.Range(0,2)].gameObject);
     }
 }
