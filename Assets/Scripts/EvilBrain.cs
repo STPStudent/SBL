@@ -7,6 +7,7 @@ public class EvilBrain : MonoBehaviour
 {
     [SerializeField] private MainBilding player;
     [SerializeField] private MainBilding bot;
+    [SerializeField] private TowerScript Tower;
     public static List<EvilSpawner> Spawners;
     private UnitComponent playerUnits;
     public static UnitComponent units;
@@ -152,5 +153,7 @@ public class EvilBrain : MonoBehaviour
         var spawner = Spawners[Random.Range(0,2)];
         CreateBilding<EvilSpawner>(15, 
             spawner.gameObject);
+        CreateBilding<TowerScript>(20, 
+            Tower.gameObject);
     }
 }
