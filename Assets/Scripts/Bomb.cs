@@ -5,18 +5,13 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     private float speed = 3;
-    private Vector3 direction = Vector3.zero;
     [SerializeField] private float lifeTime = 0;
     private float lifeStart;
     [SerializeField] private int BombSpeed = 1; 
     private Rigidbody2D rigidBodyComponent;
 
-    public Vector3 Direction
-    {
-        get { return direction; }
-        set { direction = value; }
-    }
-    
+    public Vector3 Direction { get; set; } = Vector3.zero;
+
     void Start()
     {
         lifeStart = Time.time;
@@ -37,8 +32,8 @@ public class Bomb : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) 
     {
         //уничтожение бомбы при столкновении с любым предметом
-        if(gameObject.tag != other.gameObject.tag
-        && other.gameObject.tag != "Untagged")
+        if(!gameObject.CompareTag(other.gameObject.tag)
+        && !other.gameObject.CompareTag("Untagged"))
         {
             Destroy(gameObject);
         }

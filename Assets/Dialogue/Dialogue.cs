@@ -9,6 +9,6 @@ using UnityEngine;
 public class Dialogue
 {
     public string name;
-    public string sentences =  File.ReadAllText(@"Assets\Story.txt");
+    [TextArea(3,40)]public string sentences =  File.ReadAllText(@"Assets\Story.txt");
     public string[] sentencesList => sentences.Split('\n');
 }

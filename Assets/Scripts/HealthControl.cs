@@ -26,7 +26,7 @@ public class HealthControl : MonoBehaviour
             if(other.gameObject.name.Contains("BombPlayer") ||
            other.gameObject.name.Contains("BombEvil"))
             {
-                GetDamage(10);
+                GetDamage(15);
                 return;
             }
             Debug.Log(other.gameObject.name);
