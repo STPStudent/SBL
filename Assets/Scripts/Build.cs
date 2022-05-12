@@ -19,8 +19,8 @@ public class Build : MonoBehaviour, IPointerDownHandler
         if (IsBuilding)
             if (Input.GetMouseButtonDown(1))
             {
-                IsBuilding = false;
                 var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                IsBuilding = false;
                 Instantiate(Fabric, new Vector3(coordinates.x, coordinates.y, 0), Quaternion.identity);
                 Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
             }

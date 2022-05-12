@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 1
-  BombSpeed: 100
+  BombSpeed: 50
 --- !u!60 &6327449400938858849
 PolygonCollider2D:
   m_ObjectHideFlags: 0
