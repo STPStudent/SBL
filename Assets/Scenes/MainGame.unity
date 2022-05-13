@@ -758,6 +758,7 @@ MonoBehaviour:
   type: 1
   secondsWait: 1
   countAddAfterWait: 1
+  mainBilding: {fileID: 92637464}
   resourcesCount: 20
 --- !u!50 &57560247
 Rigidbody2D:
@@ -1099,7 +1100,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1003142659
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e27158a3d0328bc4cb721e5b1bdcdc46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1165,6 +1166,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   result: {fileID: 1686699924}
+  resourcesCount: 0
 --- !u!58 &92637465
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4659,7 +4661,7 @@ MonoBehaviour:
   unitCost: 1
   type: 0
   unit: {fileID: 7978428832090662827, guid: 94d6b72b739b2db409bd778c27f354cf, type: 3}
-  resources: {fileID: 1606998183}
+  mainBilding: {fileID: 1407459589}
   deltaTime: 3
 --- !u!50 &761031164
 Rigidbody2D:
@@ -5240,7 +5242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804773373}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.9, y: 3, z: 0}
+  m_LocalPosition: {x: -26.8, y: -69, z: 0}
   m_LocalScale: {x: 1.8927981, y: 1.8927981, z: 0}
   m_Children:
   - {fileID: 480116347}
@@ -6463,7 +6465,7 @@ MonoBehaviour:
   unitCost: 1
   type: 0
   unit: {fileID: 4161244359718295051, guid: 1960ce6013c29334bbd932ed5a20975d, type: 3}
-  resources: {fileID: 1606998183}
+  mainBilding: {fileID: 1407459589}
   deltaTime: 3
 --- !u!50 &974067944
 Rigidbody2D:
@@ -9212,6 +9214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 92637464}
+  bot: {fileID: 1407459589}
+  Tower: {fileID: 2119968673}
   resourcesCount: 0
 --- !u!50 &1407459587
 Rigidbody2D:
@@ -9380,6 +9384,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   result: {fileID: 670656099}
+  resourcesCount: 0
 --- !u!250 &1407459590
 PointEffector2D:
   m_ObjectHideFlags: 0
@@ -10519,6 +10524,7 @@ MonoBehaviour:
   type: 0
   secondsWait: 1
   countAddAfterWait: 2
+  mainBilding: {fileID: 1407459589}
   resourcesCount: 0
 --- !u!50 &1606998184
 Rigidbody2D:
@@ -13046,7 +13052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119968670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.8, y: 13.2, z: 0}
+  m_LocalPosition: {x: 31.3, y: -80.2, z: 0}
   m_LocalScale: {x: 1.8927981, y: 1.8927981, z: 0}
   m_Children:
   - {fileID: 1897187247}
