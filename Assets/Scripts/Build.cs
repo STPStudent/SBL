@@ -10,7 +10,7 @@ public class Build : MonoBehaviour, IPointerDownHandler
     private bool IsBuilding;
     public GameObject Fabric;
     public int Cost;
-    [SerializeField] private ResourcesFabric resources;
+    [SerializeField] private MainBilding mainBilding;
     public Texture2D cursor;
     [SerializeField] private Texture2D normalCursor;
 
@@ -28,10 +28,10 @@ public class Build : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (resources.resourcesCount >= Cost)
+        if (mainBilding.resourcesCount >= Cost)
         {
             IsBuilding = true;
-            resources.resourcesCount -= Cost;
+            mainBilding.resourcesCount -= Cost;
             Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
         }
     }
