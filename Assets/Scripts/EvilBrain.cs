@@ -146,6 +146,7 @@ public class EvilBrain : MonoBehaviour
     async void Update()
     {
         //Задаем направление каждому юниту
+        Debug.Log(Time.time);
         resourcesCount = bot.resourcesCount;
         playerUnits = UnitControl.units;
         if(Spawners.Count > 2)
