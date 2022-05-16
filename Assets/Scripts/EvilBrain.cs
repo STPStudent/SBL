@@ -13,14 +13,15 @@ public class EvilBrain : MonoBehaviour
     public int resourcesCount = 0;
     private int attackCount = 0;
     private int defenseCount = 0;
+
     public static void AddUnit(UnitComponent comp)
-	{
+    {
         //Добавляет юнита бота в список
-		units.nextComponent = comp;
-		comp.previousComponent = units;
-		units = comp;
+        units.nextComponent = comp;
+        comp.previousComponent = units;
+        units = comp;
         unitCount++;
-	}
+    }
 
     public static void DeleteSpawner(EvilSpawner spawner)
     {
@@ -29,16 +30,16 @@ public class EvilBrain : MonoBehaviour
 
     void Awake()
     {
-        units = new UnitComponent();
+        units = gameObject.AddComponent<UnitComponent>();
         Spawners = new List<EvilSpawner>();
     }
-    
+
     private void SetPoint(string goal, GameObject[] k)
     {
-        foreach(var player in k)
-            if(player.gameObject.name.Contains(goal)
-            && player.transform.position.magnitude < 50)
-                foreach(var unit in units)
+        foreach (var player in k)
+            if (player.gameObject.name.Contains(goal)
+                && player.transform.position.magnitude < 50)
+                foreach (var unit in units)
                 {
                     unit.finishPosition = player.gameObject.transform.position;
                 }
@@ -46,27 +47,27 @@ public class EvilBrain : MonoBehaviour
 
     private void ControlArmy()
     {
-        if(unitCount < 5
-        || unitCount * 3 < UnitControl.unitCount * 2)
+        if (unitCount < 5
+            || unitCount * 3 < UnitControl.unitCount * 2)
         {
             var k = Random.Range(0, Spawners.Count);
-            while(Spawners[k].transform.position.magnitude > 50)
+            while (Spawners[k].transform.position.magnitude > 50)
                 k = Random.Range(0, Spawners.Count);
             Spawners[k].Spawn();
         }
 
-        foreach(var unit in units)
-            unit.finishPosition =  new Vector2(42, 6);
+        foreach (var unit in units)
+            unit.finishPosition = new Vector2(42, 6);
 
-        foreach(var comp in playerUnits)
+        foreach (var comp in playerUnits)
         {
-            foreach(var unit in units)
-                if(unit != null && comp != null &&
-                (unit.transform.position - comp.transform.position).magnitude < 7)
+            foreach (var unit in units)
+                if (unit != null && comp != null &&
+                    (unit.transform.position - comp.transform.position).magnitude < 7)
                     unit.finishPosition = comp.transform.position;
         }
 
-        if(unitCount > 10)
+        if (unitCount > 10)
         {
             var k = GameObject.FindGameObjectsWithTag("Player");
             SetPoint("PlayerMainBuild", k);
@@ -75,55 +76,55 @@ public class EvilBrain : MonoBehaviour
             //SetPoint("Recourse", k);
         }
 
-        foreach(var comp in playerUnits)
+        foreach (var comp in playerUnits)
         {
-            foreach(var unit in units)
-                if(unit != null && comp != null &&
-                (unit.transform.position - comp.transform.position).magnitude < 7)
+            foreach (var unit in units)
+                if (unit != null && comp != null &&
+                    (unit.transform.position - comp.transform.position).magnitude < 7)
                     unit.finishPosition = comp.transform.position;
         }
 
         attackCount = 0;
-        foreach(var comp in playerUnits)
+        foreach (var comp in playerUnits)
         {
-            if(comp == null)
+            if (comp == null)
                 continue;
             var len = (comp.transform.position - transform.position).magnitude;
-            if(len < 20)
+            if (len < 20)
             {
                 attackCount++;
                 var k = Random.Range(0, Spawners.Count);
-                while(Spawners[k].transform.position.magnitude > 50)
+                while (Spawners[k].transform.position.magnitude > 50)
                     k = Random.Range(0, Spawners.Count);
                 defenseCount = 0;
-                foreach(var unit in units)
-                    if(unit != null 
-                    && (unit.transform.position - transform.position).magnitude < 20
-                    && len < (unit.finishPosition - new Vector2(transform.position.x, transform.position.y)).magnitude)
+                foreach (var unit in units)
+                    if (unit != null
+                        && (unit.transform.position - transform.position).magnitude < 20
+                        && len < (unit.finishPosition - new Vector2(transform.position.x, transform.position.y))
+                        .magnitude)
                     {
                         unit.finishPosition = comp.transform.position;
                         defenseCount++;
                     }
-                Debug.Log(defenseCount);
-                Debug.Log(attackCount);
-                if(defenseCount < attackCount)
+
+                if (defenseCount < attackCount)
                     Spawners[k].Spawn();
             }
         }
     }
 
-    private void CreateBilding()
+    private void CreateBuilding()
     {
         resourcesCount = Spawners[0].resources.resourcesCount;
-        if(resourcesCount > 15
-        && Spawners.Count < 4)
+        if (resourcesCount > 15
+            && Spawners.Count < 4)
         {
             var x = Random.Range(0.0f, 15.0f);
-            var y = Random.Range(0.0f, Mathf.Sqrt(225 - x*x));
-            if(x*x + y*y < 81)
+            var y = Random.Range(0.0f, Mathf.Sqrt(225 - x * x));
+            if (x * x + y * y < 81)
                 return;
-            Instantiate(Spawners[Spawners.Count % 2], 
-                new Vector3(-x, -y, 0.0f) + transform.position, 
+            Instantiate(Spawners[Spawners.Count % 2],
+                new Vector3(-x, -y, 0.0f) + transform.position,
                 Quaternion.identity);
             Spawners[0].resources.resourcesCount -= 15;
         }
@@ -133,8 +134,8 @@ public class EvilBrain : MonoBehaviour
     {
         //Задаем направление каждому юниту
         playerUnits = UnitControl.units;
-        if(Spawners.Count > 2)
+        if (Spawners.Count > 2)
             ControlArmy();
-        CreateBilding();
+        CreateBuilding();
     }
 }

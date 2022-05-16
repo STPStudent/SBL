@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
 {
-    [SerializeField] private UnitType type;
     [SerializeField] public int PlayerIndex;
     internal UnitComponent previousComponent;
     internal UnitComponent nextComponent;
     private float acceleration = 3;
     private Rigidbody2D rigidBodyComponent;
-    private bool used;
+    private bool isChoose;
     internal Vector2 finishPosition = Vector2.zero;
     private new SpriteRenderer renderer;
-    
+
 
     void Start()
     {
@@ -25,8 +24,8 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
         //добавляет его в соответсвующии разделы
         rigidBodyComponent = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
-        this.SetHealth();
-        if(PlayerIndex == 0)
+        SetHealth();
+        if (PlayerIndex == 0)
             UnitControl.AddUnit(this);
         else
             EvilBrain.AddUnit(this);
@@ -37,12 +36,13 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
         //Когда погибает юнит уберает ссылки на себя
         //у других членов связаного списка
         //А потом destoy уничтожает игровой обьект(себя)
-        if(previousComponent != null)
+        if (previousComponent != null)
             previousComponent.nextComponent = nextComponent;
-        if(nextComponent != null)
+        if (nextComponent != null)
             nextComponent.previousComponent = previousComponent;
-        Destroy(this.gameObject);
-        if(PlayerIndex == 0)
+        Destroy(gameObject);
+        
+        if (PlayerIndex == 0)
             UnitControl.unitCount--;
         else
             EvilBrain.unitCount--;
@@ -53,61 +53,59 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
         //Позволяет бегать по связаному списку
         yield return this;
         var pathItem = previousComponent;
-            while (pathItem != null)
-            {
-                yield return pathItem;
-                pathItem = pathItem.previousComponent;
-            }
+        while (pathItem != null)
+        {
+            yield return pathItem;
+            pathItem = pathItem.previousComponent;
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
     }
+
     public void Deselect()
     {
-        //Отменяет выделение юнита
-        //И возращает старый цвет
-        used = false;
+        //Отменяет выделение юнита и возращает старый цвет
+        isChoose = false;
         renderer.material.color = Color.white;
     }
 
     public void Select()
     {
-        //Выделяет юнита 
-        //и меняет ему цвет на более зеленый
-        used = true;
+        //Выделяет юнита и меняет ему цвет на зеленый
+        isChoose = true;
         renderer.material.color = Color.green;
     }
-    
+
     void Update()
     {
-        //находит вектор направления из текущей точки в указаную
+        //Находит вектор направления из текущей точки в указаную
         var startPosition = rigidBodyComponent.position;
-        var a = finishPosition - startPosition;
+        var vectorDifference = finishPosition - startPosition;
 
-        if (a.x < 0)
-            renderer.flipX = false;
-        else
-            renderer.flipX = true;
+        //Отражает спрайт по горизонтали во время смены движения
+        renderer.flipX = !(vectorDifference.x < 0);
 
 
-        if(a.magnitude < 2
-        || finishPosition == Vector2.zero)
+        if (vectorDifference.magnitude < 2
+            || finishPosition == Vector2.zero)
         {
             rigidBodyComponent.velocity = Vector2.zero;
             return;
         }
-        rigidBodyComponent.velocity = a.normalized * acceleration;
+
+        rigidBodyComponent.velocity = vectorDifference.normalized * acceleration;
     }
 
-    void OnMouseOver()
+    private void OnMouseOver()
     {
         CursorControl.SetAttackCursor();
     }
-    void OnMouseExit()
+
+    private void OnMouseExit()
     {
         CursorControl.SetNormalCursor();
     }
-
 }

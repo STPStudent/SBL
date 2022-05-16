@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPause = false;
-    public static bool IsSettings = false;
+    public static bool GameIsPause;
+    public static bool IsSettings;
     public GameObject pauseMenuUI;
     public GameObject resourses;
     public GameObject settings;
@@ -59,12 +59,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         IsSettings = false;
         settings.SetActive(IsSettings);
-    }
-
-
-    public void GoToMenu()
-    {
-        SceneManager.LoadScene("Menu"); 
     }
 
     public void QuitGame()
