@@ -34,28 +34,18 @@ public class EvilBrain : MonoBehaviour
         Spawners = new List<EvilSpawner>();
     }
     
-    private void SetPoint(string goal, GameObject[] k)
+    private Vector3 SetPoint(string goal, GameObject[] k)
     {
+        var found = Vector3.zero;
         foreach(var player in k)
             if(player.gameObject.name.Contains(goal)
             && player.transform.position.magnitude < 50)
-                foreach(var unit in units)
-                {
-                    unit.finishPosition = player.gameObject.transform.position;
-                }
+                found = player.gameObject.transform.position;
+        return found;
     }
 
-    private void ControlArmy()
+    private void DoAttackUnit()
     {
-        if(unitCount < 5
-        || unitCount * 3 < UnitControl.unitCount * 2)
-        {
-            var k = Random.Range(0, Spawners.Count);
-            while(Spawners[k].transform.position.magnitude > 50)
-                k = Random.Range(0, Spawners.Count);
-            Spawners[k].Spawn();
-        }
-
         foreach(var comp in playerUnits)
         {
             foreach(var unit in units)
@@ -63,24 +53,33 @@ public class EvilBrain : MonoBehaviour
                 (unit.transform.position - comp.transform.position).magnitude < 7)
                     unit.finishPosition = comp.transform.position;
         }
+    }
 
+    private void TransformPositions(Vector3 goal)
+    {
+        foreach(var unit in units)
+            unit.finishPosition = goal;
+    }
+
+    private void DoAttackBuilding()
+    {
         if(unitCount > 10)
         {
-            var k = GameObject.FindGameObjectsWithTag("Player");
-            SetPoint("PlayerMainBuild", k);
-            SetPoint("Fabric", k);
-            SetPoint("Tower", k);
-            //SetPoint("Recourse", k);
+            var playerBuilding = GameObject.FindGameObjectsWithTag("Player");
+            var pointMain = SetPoint("PlayerMainBuild", playerBuilding);
+            var pointFabric = SetPoint("Fabric", playerBuilding);
+            var pointTower = SetPoint("Tower", playerBuilding);
+            if(pointTower != Vector3.zero)
+                TransformPositions(pointTower);
+            else if(pointFabric != Vector3.zero)
+                TransformPositions(pointFabric);
+            else if(pointMain != Vector3.zero)
+                TransformPositions(pointMain);
         }
+    }
 
-        foreach(var comp in playerUnits)
-        {
-            foreach(var unit in units)
-                if(unit != null && comp != null &&
-                (unit.transform.position - comp.transform.position).magnitude < 7)
-                    unit.finishPosition = comp.transform.position;
-        }
-
+    private void DefanseBuilding()
+    {
         attackCount = 0;
         foreach(var comp in playerUnits)
         {
@@ -109,6 +108,23 @@ public class EvilBrain : MonoBehaviour
                     Spawners[k].Spawn();
             }
         }
+    }
+
+    private void ControlArmy()
+    {
+        if(unitCount < 5
+        || unitCount * 3 < UnitControl.unitCount * 2)
+        {
+            var k = Random.Range(0, Spawners.Count);
+            while(Spawners[k].transform.position.magnitude > 50)
+                k = Random.Range(0, Spawners.Count);
+            Spawners[k].Spawn();
+        }
+
+        DoAttackBuilding();
+        DoAttackUnit();
+
+        DefanseBuilding();
     }
 
     private void CreateBilding<T>(
@@ -146,7 +162,6 @@ public class EvilBrain : MonoBehaviour
     async void Update()
     {
         //Задаем направление каждому юниту
-        Debug.Log(Time.time);
         resourcesCount = bot.resourcesCount;
         playerUnits = UnitControl.units;
         if(Spawners.Count > 2)

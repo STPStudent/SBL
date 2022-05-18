@@ -29,7 +29,6 @@ public class HealthControl : MonoBehaviour
                 GetDamage(15);
                 return;
             }
-            Debug.Log(other.gameObject.name);
             var attack = gameObject;
             GetDamage(other.gameObject.GetComponent<HealthControl>().DamageForceScale);
         }
