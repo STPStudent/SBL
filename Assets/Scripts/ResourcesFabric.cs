@@ -7,17 +7,15 @@ using UnityEngine.UI;
 public class ResourcesFabric : HealthControl
 {
     [SerializeField] private Text text;
-    [SerializeField] private FabricResourceType type;
-    private bool overflowed;
     [SerializeField] private int secondsWait = 5;
     [SerializeField] private int countAddAfterWait = 1;
     private float lastTime;
     private float deltaTime;
-    public int resourcesCount = 0;
+    public int resourcesCount;
 
     void Start()
     {
-        this.SetHealth();
+        SetHealth();
         lastTime = Time.realtimeSinceStartup;
     }
 

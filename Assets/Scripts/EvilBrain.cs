@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EvilBrain : MonoBehaviour
 {
-    [SerializeField] private MainBilding player;
+    [SerializeField] private MainBuilding player;
     public static List<EvilSpawner> Spawners;
     private UnitComponent playerUnits;
     public static UnitComponent units;

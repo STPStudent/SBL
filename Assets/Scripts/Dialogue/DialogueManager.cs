@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     private GameObject blackBg;
     public Animator animator;
     [SerializeField] private Image radianProgress;
+    [SerializeField] private Image skipText;
     private Queue<Tuple<string, string>> sentences;
     private static readonly int IsOpen = Animator.StringToHash("IsOpen");
 
@@ -35,13 +36,15 @@ public class DialogueManager : MonoBehaviour
     {
         if (Input.anyKey && !Input.GetKey(KeyCode.Mouse0))
         {
-            radianProgress.fillAmount += Time.deltaTime / 3f;
+            skipText.fillAmount = 1;
+            radianProgress.fillAmount += Time.deltaTime / 4f;
             if (radianProgress.fillAmount >= 1f)
                 EndDialogue();
         }
         else
         {
             radianProgress.fillAmount = 0;
+            skipText.fillAmount = 0;
         }
     }
 

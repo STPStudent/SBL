@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainBilding : HealthControl
+public class MainBuilding : HealthControl
 {
     [SerializeField] private GameObject result;
     
     void Start()
     {
-        this.SetHealth();
+        SetHealth();
     }
 
     public override void DestroyObject()

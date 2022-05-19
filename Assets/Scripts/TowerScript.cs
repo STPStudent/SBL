@@ -5,39 +5,38 @@ using System;
 
 public class TowerScript : HealthControl
 {
-    [SerializeField] private Bomb _bomb;
-    [SerializeField] private int Radius;
-    [SerializeField] private float deltaTime = 0;
+    [SerializeField] private Bomb bomb;
+    private int radius;
+    [SerializeField] private float deltaTime;
     private float lastShot;
+    private static UnitComponent units;
 
-    public static UnitComponent units;
-    
     void Start()
     {
         SetHealth();
         lastShot = Time.time;
+        radius = 20;
     }
-	void Update()
+
+    void Update()
     {
         if (Time.time - lastShot > deltaTime)
         {
             lastShot = Time.time;
-            if (gameObject.tag == "Player")
-                units = EvilBrain.units;
-            else units = UnitControl.units;
+            units = gameObject.CompareTag("Player") ? EvilBrain.units : UnitControl.units;
             if (units != null)
             {
-			    Vector3 position = transform.position;
+                var position = transform.position;
                 position.y += 4.5F; //чтоб из вершины башни
                 foreach (var unit in units)
                 {
-                    if((position - unit.transform.position).magnitude > Radius)
+                    if ((position - unit.transform.position).magnitude > radius)
                         continue;
-                    Bomb newBomb = Instantiate(_bomb, position, Quaternion.identity) as Bomb;
+                    var newBomb = Instantiate(bomb, position, Quaternion.identity) as Bomb;
                     newBomb.Direction = unit.transform.position;
                     break;
                 }
             }
-		}
+        }
     }
 }
