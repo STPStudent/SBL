@@ -1,33 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CursorControl : MonoBehaviour
 {
-    [SerializeField] public Texture2D _cursorNormalTexture;
-    [SerializeField] public Texture2D _cursorAtackTexture;
-    [SerializeField] public CursorMode _cursorMode = CursorMode.Auto;
-    [SerializeField] public Vector2 _hotSpot = Vector2.zero;
-    public static Texture2D cursorNormalTexture;
-    public static Texture2D cursorAtackTexture;
-    public static CursorMode cursorMode;
-    public static Vector2 hotSpot;
+    [SerializeField] private Texture2D cursorNormalTexture;
+    [SerializeField] private Texture2D cursorAttackTexture;
+    [SerializeField] private Texture2D cursorCross;
+    private static Texture2D staticCursorNormalTexture;
+    private static Texture2D staticCursorAttackTexture;
+    private static Texture2D staticCursorCross;
+    public Texture2D cursorBuilding;
+    private static Texture2D staticCursorBuilding;
+    private static bool isBuilding = false;
+    private static bool isObjekt = false;
 
-    void Start()
+    public bool IsBuilding
+    { 
+        get => isBuilding;
+        set => isBuilding = value;
+    }
+    
+    public bool IsObjekt()
+        => isObjekt;
+
+    private void Start()
     {
-        cursorNormalTexture = _cursorNormalTexture;
-        cursorAtackTexture = _cursorAtackTexture;
-        cursorMode = _cursorMode;
-        hotSpot = _hotSpot;
+        staticCursorNormalTexture = cursorNormalTexture;
+        staticCursorAttackTexture = cursorAttackTexture;
+        staticCursorCross = cursorCross;
+    }
+
+    void Update()
+    {
+        staticCursorBuilding = cursorBuilding;
     }
 
     public static void SetAttackCursor()
     {
-        Cursor.SetCursor(cursorAtackTexture, hotSpot, cursorMode);
+        if(!isBuilding)
+            Cursor.SetCursor(staticCursorAttackTexture, Vector2.zero, CursorMode.Auto);
+        else
+        {
+            Cursor.SetCursor(staticCursorCross, Vector2.zero, CursorMode.Auto);
+            isObjekt = true;
+        }
     }
 
     public static void SetNormalCursor()
     {
-        Cursor.SetCursor(cursorNormalTexture, hotSpot, cursorMode);
+        if(!isBuilding)
+            Cursor.SetCursor(staticCursorNormalTexture, Vector2.zero, CursorMode.Auto);
+        else
+            Cursor.SetCursor(staticCursorBuilding, Vector2.zero, CursorMode.Auto);
+        isObjekt = false;
     }
 }

@@ -17,9 +17,9 @@ public class HealthControl : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) 
     {
-        ///Сейчас проверяет тег если это юнит то выполнябтся условия 
-        if(other.gameObject.tag != gameObject.tag
-        && other.gameObject.tag != "Untagged")
+        //Сейчас проверяет тег если это юнит то выполнябтся условия 
+        if(!other.gameObject.CompareTag(gameObject.tag)
+        && !other.gameObject.CompareTag("Untagged"))
         {
             //Вычитает из здоровья значение урона
             //если здоровье меньше нуля делает его нулем
@@ -29,7 +29,6 @@ public class HealthControl : MonoBehaviour
                 GetDamage(15);
                 return;
             }
-            Debug.Log(other.gameObject.name);
             var attack = gameObject;
             GetDamage(other.gameObject.GetComponent<HealthControl>().DamageForceScale);
         }
@@ -40,9 +39,18 @@ public class HealthControl : MonoBehaviour
         CurrentHealth -= (int)damage;
         CurrentHealth = Mathf.Max(0, CurrentHealth);
     }
+    private void OnMouseOver()
+    {
+        CursorControl.SetAttackCursor();
+    }
+
+    private void OnMouseExit()
+    {
+        CursorControl.SetNormalCursor();
+    }
 
     public virtual void DestroyObject()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

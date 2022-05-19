@@ -7,35 +7,29 @@ using UnityEngine.UI;
 public class ResourcesFabric : HealthControl
 {
     [SerializeField] private Text text;
-    [SerializeField] private FabricResourceType type;
-    private bool overflowed;
     [SerializeField] private int secondsWait = 5;
     [SerializeField] private int countAddAfterWait = 1;
-    [SerializeField] private MainBilding mainBilding;
+    [SerializeField] private MainBuilding mainBuilding;
     private float lastTime;
-    private float deltaTime;
-    public int resourcesCount = 0;
 
     void Start()
     {
-        this.SetHealth();
-        lastTime = Time.realtimeSinceStartup;
+        SetHealth();
+        lastTime = Time.time;
     }
 
     void Update()
     {
         if(PauseMenu.GameIsPause)
-        {
-            deltaTime = Time.realtimeSinceStartup - lastTime;
             return;
-        }
-        var timeNow = Time.realtimeSinceStartup;
-        if(timeNow - lastTime - deltaTime > secondsWait)
+        
+        var timeNow = Time.time;
+        if(timeNow - lastTime > secondsWait)
         {
             lastTime = timeNow;
-            mainBilding.resourcesCount += countAddAfterWait;
+            mainBuilding.resourcesCount += countAddAfterWait;
         }
         if(text != null)
-            text.text = mainBilding.resourcesCount.ToString();
+            text.text = mainBuilding.resourcesCount.ToString();
     }
 }

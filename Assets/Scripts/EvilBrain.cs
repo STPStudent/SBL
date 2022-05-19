@@ -5,44 +5,129 @@ using UnityEngine;
 
 public class EvilBrain : MonoBehaviour
 {
-    [SerializeField] private MainBilding player;
-    [SerializeField] private MainBilding bot;
+    [SerializeField] private MainBuilding player;
+    [SerializeField] private MainBuilding bot;
     [SerializeField] private TowerScript Tower;
     public static List<EvilSpawner> Spawners;
     private UnitComponent playerUnits;
     public static UnitComponent units;
     public static int unitCount = 0;
     public int resourcesCount = 0;
-    private int attackCount = 0;
-    private int defenseCount = 0;
     private int bildingCount = 0;
     public static void AddUnit(UnitComponent comp)
-	{
+    {
         //Добавляет юнита бота в список
-		units.nextComponent = comp;
-		comp.previousComponent = units;
-		units = comp;
+        units.nextComponent = comp;
+        comp.previousComponent = units;
+        units = comp;
         unitCount++;
-	}
+    }
 
     public static void DeleteSpawner(EvilSpawner spawner) 
         => Spawners.Remove(spawner);
 
     void Awake()
     {
-        units = new UnitComponent();
+        units = gameObject.AddComponent<UnitComponent>();
         Spawners = new List<EvilSpawner>();
     }
     
-    private void SetPoint(string goal, GameObject[] k)
+    private Vector3 SetPoint(string goal, GameObject[] k)
     {
+        var found = Vector3.zero;
         foreach(var player in k)
             if(player.gameObject.name.Contains(goal)
             && player.transform.position.magnitude < 50)
-                foreach(var unit in units)
-                {
-                    unit.finishPosition = player.gameObject.transform.position;
-                }
+                found = player.gameObject.transform.position;
+        return found;
+    }
+
+    private void DoAttackUnit()
+    {
+        foreach(var comp in playerUnits)
+        {
+            foreach (var unit in units)
+                if (unit != null && comp != null &&
+                    (unit.transform.position - comp.transform.position).magnitude < 7)
+                    unit.finishPosition = comp.transform.position;
+        }
+    }
+
+    private void TransformPositions(Vector3 goal)
+    {
+        foreach(var unit in units)
+            unit.finishPosition = goal;
+    }
+
+    private void DoAttackBuilding()
+    {
+        if(unitCount > 10)
+        {
+            var playerBuilding = GameObject.FindGameObjectsWithTag("Player");
+            var pointMain = SetPoint("PlayerMainBuild", playerBuilding);
+            var pointFabric = SetPoint("Fabric", playerBuilding);
+            var pointTower = SetPoint("Tower", playerBuilding);
+            if(pointTower != Vector3.zero)
+                TransformPositions(pointTower);
+            else if(pointFabric != Vector3.zero)
+                TransformPositions(pointFabric);
+            else if(pointMain != Vector3.zero)
+                TransformPositions(pointMain);
+        }
+    }
+
+    private int SpawnDefasePosition(Vector3 unitAttack)
+    {
+        var indexNear = 0;
+        var lenToUnit = Vector3.zero;
+        for(var i = 0; i < Spawners.Count(); i++)
+        {
+            if(lenToUnit == Vector3.zero
+            || lenToUnit.magnitude > 
+                (Spawners[i].transform.position - unitAttack).magnitude)
+            {
+                indexNear = i;
+                lenToUnit = Spawners[i].transform.position - unitAttack;
+            }
+        }
+        return indexNear;
+    }
+
+    private void DefanseBuilding()
+    {
+        var attackCount = 0;
+        var defenseCount = 0;
+        var nearPlayer = Vector3.zero;
+        foreach(var comp in playerUnits)
+        {
+            if (comp == null)
+                continue;
+            var len = (comp.transform.position - transform.position).magnitude;
+            if(len < 20
+                && (nearPlayer == Vector3.zero 
+                    || (nearPlayer - transform.position).magnitude < len))
+            {
+                nearPlayer = comp.transform.position;
+                attackCount++;
+            }
+        }
+
+        if(nearPlayer == Vector3.zero)
+            return;
+
+        foreach(var unit in units)
+            if(unit != null 
+                && (unit.transform.position - nearPlayer).magnitude < 20)
+            {
+                unit.finishPosition = nearPlayer;
+                defenseCount++;
+            }
+
+        var indexNear = SpawnDefasePosition(nearPlayer);
+        if(defenseCount < attackCount)
+        {
+            Spawners[indexNear].Spawn();
+        }
     }
 
     private void ControlArmy()
@@ -56,59 +141,9 @@ public class EvilBrain : MonoBehaviour
             Spawners[k].Spawn();
         }
 
-        foreach(var comp in playerUnits)
-        {
-            foreach(var unit in units)
-                if(unit != null && comp != null &&
-                (unit.transform.position - comp.transform.position).magnitude < 7)
-                    unit.finishPosition = comp.transform.position;
-        }
-
-        if(unitCount > 10)
-        {
-            var k = GameObject.FindGameObjectsWithTag("Player");
-            SetPoint("PlayerMainBuild", k);
-            SetPoint("Fabric", k);
-            SetPoint("Tower", k);
-            //SetPoint("Recourse", k);
-        }
-
-        foreach(var comp in playerUnits)
-        {
-            foreach(var unit in units)
-                if(unit != null && comp != null &&
-                (unit.transform.position - comp.transform.position).magnitude < 7)
-                    unit.finishPosition = comp.transform.position;
-        }
-
-        attackCount = 0;
-        foreach(var comp in playerUnits)
-        {
-            if(comp == null)
-                continue;
-            var len = (comp.transform.position - transform.position).magnitude;
-            if(len < 20)
-            {
-                attackCount++;
-                var k = Random.Range(0, Spawners.Count);
-                while(Spawners[k].transform.position.magnitude > 50)
-                    k = Random.Range(0, Spawners.Count);
-                defenseCount = 0;
-                foreach(var unit in units)
-                    if(unit != null 
-                    && (unit.transform.position - transform.position).magnitude < 20
-                    && len < (unit.finishPosition 
-                        - new Vector2(transform.position.x, transform.position.y)).magnitude)
-                    {
-                        unit.finishPosition = comp.transform.position;
-                        defenseCount++;
-                    }
-                Debug.Log(defenseCount);
-                Debug.Log(attackCount);
-                if(defenseCount < attackCount)
-                    Spawners[k].Spawn();
-            }
-        }
+        DoAttackBuilding();
+        DoAttackUnit();
+        DefanseBuilding();
     }
 
     private void CreateBilding<T>(
@@ -125,7 +160,7 @@ public class EvilBrain : MonoBehaviour
             var right = Mathf.Sqrt(10.0f *10.0f - x*x);
             var y = Random.Range(-right, right);
             var allBildings = GameObject
-            .FindGameObjectsWithTag(this.gameObject.tag);
+            .FindGameObjectsWithTag(gameObject.tag);
             var newBuildPlace = new Vector3(-x,-y,0) 
             + allBildings[Random.Range(0, allBildings.Length)]
                 .transform.position;
@@ -133,7 +168,8 @@ public class EvilBrain : MonoBehaviour
             || !MainCamera.IsBounds(newBuildPlace))
                 return;
             foreach(var obj in allBildings)
-                if((obj.transform.position - newBuildPlace).magnitude < 7)
+                if((obj.transform.position - newBuildPlace).magnitude < 7
+                && obj.gameObject.name.Contains("Unit"))
                     return;
             Instantiate(building, 
                 newBuildPlace, 
@@ -143,12 +179,12 @@ public class EvilBrain : MonoBehaviour
         }
     }
 
-    async void Update()
+    void Update()
     {
         //Задаем направление каждому юниту
         resourcesCount = bot.resourcesCount;
         playerUnits = UnitControl.units;
-        if(Spawners.Count > 2)
+        if (Spawners.Count > 2)
             ControlArmy();
         var spawner = Spawners[Random.Range(0,2)];
         CreateBilding<EvilSpawner>(15, 
