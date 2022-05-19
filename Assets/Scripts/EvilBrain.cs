@@ -13,8 +13,6 @@ public class EvilBrain : MonoBehaviour
     public static UnitComponent units;
     public static int unitCount = 0;
     public int resourcesCount = 0;
-    private int attackCount = 0;
-    private int defenseCount = 0;
     private int bildingCount = 0;
     public static void AddUnit(UnitComponent comp)
 	{
@@ -78,35 +76,56 @@ public class EvilBrain : MonoBehaviour
         }
     }
 
+    private int SpawnDefasePosition(Vector3 unitAttack)
+    {
+        var indexNear = 0;
+        var lenToUnit = Vector3.zero;
+        for(var i = 0; i < Spawners.Count(); i++)
+        {
+            if(lenToUnit == Vector3.zero
+            || lenToUnit.magnitude > 
+                (Spawners[i].transform.position - unitAttack).magnitude)
+            {
+                indexNear = i;
+                lenToUnit = Spawners[i].transform.position - unitAttack;
+            }
+        }
+        Debug.Log(lenToUnit);
+        return indexNear;
+    }
+
     private void DefanseBuilding()
     {
-        attackCount = 0;
+        var attackCount = 0;
+        var defenseCount = 0;
+        var nearPlayer = Vector3.zero;
         foreach(var comp in playerUnits)
         {
             if(comp == null)
                 continue;
             var len = (comp.transform.position - transform.position).magnitude;
-            if(len < 20)
+            if(len < 20
+                && (nearPlayer == Vector3.zero 
+                    || (nearPlayer - transform.position).magnitude < len))
             {
+                nearPlayer = comp.transform.position;
                 attackCount++;
-                var k = Random.Range(0, Spawners.Count);
-                while(Spawners[k].transform.position.magnitude > 50)
-                    k = Random.Range(0, Spawners.Count);
-                defenseCount = 0;
-                foreach(var unit in units)
-                    if(unit != null 
-                    && (unit.transform.position - transform.position).magnitude < 20
-                    && len < (unit.finishPosition 
-                        - new Vector2(transform.position.x, transform.position.y)).magnitude)
-                    {
-                        unit.finishPosition = comp.transform.position;
-                        defenseCount++;
-                    }
-                Debug.Log(defenseCount);
-                Debug.Log(attackCount);
-                if(defenseCount < attackCount)
-                    Spawners[k].Spawn();
             }
+        }
+
+        foreach(var unit in units)
+            if(unit != null 
+                && (unit.transform.position - nearPlayer).magnitude < 20)
+            {
+                unit.finishPosition = nearPlayer;
+                defenseCount++;
+            }
+
+        var indexNear = SpawnDefasePosition(nearPlayer);
+        if(defenseCount < attackCount)
+        {
+            Spawners[indexNear].Spawn();
+            Debug.Log(defenseCount.ToString() + ' ' + attackCount.ToString());
         }
     }
 
@@ -123,7 +142,6 @@ public class EvilBrain : MonoBehaviour
 
         DoAttackBuilding();
         DoAttackUnit();
-
         DefanseBuilding();
     }
 
@@ -149,7 +167,8 @@ public class EvilBrain : MonoBehaviour
             || !MainCamera.IsBounds(newBuildPlace))
                 return;
             foreach(var obj in allBildings)
-                if((obj.transform.position - newBuildPlace).magnitude < 7)
+                if((obj.transform.position - newBuildPlace).magnitude < 7
+                && obj.gameObject.name.Contains("Unit"))
                     return;
             Instantiate(building, 
                 newBuildPlace, 
