@@ -9,30 +9,27 @@ public class ResourcesFabric : HealthControl
     [SerializeField] private Text text;
     [SerializeField] private int secondsWait = 5;
     [SerializeField] private int countAddAfterWait = 1;
+    [SerializeField] private MainBuilding mainBuilding;
     private float lastTime;
-    private float deltaTime;
-    public int resourcesCount;
 
     void Start()
     {
         SetHealth();
-        lastTime = Time.realtimeSinceStartup;
+        lastTime = Time.time;
     }
 
     void Update()
     {
         if(PauseMenu.GameIsPause)
-        {
-            deltaTime = Time.realtimeSinceStartup - lastTime;
             return;
-        }
-        var timeNow = Time.realtimeSinceStartup;
-        if(timeNow - lastTime - deltaTime > secondsWait)
+        
+        var timeNow = Time.time;
+        if(timeNow - lastTime > secondsWait)
         {
             lastTime = timeNow;
-            resourcesCount += countAddAfterWait;
+            mainBuilding.resourcesCount += countAddAfterWait;
         }
         if(text != null)
-            text.text = resourcesCount.ToString();
+            text.text = mainBuilding.resourcesCount.ToString();
     }
 }

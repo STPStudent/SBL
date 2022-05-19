@@ -494,9 +494,10 @@ MonoBehaviour:
   Fabric: {fileID: 804773373}
   circle: {fileID: 547878427}
   Cost: 20
-  resources: {fileID: 57560246}
+  mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 3ba387706a916624ca65e3aab3ae8470, type: 3}
   normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
+  cursorControl: {fileID: 789745014}
 --- !u!114 &45969089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,7 +734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57560243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -44.3, y: 31.4, z: 0}
+  m_LocalPosition: {x: -46.7, y: 39.6, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 2067165385}
@@ -759,7 +760,7 @@ MonoBehaviour:
   text: {fileID: 529602478}
   secondsWait: 1
   countAddAfterWait: 1
-  resourcesCount: 20
+  mainBuilding: {fileID: 92637464}
 --- !u!50 &57560247
 Rigidbody2D:
   serializedVersion: 4
@@ -1100,7 +1101,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1003142659
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e27158a3d0328bc4cb721e5b1bdcdc46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1166,6 +1167,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   result: {fileID: 1686699924}
+  resourcesCount: 20
 --- !u!58 &92637465
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1757,9 +1759,10 @@ MonoBehaviour:
   Fabric: {fileID: 1609624836}
   circle: {fileID: 840660843}
   Cost: 18
-  resources: {fileID: 57560246}
+  mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 27612be2af01d4947b33eaf4078e6713, type: 3}
   normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
+  cursorControl: {fileID: 789745014}
 --- !u!114 &196986283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4723,8 +4726,10 @@ MonoBehaviour:
   unitCount: 16
   unitCost: 1
   unit: {fileID: 7978428832090662827, guid: 94d6b72b739b2db409bd778c27f354cf, type: 3}
-  resources: {fileID: 1606998183}
+  mainBuilding: {fileID: 1407459589}
   deltaTime: 3
+  spawnTime: 0
+  AreTriger: 0
 --- !u!50 &761031164
 Rigidbody2D:
   serializedVersion: 4
@@ -4739,8 +4744,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -4756,7 +4761,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0.032710075, y: 0.01226598}
@@ -4964,6 +4969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorNormalTexture: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
   cursorAttackTexture: {fileID: 2800000, guid: 218e791789a366e429881c95f194d596, type: 3}
+  cursorCross: {fileID: 2800000, guid: ee833b6e681a88c4e93caaf866a5dfe6, type: 3}
 --- !u!4 &789745015
 Transform:
   m_ObjectHideFlags: 0
@@ -5222,7 +5228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804773373}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.9, y: 3, z: 0}
+  m_LocalPosition: {x: -26.8, y: -69, z: 0}
   m_LocalScale: {x: 1.8927981, y: 1.8927981, z: 0}
   m_Children:
   - {fileID: 480116347}
@@ -6519,8 +6525,10 @@ MonoBehaviour:
   unitCount: 16
   unitCost: 1
   unit: {fileID: 4161244359718295051, guid: 1960ce6013c29334bbd932ed5a20975d, type: 3}
-  resources: {fileID: 1606998183}
+  mainBuilding: {fileID: 1407459589}
   deltaTime: 3
+  spawnTime: 0
+  AreTriger: 0
 --- !u!50 &974067944
 Rigidbody2D:
   serializedVersion: 4
@@ -6552,7 +6560,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -9322,7 +9330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407459583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.1, y: 8.7, z: 0}
+  m_LocalPosition: {x: 41.4, y: 8.7, z: 0}
   m_LocalScale: {x: 6.5087004, y: 6.5087004, z: 9.589719}
   m_Children:
   - {fileID: 2046151397}
@@ -9342,6 +9350,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 92637464}
+  bot: {fileID: 1407459589}
+  Tower: {fileID: 2119968673}
   resourcesCount: 0
 --- !u!50 &1407459587
 Rigidbody2D:
@@ -9510,6 +9520,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   result: {fileID: 670656099}
+  resourcesCount: 0
 --- !u!250 &1407459590
 PointEffector2D:
   m_ObjectHideFlags: 0
@@ -9872,10 +9883,9 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  unitCount: 100
   unitCost: 2
   unit: {fileID: 2266968258551286439, guid: eb28d041a364bd84a8d6b75e7dc9cb2f, type: 3}
-  resources: {fileID: 57560246}
+  mainBuilding: {fileID: 92637464}
   deltaTime: 1
 --- !u!50 &1475393180
 Rigidbody2D:
@@ -10607,9 +10617,10 @@ MonoBehaviour:
   Fabric: {fileID: 1475393178}
   circle: {fileID: 1101481208}
   Cost: 15
-  resources: {fileID: 57560246}
+  mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: a708ebc0b6319f742a0cde44f9338434, type: 3}
   normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
+  cursorControl: {fileID: 789745014}
 --- !u!1 &1606998182
 GameObject:
   m_ObjectHideFlags: 0
@@ -10649,7 +10660,7 @@ MonoBehaviour:
   text: {fileID: 0}
   secondsWait: 1
   countAddAfterWait: 2
-  resourcesCount: 0
+  mainBuilding: {fileID: 1407459589}
 --- !u!50 &1606998184
 Rigidbody2D:
   serializedVersion: 4
@@ -10746,7 +10757,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606998182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.6, y: 31.4, z: 0}
+  m_LocalPosition: {x: -35.3, y: 39.3, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 945588414}
@@ -10790,10 +10801,9 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  unitCount: 100
   unitCost: 1
   unit: {fileID: 5638681313489024860, guid: 2373f4cf9d30f3545a26b90ac927c956, type: 3}
-  resources: {fileID: 57560246}
+  mainBuilding: {fileID: 92637464}
   deltaTime: 1
 --- !u!50 &1609624838
 Rigidbody2D:
@@ -13040,7 +13050,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119968670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.8, y: 13.2, z: 0}
+  m_LocalPosition: {x: 31.3, y: -80.2, z: 0}
   m_LocalScale: {x: 1.8927981, y: 1.8927981, z: 0}
   m_Children:
   - {fileID: 1897187247}
