@@ -90,7 +90,6 @@ public class EvilBrain : MonoBehaviour
                 lenToUnit = Spawners[i].transform.position - unitAttack;
             }
         }
-        Debug.Log(lenToUnit);
         return indexNear;
     }
 
@@ -113,6 +112,9 @@ public class EvilBrain : MonoBehaviour
             }
         }
 
+        if(nearPlayer == Vector3.zero)
+            return;
+
         foreach(var unit in units)
             if(unit != null 
                 && (unit.transform.position - nearPlayer).magnitude < 20)
@@ -125,7 +127,6 @@ public class EvilBrain : MonoBehaviour
         if(defenseCount < attackCount)
         {
             Spawners[indexNear].Spawn();
-            Debug.Log(defenseCount.ToString() + ' ' + attackCount.ToString());
         }
     }
 
@@ -178,7 +179,7 @@ public class EvilBrain : MonoBehaviour
         }
     }
 
-    async void Update()
+    void Update()
     {
         //Задаем направление каждому юниту
         resourcesCount = bot.resourcesCount;
