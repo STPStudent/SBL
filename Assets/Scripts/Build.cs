@@ -42,7 +42,7 @@ public class Build : MonoBehaviour, IPointerDownHandler
             && !cursorControl.IsObjekt()
             && !t)
             {
-                isBuilding = true;
+                isBuilding = false;
                 cursorControl.IsBuilding = false;
                 Instantiate(Fabric, new Vector3(coordinates.x, coordinates.y, 0), Quaternion.identity);
                 mainBuilding.resourcesCount -= Cost;
