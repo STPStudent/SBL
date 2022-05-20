@@ -8,16 +8,6 @@ public class MainCamera : MonoBehaviour
     [SerializeField] private float mapWidth, mapHeight;
     internal static float leftX, rightX, leftY, rightY;
 
-    public static bool IsBounds(Vector3 position)
-    {
-        var fstr = leftX.ToString() + " < " + position.x.ToString() + " < " + rightX.ToString();
-        var sstr = leftY.ToString() + " < " + position.y.ToString() + " < " + rightY.ToString(); 
-        return position.x > leftX
-        && position.x < rightX 
-        && position.y < rightY
-        && position.y > leftY;
-    }
-
     void Start()
     {
         //Смотрим границы поля

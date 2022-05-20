@@ -5,61 +5,40 @@ using UnityEngine.UI;
 
 public class Build : MonoBehaviour, IPointerDownHandler
 {
+    private bool isBuilding;
     public GameObject Fabric;
     [SerializeField] private Image circle;
     public int Cost;
-    [SerializeField] private MainBuilding mainBuilding;
+    [SerializeField] private ResourcesFabric resources;
     public Texture2D cursor;
     [SerializeField] private Texture2D normalCursor;
-    [SerializeField] private CursorControl cursorControl;
-    private bool isBuilding = false;
+    
 
     public void Update()
     {
+        if (isBuilding)
+            if (Input.GetMouseButtonDown(1))
+            {
+                var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                isBuilding = false;
+                Instantiate(Fabric, new Vector3(coordinates.x, coordinates.y, 0), Quaternion.identity);
+                resources.resourcesCount -= Cost;
+                Cursor.SetCursor(normalCursor, Vector2.zero, CursorMode.Auto);
+                circle.fillAmount = 1f;
+            }
+
         if (circle.fillAmount - Time.deltaTime / 15 < 0)
             circle.fillAmount = 0;
         else
             circle.fillAmount -= Time.deltaTime / 15;
-        
-        if (isBuilding)
-        {
-            var t = true;
-            var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var allBildings = GameObject
-                .FindGameObjectsWithTag(Fabric.tag);
-                foreach(var obj in allBildings)
-                    if((obj.transform.position - coordinates).magnitude < 30
-                    && !obj.gameObject.name.Contains("Unit"))
-                    {
-                        t = false;
-                        break;
-                    }
-            if(t || cursorControl.IsObjekt())
-                CursorControl.SetAttackCursor();
-            else
-                CursorControl.SetNormalCursor();
-            if (Input.GetMouseButtonDown(1)
-            && !cursorControl.IsObjekt()
-            && !t)
-            {
-                isBuilding = true;
-                cursorControl.IsBuilding = false;
-                Instantiate(Fabric, new Vector3(coordinates.x, coordinates.y, 0), Quaternion.identity);
-                mainBuilding.resourcesCount -= Cost;
-                CursorControl.SetNormalCursor();
-                circle.fillAmount = 1f;
-            }
-        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (mainBuilding.resourcesCount >= Cost)
+        if (resources.resourcesCount >= Cost && circle.fillAmount == 0)
         {
             isBuilding = true;
-            cursorControl.IsBuilding = true;
             Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
-            cursorControl.cursorBuilding = cursor;
         }
     }
 }

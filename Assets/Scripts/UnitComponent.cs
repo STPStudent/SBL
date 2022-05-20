@@ -81,12 +81,7 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
 
     void Update()
     {
-        var k = new Vector2(
-			Mathf.Clamp(transform.position.x, MainCamera.leftX, MainCamera.rightX),
-			Mathf.Clamp(transform.position.y,MainCamera.leftY, MainCamera.rightY)
-		);
-		transform.position = k;
-        //находит вектор направления из текущей точки в указаную
+        //Находит вектор направления из текущей точки в указаную
         var startPosition = rigidBodyComponent.position;
         var vectorDifference = finishPosition - startPosition;
 
