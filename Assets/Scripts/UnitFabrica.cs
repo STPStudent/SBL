@@ -11,6 +11,8 @@ public class UnitFabrica : HealthControl
     [SerializeField] private float deltaTime;
     private int spawnCount;
     private float lastTime;
+    [SerializeField] private GameObject culdown;
+    private Sprite a;
 
     void Start()
     {
