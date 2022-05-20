@@ -497,6 +497,7 @@ MonoBehaviour:
   resources: {fileID: 57560246}
   cursor: {fileID: 2800000, guid: 3ba387706a916624ca65e3aab3ae8470, type: 3}
   normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
+  notCursor: {fileID: 2800000, guid: d56a5639849757543acf773971c41e14, type: 3}
 --- !u!114 &45969089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,8 +758,6 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   text: {fileID: 529602478}
-  secondsWait: 1
-  countAddAfterWait: 1
   resourcesCount: 20
 --- !u!50 &57560247
 Rigidbody2D:
@@ -1760,6 +1759,7 @@ MonoBehaviour:
   resources: {fileID: 57560246}
   cursor: {fileID: 2800000, guid: 27612be2af01d4947b33eaf4078e6713, type: 3}
   normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
+  notCursor: {fileID: 2800000, guid: d56a5639849757543acf773971c41e14, type: 3}
 --- !u!114 &196986283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11038,6 +11038,7 @@ MonoBehaviour:
   resources: {fileID: 57560246}
   cursor: {fileID: 2800000, guid: a708ebc0b6319f742a0cde44f9338434, type: 3}
   normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
+  notCursor: {fileID: 2800000, guid: d56a5639849757543acf773971c41e14, type: 3}
 --- !u!1 &1606998182
 GameObject:
   m_ObjectHideFlags: 0
@@ -11075,8 +11076,6 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   text: {fileID: 0}
-  secondsWait: 1
-  countAddAfterWait: 2
   resourcesCount: 0
 --- !u!50 &1606998184
 Rigidbody2D:

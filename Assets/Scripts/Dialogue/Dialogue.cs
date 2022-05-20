@@ -8,6 +8,7 @@ using UnityEngine;
 [Serializable]
 public class Dialogue
 {
-    private string sentences =  File.ReadAllText(@"Assets\Story.txt");
+    [TextArea(3, 20)] public string sentences;
     public string[] sentencesList => sentences.Split('\n');
+    
 }

@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Threading;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResourcesFabric : HealthControl
 {
     [SerializeField] private Text text;
-    [SerializeField] private int secondsWait = 5;
-    [SerializeField] private int countAddAfterWait = 1;
+    private float secondsWait = 0.85f;
+    private float countAddAfterWait = 1;
     private float lastTime;
     private float deltaTime;
     public int resourcesCount;
@@ -30,7 +27,7 @@ public class ResourcesFabric : HealthControl
         if(timeNow - lastTime - deltaTime > secondsWait)
         {
             lastTime = timeNow;
-            resourcesCount += countAddAfterWait;
+            resourcesCount += (int)countAddAfterWait;
         }
         if(text != null)
             text.text = resourcesCount.ToString();
