@@ -45,6 +45,11 @@ public class CursorControl : MonoBehaviour
         }
     }
 
+    public static void OutOfRadius()
+    {
+        Cursor.SetCursor(staticCursorCross, Vector2.zero, CursorMode.Auto);
+    }
+
     public static void SetNormalCursor()
     {
         if(!isBuilding)
