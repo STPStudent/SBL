@@ -34,7 +34,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKey && !Input.GetKey(KeyCode.Mouse0))
+        if (Input.anyKey && !Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.Escape))
         {
             skipText.fillAmount = 1;
             radianProgress.fillAmount += Time.deltaTime / 4f;

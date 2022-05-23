@@ -5,26 +5,19 @@ using UnityEngine.UI;
 
 public class Build : MonoBehaviour, IPointerDownHandler
 {
+    private bool isBuilding;
     public GameObject Fabric;
     [SerializeField] private Image circle;
     public int Cost;
     [SerializeField] private MainBuilding mainBuilding;
-    public Texture2D cursor;
-    [SerializeField] private Texture2D normalCursor;
-    [SerializeField] private CursorControl cursorControl;
-    private bool isBuilding = false;
+    [SerializeField] private Texture2D cursor;
 
     public void Update()
     {
-        if (circle.fillAmount - Time.deltaTime / 15 < 0)
-            circle.fillAmount = 0;
-        else
-            circle.fillAmount -= Time.deltaTime / 15;
-        
         if (isBuilding)
         {
-            var t = true;
             var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var t = true;
             var allBildings = GameObject
                 .FindGameObjectsWithTag(Fabric.tag);
                 foreach(var obj in allBildings)
@@ -39,32 +32,34 @@ public class Build : MonoBehaviour, IPointerDownHandler
                         break;
                     }
                 }
-            if(t || cursorControl.IsObjekt())
+            if(t || CursorControl.IsObjekt())
                 CursorControl.OutOfRadius();
-            else
-                CursorControl.SetNormalCursor();
-            if (Input.GetMouseButtonDown(1)
-            && !cursorControl.IsObjekt()
-            && !t)
+            else if(Input.GetMouseButtonDown(1))
             {
                 isBuilding = false;
-                cursorControl.IsBuilding = false;
+                CursorControl.IsBuilding = false;
                 Instantiate(Fabric, new Vector3(coordinates.x, coordinates.y, 0), Quaternion.identity);
                 mainBuilding.resourcesCount -= Cost;
                 CursorControl.SetNormalCursor();
                 circle.fillAmount = 1f;
             }
+            else
+                CursorControl.SetNormalCursor();
         }
+
+        if (circle.fillAmount - Time.deltaTime / 15 < 0)
+            circle.fillAmount = 0;
+        else
+            circle.fillAmount -= Time.deltaTime / 15;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (mainBuilding.resourcesCount >= Cost)
+        if (mainBuilding.resourcesCount >= Cost && circle.fillAmount == 0)
         {
             isBuilding = true;
-            cursorControl.IsBuilding = true;
-            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.Auto);
-            cursorControl.cursorBuilding = cursor;
+            CursorControl.IsBuilding = true;
+            CursorControl.SetBuildingCursor(cursor);
         }
     }
 }
