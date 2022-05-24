@@ -419,10 +419,8 @@ MonoBehaviour:
   Fabric: {fileID: 804773373}
   circle: {fileID: 547878427}
   Cost: 20
-  mainBuilding: {fileID: 0}
+  mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 3ba387706a916624ca65e3aab3ae8470, type: 3}
-  normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
-  notCursor: {fileID: 0}
 --- !u!114 &45969089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,10 +1682,8 @@ MonoBehaviour:
   Fabric: {fileID: 1609624836}
   circle: {fileID: 840660843}
   Cost: 18
-  mainBuilding: {fileID: 0}
+  mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 27612be2af01d4947b33eaf4078e6713, type: 3}
-  normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
-  notCursor: {fileID: 0}
 --- !u!114 &196986283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5468,7 +5464,6 @@ MonoBehaviour:
   cursorNormalTexture: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
   cursorAttackTexture: {fileID: 2800000, guid: 218e791789a366e429881c95f194d596, type: 3}
   cursorCross: {fileID: 0}
-  cursorBuilding: {fileID: 0}
 --- !u!4 &789745015
 Transform:
   m_ObjectHideFlags: 0
@@ -10980,10 +10975,8 @@ MonoBehaviour:
   Fabric: {fileID: 1475393178}
   circle: {fileID: 1101481208}
   Cost: 15
-  mainBuilding: {fileID: 0}
+  mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: a708ebc0b6319f742a0cde44f9338434, type: 3}
-  normalCursor: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
-  notCursor: {fileID: 0}
 --- !u!1 &1606998182
 GameObject:
   m_ObjectHideFlags: 0
