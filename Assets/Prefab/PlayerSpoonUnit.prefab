@@ -121,11 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561874ff6d60cca479d918e099226a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 200
   CurrentHealth: 0
   DamageForceThreshold: 100
-  DamageForceScale: 10
-  spawnTime: 0
+  DamageForceScale: 20
   PlayerIndex: 0
 --- !u!95 &5638681313489024858
 Animator:
@@ -176,7 +175,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

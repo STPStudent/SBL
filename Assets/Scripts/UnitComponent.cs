@@ -113,4 +113,12 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
     {
         CursorControl.SetNormalCursor();
     }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        var vectorDifference = 
+                (transform.position - other.transform.position).normalized;
+        Debug.Log(vectorDifference);
+        transform.position = transform.position + vectorDifference;
+    }
 }

@@ -19,6 +19,12 @@ public class EvilSpawner : HealthControl
         EvilBrain.Spawners.Add(this);
         lastTime = Time.time;
         spawnCount = 5;
+    }
+
+    void Update()
+    {
+        if(transform.position.y < -70)
+            return;
         DoSpawn();
     }
 

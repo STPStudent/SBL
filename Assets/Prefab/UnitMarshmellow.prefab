@@ -124,7 +124,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 25
-  spawnTime: 0
   PlayerIndex: 1
 --- !u!60 &4161244359718295053
 PolygonCollider2D:
