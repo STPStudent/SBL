@@ -16,7 +16,6 @@ public class TowerScript : HealthControl
         SetHealth();
         lastShot = Time.time;
         radius = 20;
-        spawnTime = Time.time;
     }
 
     void Update()

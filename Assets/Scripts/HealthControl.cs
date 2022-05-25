@@ -8,7 +8,6 @@ public class HealthControl : MonoBehaviour
     public float CurrentHealth;
     public float DamageForceThreshold = 1f;
     public float DamageForceScale = 5f;
-    public float spawnTime;
 
     public void SetHealth()
     {
@@ -52,20 +51,5 @@ public class HealthControl : MonoBehaviour
     public virtual void DestroyObject()
     {
         Destroy(gameObject);
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if(!other.name.Contains("Unit")
-            &&!other.name.Contains("Bomb")
-            && other.gameObject.GetComponent<HealthControl>().spawnTime < spawnTime
-            || name.Contains("Unit"))
-        {
-            var col = GetComponent<Collider2D>();
-            if(other.bounds.Intersects(col.bounds))
-            {
-                transform.position = transform.position + Vector3.left + Vector3.down/2;
-            }
-        }
     }
 }
