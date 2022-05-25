@@ -14,6 +14,8 @@ public class EvilBrain : MonoBehaviour
     public static int unitCount = 0;
     public int resourcesCount = 0;
     private int bildingCount = 0;
+    private int spawnerCount = 0;
+    private int towerCount = 0;
     public static void AddUnit(UnitComponent comp)
     {
         //Добавляет юнита бота в список
@@ -148,7 +150,7 @@ public class EvilBrain : MonoBehaviour
         DefanseBuilding();
     }
 
-    private void CreateBilding(
+    private int CreateBilding(
         int coust, 
         GameObject building
     )
@@ -161,24 +163,22 @@ public class EvilBrain : MonoBehaviour
             var allBildings = GameObject
             .FindGameObjectsWithTag(gameObject.tag);
             var buildingPlace = bot.transform.position;
-            if(Random.Range(0,6) != 0)
-                buildingPlace = allBildings[Random.Range(0, allBildings.Length)]
-                    .transform.position;
             var newBuildPlace = new Vector3(-x,-y,0) 
                 + buildingPlace;
             if((new Vector3(-x,-y,0)).magnitude < 7
             || !MainCamera.IsBounds(newBuildPlace))
-                return;
+                return 0;
             foreach(var obj in allBildings)
                 if((obj.transform.position - newBuildPlace).magnitude < 7
                 && obj.gameObject.name.Contains("Unit"))
-                    return;
+                    return 0;
             Instantiate(building, 
                 newBuildPlace, 
                 Quaternion.identity);
             bot.resourcesCount -= coust;
-            bildingCount ++;
+            return 1;
         }
+        return 0;
     }
 
     void Update()
@@ -189,7 +189,9 @@ public class EvilBrain : MonoBehaviour
         if (Spawners.Count > 2)
             ControlArmy();
         var spawner = Spawners[Random.Range(0,2)];
-        CreateBilding(15, spawner.gameObject);
-        CreateBilding(10, Tower.gameObject);
+        if((spawnerCount + towerCount)%3 == 0)
+            towerCount += CreateBilding(10, Tower.gameObject);
+        else
+            spawnerCount += CreateBilding(5, spawner.gameObject);
     }
 }

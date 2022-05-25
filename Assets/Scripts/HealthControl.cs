@@ -64,7 +64,7 @@ public class HealthControl : MonoBehaviour
             var col = GetComponent<Collider2D>();
             if(other.bounds.Intersects(col.bounds))
             {
-                transform.position = transform.position + Vector3.left + Vector3.down;
+                transform.position = transform.position + Vector3.left + Vector3.down/2;
             }
         }
     }
