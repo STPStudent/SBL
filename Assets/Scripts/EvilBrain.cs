@@ -17,7 +17,8 @@ public class EvilBrain : MonoBehaviour
     public static void AddUnit(UnitComponent comp)
     {
         //Добавляет юнита бота в список
-        units.nextComponent = comp;
+        if(units != null)
+            units.nextComponent = comp;
         comp.previousComponent = units;
         units = comp;
         unitCount++;
@@ -28,7 +29,7 @@ public class EvilBrain : MonoBehaviour
 
     void Awake()
     {
-        units = gameObject.AddComponent<UnitComponent>();
+        units = null;
         Spawners = new List<EvilSpawner>();
     }
     
@@ -140,7 +141,8 @@ public class EvilBrain : MonoBehaviour
                 k = Random.Range(0, Spawners.Count);
             Spawners[k].Spawn();
         }
-
+        if(units == null)
+            return;
         DoAttackBuilding();
         DoAttackUnit();
         DefanseBuilding();
@@ -187,8 +189,7 @@ public class EvilBrain : MonoBehaviour
         if (Spawners.Count > 2)
             ControlArmy();
         var spawner = Spawners[Random.Range(0,2)];
-        //CreateBilding(15, spawner.gameObject);
-        CreateBilding(20, 
-            Tower.gameObject);
+        CreateBilding(15, spawner.gameObject);
+        CreateBilding(10, Tower.gameObject);
     }
 }

@@ -56,12 +56,12 @@ public class HealthControl : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.name.Contains("Main")
-        || (other.gameObject.name.Contains("Generator")
-            && other.gameObject.GetComponent<EvilSpawner>().spawnTime < spawnTime))
+        if(!other.name.Contains("Unit")
+            &&!other.name.Contains("Bomb")
+            && other.gameObject.GetComponent<HealthControl>().spawnTime < spawnTime
+            || name.Contains("Unit"))
         {
             var col = GetComponent<Collider2D>();
-            Debug.Log(other.bounds.Intersects(col.bounds));
             if(other.bounds.Intersects(col.bounds))
             {
                 transform.position = transform.position + Vector3.left + Vector3.down;

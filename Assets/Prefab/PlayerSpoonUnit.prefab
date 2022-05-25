@@ -125,7 +125,7 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 100
   DamageForceScale: 10
-  type: 1
+  spawnTime: 0
   PlayerIndex: 0
 --- !u!95 &5638681313489024858
 Animator:
@@ -154,7 +154,7 @@ PointEffector2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5638681313489024861}
   m_Enabled: 1
-  m_UseColliderMask: 1
+  m_UseColliderMask: 0
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295
