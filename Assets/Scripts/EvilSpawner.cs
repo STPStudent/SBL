@@ -11,7 +11,6 @@ public class EvilSpawner : HealthControl
     [SerializeField] public MainBuilding mainBuilding;
     [SerializeField] private float deltaTime;
     private float lastTime;
-    public float spawnTime;
     public bool AreTriger = false;
     void Start()
     {
@@ -38,22 +37,6 @@ public class EvilSpawner : HealthControl
             lastTime = time;
             mainBuilding.resourcesCount -= unitCost;
             Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
-        }
-    }
-    
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if(other.gameObject.name.Contains("Main")
-        || (other.gameObject.name.Contains("Generator")
-            && other.gameObject.GetComponent<EvilSpawner>().spawnTime < spawnTime))
-        {
-            var col = GetComponent<Collider2D>();
-            Debug.Log(other.bounds.Intersects(col.bounds));
-            var time = Time.time - spawnTime;
-            if(other.bounds.Intersects(col.bounds))
-            {
-                transform.position = transform.position + Vector3.left;
-            }
         }
     }
 }

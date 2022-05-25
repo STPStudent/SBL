@@ -146,24 +146,24 @@ public class EvilBrain : MonoBehaviour
         DefanseBuilding();
     }
 
-    private void CreateBilding<T>(
+    private void CreateBilding(
         int coust, 
         GameObject building
-    ) where T : Component
+    )
     {
-        var anotherBuilding = GetComponents<T>();
-        if(resourcesCount > coust
-        && Spawners.Count < 4
-        || resourcesCount > coust * (anotherBuilding.Length + 1) * 6)
+        if(resourcesCount > coust)
         {
             var x = Random.Range(-10.0f, 10.0f);
             var right = Mathf.Sqrt(10.0f *10.0f - x*x);
             var y = Random.Range(-right, right);
             var allBildings = GameObject
             .FindGameObjectsWithTag(gameObject.tag);
+            var buildingPlace = bot.transform.position;
+            if(Random.Range(0,6) != 0)
+                buildingPlace = allBildings[Random.Range(0, allBildings.Length)]
+                    .transform.position;
             var newBuildPlace = new Vector3(-x,-y,0) 
-            + allBildings[Random.Range(0, allBildings.Length)]
-                .transform.position;
+                + buildingPlace;
             if((new Vector3(-x,-y,0)).magnitude < 7
             || !MainCamera.IsBounds(newBuildPlace))
                 return;
@@ -187,9 +187,8 @@ public class EvilBrain : MonoBehaviour
         if (Spawners.Count > 2)
             ControlArmy();
         var spawner = Spawners[Random.Range(0,2)];
-        CreateBilding<EvilSpawner>(15, 
-            spawner.gameObject);
-        CreateBilding<TowerScript>(20, 
+        //CreateBilding(15, spawner.gameObject);
+        CreateBilding(20, 
             Tower.gameObject);
     }
 }
