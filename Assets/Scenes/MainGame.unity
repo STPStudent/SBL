@@ -680,7 +680,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  spawnTime: 0
   text: {fileID: 529602478}
   secondsWait: 5
   countAddAfterWait: 1
@@ -1090,7 +1089,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  spawnTime: 0
   result: {fileID: 1686699924}
   resourcesCount: 20
 --- !u!58 &92637465
@@ -5196,6 +5194,7 @@ GameObject:
   - component: {fileID: 761031163}
   - component: {fileID: 761031165}
   - component: {fileID: 761031168}
+  - component: {fileID: 761031169}
   m_Layer: 0
   m_Name: EvilPotatoGenerator
   m_TagString: Bot
@@ -5219,7 +5218,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  spawnTime: 0
   unitCount: 16
   unitCost: 1
   unit: {fileID: 7978428832090662827, guid: 94d6b72b739b2db409bd778c27f354cf, type: 3}
@@ -5354,11 +5352,23 @@ PointEffector2D:
   m_ForceMagnitude: 1000
   m_ForceVariation: 0
   m_DistanceScale: 1
-  m_ForceSource: 1
-  m_ForceTarget: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
   m_ForceMode: 0
   m_Drag: 0
   m_AngularDrag: 0
+--- !u!114 &761031169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761031162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d12da0e23f4a1442858d9204cea0f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &784936714
 GameObject:
   m_ObjectHideFlags: 0
@@ -5591,7 +5601,6 @@ MonoBehaviour:
   CurrentHealth: 1
   DamageForceThreshold: 1
   DamageForceScale: 10
-  spawnTime: 0
   bomb: {fileID: 6327449400938858878, guid: b37b5658a2ca29d4a8da2c168101faef, type: 3}
   deltaTime: 2
 --- !u!212 &804773375
@@ -6995,6 +7004,7 @@ GameObject:
   - component: {fileID: 974067943}
   - component: {fileID: 974067948}
   - component: {fileID: 974067945}
+  - component: {fileID: 974067949}
   m_Layer: 0
   m_Name: EvilMarshmellowGenerator
   m_TagString: Bot
@@ -7018,7 +7028,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  spawnTime: 0
   unitCount: 16
   unitCost: 1
   unit: {fileID: 4161244359718295051, guid: 1960ce6013c29334bbd932ed5a20975d, type: 3}
@@ -7190,11 +7199,23 @@ PointEffector2D:
   m_ForceMagnitude: 1000
   m_ForceVariation: 0
   m_DistanceScale: 1
-  m_ForceSource: 1
-  m_ForceTarget: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
   m_ForceMode: 0
   m_Drag: 0
   m_AngularDrag: 0
+--- !u!114 &974067949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974067942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d12da0e23f4a1442858d9204cea0f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &998141622
 GameObject:
   m_ObjectHideFlags: 0
@@ -9820,7 +9841,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  spawnTime: 0
   result: {fileID: 670656099}
   resourcesCount: 0
 --- !u!250 &1407459590
@@ -10185,7 +10205,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  spawnTime: 0
   unitCost: 2
   unit: {fileID: 2266968258551286439, guid: d7d2bd48e56c29b4a874287dcc98a4f7, type: 3}
   mainBuilding: {fileID: 92637464}
@@ -11018,7 +11037,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  spawnTime: 0
   text: {fileID: 0}
   secondsWait: 1
   countAddAfterWait: 1
@@ -11163,7 +11181,6 @@ MonoBehaviour:
   CurrentHealth: 0
   DamageForceThreshold: 1
   DamageForceScale: 5
-  spawnTime: 0
   unitCost: 1
   unit: {fileID: 5638681313489024860, guid: 472c002b484679c4ca0b2a148989f96d, type: 3}
   mainBuilding: {fileID: 92637464}
@@ -13732,6 +13749,8 @@ GameObject:
   - component: {fileID: 2119968671}
   - component: {fileID: 2119968672}
   - component: {fileID: 2119968676}
+  - component: {fileID: 2119968677}
+  - component: {fileID: 2119968678}
   m_Layer: 0
   m_Name: TowerEvil
   m_TagString: Bot
@@ -13754,8 +13773,8 @@ PointEffector2D:
   m_ForceMagnitude: 1000
   m_ForceVariation: 0
   m_DistanceScale: 1
-  m_ForceSource: 1
-  m_ForceTarget: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
   m_ForceMode: 0
   m_Drag: 0
   m_AngularDrag: 0
@@ -13830,7 +13849,6 @@ MonoBehaviour:
   CurrentHealth: 1
   DamageForceThreshold: 1
   DamageForceScale: 10
-  spawnTime: 0
   bomb: {fileID: 8268424299518160429, guid: 0024e0c74bb450748b16812231aa96b1, type: 3}
   deltaTime: 2
 --- !u!212 &2119968674
@@ -13920,3 +13938,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2119968677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119968670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e6971277d1f8764f9fda111fdf57749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2119968678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119968670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d12da0e23f4a1442858d9204cea0f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
