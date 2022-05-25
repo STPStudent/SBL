@@ -657,7 +657,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57560243}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -44.3, y: 31.4, z: 0}
+  m_LocalPosition: {x: -44, y: 36.7, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 2067165385}
@@ -10182,7 +10182,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   unitCost: 2
-  unit: {fileID: 2266968258551286439, guid: eb28d041a364bd84a8d6b75e7dc9cb2f, type: 3}
+  unit: {fileID: 2266968258551286439, guid: d7d2bd48e56c29b4a874287dcc98a4f7, type: 3}
   mainBuilding: {fileID: 92637464}
   deltaTime: 1
 --- !u!50 &1475393180
@@ -11014,7 +11014,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   text: {fileID: 0}
-  secondsWait: 5
+  secondsWait: 1
   countAddAfterWait: 1
   mainBuilding: {fileID: 1407459589}
 --- !u!50 &1606998184
@@ -11113,7 +11113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606998182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.6, y: 31.4, z: 0}
+  m_LocalPosition: {x: -35.6, y: 36.4, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 945588414}
@@ -11158,7 +11158,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   unitCost: 1
-  unit: {fileID: 5638681313489024860, guid: 2373f4cf9d30f3545a26b90ac927c956, type: 3}
+  unit: {fileID: 5638681313489024860, guid: 472c002b484679c4ca0b2a148989f96d, type: 3}
   mainBuilding: {fileID: 92637464}
   deltaTime: 1
 --- !u!50 &1609624838
