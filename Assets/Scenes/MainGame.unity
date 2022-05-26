@@ -679,7 +679,7 @@ MonoBehaviour:
   MaxHealth: 100
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   text: {fileID: 529602478}
   secondsWait: 1
   countAddAfterWait: 1
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   MaxHealth: 2000
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   result: {fileID: 1686699924}
   resourcesCount: 20
 --- !u!58 &92637465
@@ -5217,7 +5217,7 @@ MonoBehaviour:
   MaxHealth: 400
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   unitCount: 16
   unitCost: 1
   unit: {fileID: 7978428832090662827, guid: 94d6b72b739b2db409bd778c27f354cf, type: 3}
@@ -5599,7 +5599,7 @@ MonoBehaviour:
   MaxHealth: 2000
   CurrentHealth: 1
   DamageForceThreshold: 1
-  DamageForceScale: 10
+  DamageForceScale: 0
   bomb: {fileID: 6327449400938858878, guid: b37b5658a2ca29d4a8da2c168101faef, type: 3}
   deltaTime: 2
 --- !u!212 &804773375
@@ -7026,7 +7026,7 @@ MonoBehaviour:
   MaxHealth: 400
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   unitCount: 16
   unitCost: 1
   unit: {fileID: 4161244359718295051, guid: 1960ce6013c29334bbd932ed5a20975d, type: 3}
@@ -9838,7 +9838,7 @@ MonoBehaviour:
   MaxHealth: 2000
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   result: {fileID: 670656099}
   resourcesCount: 0
 --- !u!250 &1407459590
@@ -10202,7 +10202,7 @@ MonoBehaviour:
   MaxHealth: 400
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   unitCost: 2
   unit: {fileID: 2266968258551286439, guid: d7d2bd48e56c29b4a874287dcc98a4f7, type: 3}
   mainBuilding: {fileID: 92637464}
@@ -11034,9 +11034,9 @@ MonoBehaviour:
   MaxHealth: 100
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   text: {fileID: 0}
-  secondsWait: 10
+  secondsWait: 1
   countAddAfterWait: 1
   mainBuilding: {fileID: 1407459589}
 --- !u!50 &1606998184
@@ -11178,7 +11178,7 @@ MonoBehaviour:
   MaxHealth: 500
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   unitCost: 1
   unit: {fileID: 5638681313489024860, guid: 472c002b484679c4ca0b2a148989f96d, type: 3}
   mainBuilding: {fileID: 92637464}
@@ -13846,7 +13846,7 @@ MonoBehaviour:
   MaxHealth: 2000
   CurrentHealth: 1
   DamageForceThreshold: 1
-  DamageForceScale: 10
+  DamageForceScale: 0
   bomb: {fileID: 8268424299518160429, guid: 0024e0c74bb450748b16812231aa96b1, type: 3}
   deltaTime: 2
 --- !u!212 &2119968674
