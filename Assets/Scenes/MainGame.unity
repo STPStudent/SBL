@@ -1024,7 +1024,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1003142659
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e27158a3d0328bc4cb721e5b1bdcdc46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3716,7 +3716,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 16
+  orthographic size: 25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5223,7 +5223,6 @@ MonoBehaviour:
   unit: {fileID: 7978428832090662827, guid: 94d6b72b739b2db409bd778c27f354cf, type: 3}
   mainBuilding: {fileID: 1407459589}
   deltaTime: 3
-  AreTriger: 0
 --- !u!50 &761031164
 Rigidbody2D:
   serializedVersion: 4
@@ -5475,7 +5474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorNormalTexture: {fileID: 2800000, guid: f93eb52771f708d4a95b3ce8c1529652, type: 3}
   cursorAttackTexture: {fileID: 2800000, guid: 218e791789a366e429881c95f194d596, type: 3}
-  cursorCross: {fileID: 0}
+  cursorCross: {fileID: 2800000, guid: d56a5639849757543acf773971c41e14, type: 3}
 --- !u!4 &789745015
 Transform:
   m_ObjectHideFlags: 0
@@ -7033,7 +7032,6 @@ MonoBehaviour:
   unit: {fileID: 4161244359718295051, guid: 1960ce6013c29334bbd932ed5a20975d, type: 3}
   mainBuilding: {fileID: 1407459589}
   deltaTime: 3
-  AreTriger: 0
 --- !u!50 &974067944
 Rigidbody2D:
   serializedVersion: 4
@@ -11038,7 +11036,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 5
   text: {fileID: 0}
-  secondsWait: 1
+  secondsWait: 10
   countAddAfterWait: 1
   mainBuilding: {fileID: 1407459589}
 --- !u!50 &1606998184
