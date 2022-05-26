@@ -10,10 +10,15 @@ public class ResourcesFabric : HealthControl
     [SerializeField] private int secondsWait;
     [SerializeField] private int countAddAfterWait;
     [SerializeField] private MainBuilding mainBuilding;
+    private int _countAddAfterWait = 0;
     private float lastTime;
 
     void Start()
     {
+        if(gameObject.name.Contains("Clone"))
+        {
+            _countAddAfterWait = countAddAfterWait;
+        }
         SetHealth();
         lastTime = Time.time;
     }
@@ -27,7 +32,7 @@ public class ResourcesFabric : HealthControl
         if(timeNow - lastTime > secondsWait)
         {
             lastTime = timeNow;
-            mainBuilding.resourcesCount += countAddAfterWait;
+            mainBuilding.resourcesCount += _countAddAfterWait;
         }
         if(text != null)
             text.text = mainBuilding.resourcesCount.ToString();
