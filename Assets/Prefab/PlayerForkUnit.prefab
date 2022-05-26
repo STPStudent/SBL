@@ -292,6 +292,7 @@ MonoBehaviour:
   DamageForceThreshold: 100
   DamageForceScale: 10
   PlayerIndex: 0
+  acceleration: 6
 --- !u!95 &2266968258551286429
 Animator:
   serializedVersion: 3

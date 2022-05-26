@@ -7,7 +7,7 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
     [SerializeField] public int PlayerIndex;
     internal UnitComponent previousComponent;
     internal UnitComponent nextComponent;
-    private float acceleration = 3;
+    [SerializeField] private float acceleration = 3;
     private Rigidbody2D rigidBodyComponent;
     private bool isChoose;
     internal Vector2 finishPosition = Vector2.zero;
