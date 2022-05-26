@@ -13,11 +13,11 @@ public class CursorControl : MonoBehaviour
     private static bool isObject = false;
 
     public static bool IsBuilding
-    { 
+    {
         get => isBuilding;
         set => isBuilding = value;
     }
-    
+
     public static bool IsObject()
         => isObject;
 
@@ -30,7 +30,7 @@ public class CursorControl : MonoBehaviour
 
     public static void SetAttackCursor()
     {
-        if(!isBuilding)
+        if (!isBuilding)
             Cursor.SetCursor(staticCursorAttackTexture, Vector2.zero, CursorMode.Auto);
         else
         {
@@ -52,7 +52,7 @@ public class CursorControl : MonoBehaviour
 
     public static void SetNormalCursor()
     {
-        if(!isBuilding)
+        if (!isBuilding)
             Cursor.SetCursor(staticCursorNormalTexture, Vector2.zero, CursorMode.Auto);
         else
             Cursor.SetCursor(staticCursorBuilding, Vector2.zero, CursorMode.Auto);

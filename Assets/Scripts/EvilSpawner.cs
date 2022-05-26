@@ -12,6 +12,7 @@ public class EvilSpawner : HealthControl
     [SerializeField] private float deltaTime;
     private float lastTime;
     private int spawnCount;
+
     void Start()
     {
         SetHealth();
@@ -22,7 +23,7 @@ public class EvilSpawner : HealthControl
 
     void Update()
     {
-        if(transform.position.y < -70)
+        if (transform.position.y < -70)
             return;
         
         if(spawnCount > 0 && Spawn())

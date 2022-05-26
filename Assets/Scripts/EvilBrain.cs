@@ -16,10 +16,11 @@ public class EvilBrain : MonoBehaviour
     private int bildingCount = 0;
     private int spawnerCount = 0;
     private int towerCount = 0;
+
     public static void AddUnit(UnitComponent comp)
     {
         //Добавляет юнита бота в список
-        if(units != null)
+        if (units != null)
             units.nextComponent = comp;
         comp.previousComponent = units;
         units = comp;
@@ -142,7 +143,8 @@ public class EvilBrain : MonoBehaviour
                 k = Random.Range(0, Spawners.Count);
             Spawners[k].Spawn();
         }
-        if(units == null)
+
+        if (units == null)
             return;
         DoAttackBuilding();
         DoAttackUnit();
@@ -150,34 +152,36 @@ public class EvilBrain : MonoBehaviour
     }
 
     private int CreateBilding(
-        int coust, 
+        int coust,
         GameObject building
     )
     {
-        if(resourcesCount > coust)
+        if (resourcesCount > coust)
         {
             var x = Random.Range(-10.0f, 10.0f);
             var right = Mathf.Sqrt(10.0f * 10.0f - x * x);
             var y = Random.Range(-right, right);
             var allBildings = GameObject
-            .FindGameObjectsWithTag(gameObject.tag);
+                .FindGameObjectsWithTag(gameObject.tag);
             var buildingPlace = allBildings[Random.Range(0, allBildings.Length)]
-                                    .transform.position;;
-            var newBuildPlace = new Vector3(-x,-y,0) 
-                + buildingPlace;
-            if((new Vector3(-x,-y,0)).magnitude < 7
-            || !MainCamera.IsBounds(newBuildPlace))
+                .transform.position;
+            ;
+            var newBuildPlace = new Vector3(-x, -y, 0)
+                                + buildingPlace;
+            if ((new Vector3(-x, -y, 0)).magnitude < 7
+                || !MainCamera.IsBounds(newBuildPlace))
                 return 0;
-            foreach(var obj in allBildings)
-                if((obj.transform.position - newBuildPlace).magnitude < 7
-                && obj.gameObject.name.Contains("Unit"))
+            foreach (var obj in allBildings)
+                if ((obj.transform.position - newBuildPlace).magnitude < 7
+                    && obj.gameObject.name.Contains("Unit"))
                     return 0;
-            Instantiate(building, 
-                newBuildPlace, 
+            Instantiate(building,
+                newBuildPlace,
                 Quaternion.identity);
             bot.resourcesCount -= coust;
             return 1;
         }
+
         return 0;
     }
 
@@ -188,8 +192,8 @@ public class EvilBrain : MonoBehaviour
         playerUnits = UnitControl.units;
         if (Spawners.Count > 2)
             ControlArmy();
-        var spawner = Spawners[Random.Range(0,2)];
-        if((spawnerCount + towerCount)%3 == 0)
+        var spawner = Spawners[Random.Range(0, 2)];
+        if ((spawnerCount + towerCount) % 3 == 0)
             towerCount += CreateBilding(10, Tower.gameObject);
         else
             spawnerCount += CreateBilding(5, spawner.gameObject);
