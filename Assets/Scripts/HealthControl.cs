@@ -9,13 +9,12 @@ public class HealthControl : MonoBehaviour
     public float DamageForceThreshold = 1f;
     public float DamageForceScale = 5f;
 
-
     public void SetHealth()
     {
         CurrentHealth = MaxHealth;
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other) 
     {
         //Сейчас проверяет тег если это юнит то выполняются условия 
         if (!other.gameObject.CompareTag(gameObject.tag)

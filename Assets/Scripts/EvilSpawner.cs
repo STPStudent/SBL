@@ -11,14 +11,20 @@ public class EvilSpawner : HealthControl
     [SerializeField] public MainBuilding mainBuilding;
     [SerializeField] private float deltaTime;
     private float lastTime;
-    public float spawnTime;
-
+    private int spawnCount;
     void Start()
     {
         SetHealth();
         EvilBrain.Spawners.Add(this);
-        spawnTime = Time.time;
         lastTime = Time.time;
+        spawnCount = 5;
+    }
+
+    void Update()
+    {
+        if(transform.position.y < -70)
+            return;
+        DoSpawn();
     }
 
     public override void DestroyObject()
@@ -27,33 +33,21 @@ public class EvilSpawner : HealthControl
         Destroy(gameObject);
     }
 
-    public async void Spawn()
+    public void Spawn()
+        => spawnCount++;
+    
+    public void DoSpawn()
     {
         //Если выполняются условие делает спавн юнита бота
         var time = Time.time;
-        if (unitCost <= mainBuilding.resourcesCount
-            && unitCount > 0
-            && time - lastTime > deltaTime)
+        if(unitCost <= mainBuilding.resourcesCount
+        && spawnCount > 0
+        && time - lastTime > deltaTime)
         {
             lastTime = time;
+            spawnCount--;
             mainBuilding.resourcesCount -= unitCost;
             Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
-        }
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.name.Contains("Main")
-            || (other.gameObject.name.Contains("Generator")
-                && other.gameObject.GetComponent<EvilSpawner>().spawnTime < spawnTime))
-        {
-            var col = GetComponent<Collider2D>();
-            Debug.Log(other.bounds.Intersects(col.bounds));
-            var time = Time.time - spawnTime;
-            if (other.bounds.Intersects(col.bounds))
-            {
-                transform.position += Vector3.left;
-            }
         }
     }
 }
