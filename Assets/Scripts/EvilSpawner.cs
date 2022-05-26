@@ -11,7 +11,6 @@ public class EvilSpawner : HealthControl
     [SerializeField] public MainBuilding mainBuilding;
     [SerializeField] private float deltaTime;
     private float lastTime;
-    public bool AreTriger = false;
     private int spawnCount;
     void Start()
     {
