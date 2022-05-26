@@ -8,11 +8,16 @@ public class EvilBrain : MonoBehaviour
     [SerializeField] private MainBuilding player;
     [SerializeField] private MainBuilding bot;
     [SerializeField] private TowerScript Tower;
+    [SerializeField] private ResourcesFabric Fabric;
     public static List<EvilSpawner> Spawners;
+    [SerializeField] private int spawnerCost;
+    [SerializeField] private int towerCost;
+    [SerializeField] private int fabricCost;
     private UnitComponent playerUnits;
     public static UnitComponent units;
     public static int unitCount = 0;
     public int resourcesCount = 0;
+    private int fabricCount = 0;
     private int bildingCount = 0;
     private int spawnerCount = 0;
     private int towerCount = 0;
@@ -152,11 +157,12 @@ public class EvilBrain : MonoBehaviour
     }
 
     private int CreateBilding(
-        int coust,
+        int cost,
         GameObject building
     )
     {
-        if (resourcesCount > coust)
+        Debug.Log(resourcesCount);
+        if (resourcesCount > cost)
         {
             var x = Random.Range(-10.0f, 10.0f);
             var right = Mathf.Sqrt(10.0f * 10.0f - x * x);
@@ -178,7 +184,7 @@ public class EvilBrain : MonoBehaviour
             Instantiate(building,
                 newBuildPlace,
                 Quaternion.identity);
-            bot.resourcesCount -= coust;
+            bot.resourcesCount -= cost;
             return 1;
         }
 
@@ -192,10 +198,17 @@ public class EvilBrain : MonoBehaviour
         playerUnits = UnitControl.units;
         if (Spawners.Count > 2)
             ControlArmy();
+        if(CreateBilding(fabricCost, Fabric.gameObject) == 1)
+        {
+            fabricCost *= 2;
+            fabricCount++;
+        }
+        if(fabricCount == 0)
+            return;
         var spawner = Spawners[Random.Range(0, 2)];
         if ((spawnerCount + towerCount) % 3 == 0)
-            towerCount += CreateBilding(10, Tower.gameObject);
+            towerCount += CreateBilding(towerCost, Tower.gameObject);
         else
-            spawnerCount += CreateBilding(5, spawner.gameObject);
+            spawnerCount += CreateBilding(fabricCost, spawner.gameObject);
     }
 }

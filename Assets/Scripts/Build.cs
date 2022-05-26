@@ -11,6 +11,7 @@ public class Build : MonoBehaviour, IPointerDownHandler
     public int Cost;
     [SerializeField] private MainBuilding mainBuilding;
     [SerializeField] private Texture2D cursor;
+    [SerializeField] private Text text;
 
     public void Update()
     {
@@ -22,7 +23,6 @@ public class Build : MonoBehaviour, IPointerDownHandler
                 .FindGameObjectsWithTag(Fabric.tag);
             foreach (var obj in allBildings)
             {
-                Debug.Log(obj.name);
                 if ((obj.name.Contains("PlayerMainBuild")
                      && (obj.transform.position - coordinates).magnitude < 30
                      || (obj.transform.position - coordinates).magnitude < 20)
@@ -43,6 +43,11 @@ public class Build : MonoBehaviour, IPointerDownHandler
                 mainBuilding.resourcesCount -= Cost;
                 CursorControl.SetNormalCursor();
                 circle.fillAmount = 1f;
+                if(Fabric.gameObject.name.Contains("Recourse"))
+                {
+                    Cost *= 2;
+                    text.text = Cost.ToString();
+                }
             }
             else
                 CursorControl.SetNormalCursor();
