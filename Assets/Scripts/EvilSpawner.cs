@@ -12,6 +12,7 @@ public class EvilSpawner : HealthControl
     [SerializeField] private float deltaTime;
     private float lastTime;
     private int spawnCount;
+
     void Start()
     {
         SetHealth();
@@ -22,7 +23,7 @@ public class EvilSpawner : HealthControl
 
     void Update()
     {
-        if(transform.position.y < -70)
+        if (transform.position.y < -70)
             return;
         DoSpawn();
     }
@@ -35,14 +36,14 @@ public class EvilSpawner : HealthControl
 
     public void Spawn()
         => spawnCount++;
-    
+
     public void DoSpawn()
     {
         //Если выполняются условие делает спавн юнита бота
         var time = Time.time;
-        if(unitCost <= mainBuilding.resourcesCount
-        && spawnCount > 0
-        && time - lastTime > deltaTime)
+        if (unitCost <= mainBuilding.resourcesCount
+            && spawnCount > 0
+            && time - lastTime > deltaTime)
         {
             lastTime = time;
             spawnCount--;

@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(objectHP.CurrentHealth < 0.1)
+        if (objectHP.CurrentHealth < 0.1)
             objectHP.DestroyObject();
         var scale = transform.localScale;
         var healthLen = objectHP.CurrentHealth / objectHP.MaxHealth;

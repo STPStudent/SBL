@@ -20,21 +20,22 @@ public class Build : MonoBehaviour, IPointerDownHandler
             var t = true;
             var allBildings = GameObject
                 .FindGameObjectsWithTag(Fabric.tag);
-                foreach(var obj in allBildings)
-                {
-                    Debug.Log(obj.name);
-                    if((obj.name.Contains("PlayerMainBuild") 
-                        && (obj.transform.position - coordinates).magnitude < 30
-                    ||(obj.transform.position - coordinates).magnitude < 20)
+            foreach (var obj in allBildings)
+            {
+                Debug.Log(obj.name);
+                if ((obj.name.Contains("PlayerMainBuild")
+                     && (obj.transform.position - coordinates).magnitude < 30
+                     || (obj.transform.position - coordinates).magnitude < 20)
                     && !obj.gameObject.name.Contains("Unit"))
-                    {
-                        t = false;
-                        break;
-                    }
+                {
+                    t = false;
+                    break;
                 }
-            if(t || CursorControl.IsObject())
+            }
+
+            if (t || CursorControl.IsObject())
                 CursorControl.OutOfRadius();
-            else if(Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1))
             {
                 isBuilding = false;
                 CursorControl.IsBuilding = false;
