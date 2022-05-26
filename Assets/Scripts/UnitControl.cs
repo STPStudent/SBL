@@ -95,6 +95,7 @@ public class UnitControl : MonoBehaviour
             startPosition = Input.mousePosition;
             canDraw = true;
 			SetDeselect();
+			
         }
 		//Когда отпускают левую кнопку мыши
 		//убирает цвет нарисованому прямоугольнику
