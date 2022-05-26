@@ -32,7 +32,7 @@ public class Build : MonoBehaviour, IPointerDownHandler
                         break;
                     }
                 }
-            if(t || CursorControl.IsObjekt())
+            if(t || CursorControl.IsObject())
                 CursorControl.OutOfRadius();
             else if(Input.GetMouseButtonDown(1))
             {

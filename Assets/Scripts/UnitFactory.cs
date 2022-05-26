@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class UnitFabrica : HealthControl
+public class UnitFactory : HealthControl
 {
     [SerializeField] private int unitCost = 5;
     [SerializeField] private UnitComponent unit;

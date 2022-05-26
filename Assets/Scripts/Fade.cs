@@ -2,51 +2,51 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class FadeInOut : MonoBehaviour {
-	
-    public static bool sceneEnd;
+public class FadeInOut : MonoBehaviour
+{
+    private static bool sceneEnd;
     public float fadeSpeed = 1.5f;
     public int nextLevel;
-    private Image _image;
+    private Image image;
     private bool sceneStarting;
 
-    void Awake ()
+    void Awake()
     {
-        _image = GetComponent<Image>();
-        _image.enabled = true;
+        image = GetComponent<Image>();
+        image.enabled = true;
         sceneStarting = true;
         sceneEnd = false;
         Cursor.visible = false;
     }
 
-    void Update ()
+    void Update()
     {
-        if(sceneStarting) StartScene();
-        if(sceneEnd) EndScene();
+        if (sceneStarting) StartScene();
+        if (sceneEnd) EndScene();
     }
 
-    void StartScene ()
+    void StartScene()
     {
-        _image.color = Color.Lerp(_image.color, Color.clear, fadeSpeed * Time.deltaTime);
+        image.color = Color.Lerp(image.color, Color.clear, fadeSpeed * Time.deltaTime);
 
-        if(_image.color.a <= 0.01f)
+        if (image.color.a <= 0.01f)
         {
-            _image.color = Color.clear;
-            _image.enabled = false;
+            image.color = Color.clear;
+            image.enabled = false;
             sceneStarting = false;
             Cursor.visible = true;
         }
     }
 
-    void EndScene ()
+    void EndScene()
     {
-        _image.enabled = true;
-        _image.color = Color.Lerp(_image.color, Color.black, fadeSpeed * Time.deltaTime);
+        image.enabled = true;
+        image.color = Color.Lerp(image.color, Color.black, fadeSpeed * Time.deltaTime);
 
-        if(_image.color.a >= 0.95f)
+        if (image.color.a >= 0.95f)
         {
             Cursor.visible = false;
-            _image.color = Color.black;
+            image.color = Color.black;
             Application.LoadLevel(nextLevel);
         }
     }

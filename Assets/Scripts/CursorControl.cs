@@ -10,7 +10,7 @@ public class CursorControl : MonoBehaviour
     private static Texture2D staticCursorCross;
     private static Texture2D staticCursorBuilding;
     private static bool isBuilding = false;
-    private static bool isObjekt = false;
+    private static bool isObject = false;
 
     public static bool IsBuilding
     { 
@@ -18,8 +18,8 @@ public class CursorControl : MonoBehaviour
         set => isBuilding = value;
     }
     
-    public static bool IsObjekt()
-        => isObjekt;
+    public static bool IsObject()
+        => isObject;
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public class CursorControl : MonoBehaviour
         else
         {
             Cursor.SetCursor(staticCursorCross, Vector2.zero, CursorMode.Auto);
-            isObjekt = true;
+            isObject = true;
         }
     }
 
@@ -56,6 +56,6 @@ public class CursorControl : MonoBehaviour
             Cursor.SetCursor(staticCursorNormalTexture, Vector2.zero, CursorMode.Auto);
         else
             Cursor.SetCursor(staticCursorBuilding, Vector2.zero, CursorMode.Auto);
-        isObjekt = false;
+        isObject = false;
     }
 }

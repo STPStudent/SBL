@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class ResourcesFabric : HealthControl
 {
     [SerializeField] private Text text;
-    [SerializeField] private int secondsWait = 5;
-    [SerializeField] private int countAddAfterWait = 1;
+    [SerializeField] private int secondsWait;
+    [SerializeField] private int countAddAfterWait;
     [SerializeField] private MainBuilding mainBuilding;
     private float lastTime;
 

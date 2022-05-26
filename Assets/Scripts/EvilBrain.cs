@@ -26,7 +26,7 @@ public class EvilBrain : MonoBehaviour
         unitCount++;
     }
 
-    public static void DeleteSpawner(EvilSpawner spawner) 
+    public static void DeleteSpawner(EvilSpawner spawner)
         => Spawners.Remove(spawner);
 
     void Awake()
@@ -34,20 +34,20 @@ public class EvilBrain : MonoBehaviour
         units = null;
         Spawners = new List<EvilSpawner>();
     }
-    
+
     private Vector3 SetPoint(string goal, GameObject[] k)
     {
         var found = Vector3.zero;
-        foreach(var player in k)
-            if(player.gameObject.name.Contains(goal)
-            && player.transform.position.magnitude < 50)
+        foreach (var player in k)
+            if (player.gameObject.name.Contains(goal)
+                && player.transform.position.magnitude < 50)
                 found = player.gameObject.transform.position;
         return found;
     }
 
     private void DoAttackUnit()
     {
-        foreach(var comp in playerUnits)
+        foreach (var comp in playerUnits)
         {
             foreach (var unit in units)
                 if (unit != null && comp != null &&
@@ -58,23 +58,23 @@ public class EvilBrain : MonoBehaviour
 
     private void TransformPositions(Vector3 goal)
     {
-        foreach(var unit in units)
+        foreach (var unit in units)
             unit.finishPosition = goal;
     }
 
     private void DoAttackBuilding()
     {
-        if(unitCount > 10)
+        if (unitCount > 10)
         {
             var playerBuilding = GameObject.FindGameObjectsWithTag("Player");
             var pointMain = SetPoint("PlayerMainBuild", playerBuilding);
             var pointFabric = SetPoint("Fabric", playerBuilding);
             var pointTower = SetPoint("Tower", playerBuilding);
-            if(pointTower != Vector3.zero)
+            if (pointTower != Vector3.zero)
                 TransformPositions(pointTower);
-            else if(pointFabric != Vector3.zero)
+            else if (pointFabric != Vector3.zero)
                 TransformPositions(pointFabric);
-            else if(pointMain != Vector3.zero)
+            else if (pointMain != Vector3.zero)
                 TransformPositions(pointMain);
         }
     }
@@ -83,43 +83,42 @@ public class EvilBrain : MonoBehaviour
     {
         var indexNear = 0;
         var lenToUnit = Vector3.zero;
-        for(var i = 0; i < Spawners.Count(); i++)
+        for (var i = 0; i < Spawners.Count(); i++)
         {
-            if(lenToUnit == Vector3.zero
-            || lenToUnit.magnitude > 
+            if (lenToUnit == Vector3.zero
+                || lenToUnit.magnitude >
                 (Spawners[i].transform.position - unitAttack).magnitude)
             {
                 indexNear = i;
                 lenToUnit = Spawners[i].transform.position - unitAttack;
             }
         }
+
         return indexNear;
     }
 
-    private void DefanseBuilding()
+    private void DefenseBuilding()
     {
         var attackCount = 0;
         var defenseCount = 0;
         var nearPlayer = Vector3.zero;
-        foreach(var comp in playerUnits)
+        foreach (var comp in playerUnits)
         {
             if (comp == null)
                 continue;
             var len = (comp.transform.position - transform.position).magnitude;
-            if(len < 20
-                && (nearPlayer == Vector3.zero 
-                    || (nearPlayer - transform.position).magnitude < len))
+            if (len < 20 && (nearPlayer == Vector3.zero || (nearPlayer - transform.position).magnitude < len))
             {
                 nearPlayer = comp.transform.position;
                 attackCount++;
             }
         }
 
-        if(nearPlayer == Vector3.zero)
+        if (nearPlayer == Vector3.zero)
             return;
 
-        foreach(var unit in units)
-            if(unit != null 
+        foreach (var unit in units)
+            if (unit != null
                 && (unit.transform.position - nearPlayer).magnitude < 20)
             {
                 unit.finishPosition = nearPlayer;
@@ -127,7 +126,7 @@ public class EvilBrain : MonoBehaviour
             }
 
         var indexNear = SpawnDefasePosition(nearPlayer);
-        if(defenseCount < attackCount)
+        if (defenseCount < attackCount)
         {
             Spawners[indexNear].Spawn();
         }
@@ -135,11 +134,11 @@ public class EvilBrain : MonoBehaviour
 
     private void ControlArmy()
     {
-        if(unitCount < 5
-        || unitCount * 3 < UnitControl.unitCount * 2)
+        if (unitCount < 5
+            || unitCount * 3 < UnitControl.unitCount * 2)
         {
             var k = Random.Range(0, Spawners.Count);
-            while(Spawners[k].transform.position.magnitude > 50)
+            while (Spawners[k].transform.position.magnitude > 50)
                 k = Random.Range(0, Spawners.Count);
             Spawners[k].Spawn();
         }
@@ -147,7 +146,7 @@ public class EvilBrain : MonoBehaviour
             return;
         DoAttackBuilding();
         DoAttackUnit();
-        DefanseBuilding();
+        DefenseBuilding();
     }
 
     private int CreateBilding(
@@ -158,7 +157,7 @@ public class EvilBrain : MonoBehaviour
         if(resourcesCount > coust)
         {
             var x = Random.Range(-10.0f, 10.0f);
-            var right = Mathf.Sqrt(10.0f *10.0f - x*x);
+            var right = Mathf.Sqrt(10.0f * 10.0f - x * x);
             var y = Random.Range(-right, right);
             var allBildings = GameObject
             .FindGameObjectsWithTag(gameObject.tag);

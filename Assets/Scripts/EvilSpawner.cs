@@ -31,7 +31,7 @@ public class EvilSpawner : HealthControl
     public override void DestroyObject()
     {
         EvilBrain.DeleteSpawner(this);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public void Spawn()
