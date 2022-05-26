@@ -12,10 +12,10 @@ public class DialogueManager : MonoBehaviour
     public Text nameText;
     public Text dialogueText;
     private int count;
-    private GameObject enemy;
-    private GameObject introBg;
-    private GameObject mainBg;
-    private GameObject blackBg;
+    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject introBg;
+    [SerializeField] private GameObject mainBg;
+    [SerializeField] private GameObject blackBg;
     public Animator animator;
     [SerializeField] private Image radianProgress;
     [SerializeField] private Image skipText;
@@ -26,10 +26,6 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<Tuple<string, string>>();
-        enemy = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
-        introBg = GameObject.Find("BG").transform.GetChild(0).gameObject;
-        mainBg = GameObject.Find("BG").transform.GetChild(1).gameObject;
-        blackBg = GameObject.Find("BG").transform.GetChild(2).gameObject;
     }
 
     private void Update()
@@ -37,7 +33,7 @@ public class DialogueManager : MonoBehaviour
         if (Input.anyKey && !Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.Escape))
         {
             skipText.fillAmount = 1;
-            radianProgress.fillAmount += Time.deltaTime / 4f;
+            radianProgress.fillAmount += Time.deltaTime / 2f;
             if (radianProgress.fillAmount >= 1f)
                 EndDialogue();
         }
@@ -106,6 +102,6 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         animator.SetBool(IsOpen, false);
-        SceneManager.LoadScene("MainGame"); 
+        SceneManager.LoadScene("MainGame");
     }
 }

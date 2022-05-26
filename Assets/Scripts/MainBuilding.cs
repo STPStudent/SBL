@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainBuilding : HealthControl
 {
     [SerializeField] private GameObject result;
-    public int resourcesCount = 0;
+    [SerializeField] public int resourcesCount;
     
     void Start()
     {

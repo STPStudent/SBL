@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainCamera : MonoBehaviour
@@ -10,33 +8,34 @@ public class MainCamera : MonoBehaviour
 
     public static bool IsBounds(Vector3 position)
     {
-        var fstr = leftX.ToString() + " < " + position.x.ToString() + " < " + rightX.ToString();
-        var sstr = leftY.ToString() + " < " + position.y.ToString() + " < " + rightY.ToString(); 
+        var first = leftX + " < " + position.x + " < " + rightX;
+        var second = leftY + " < " + position.y + " < " + rightY;
         return position.x > leftX
-        && position.x < rightX 
-        && position.y < rightY
-        && position.y > leftY;
+               && position.x < rightX
+               && position.y < rightY
+               && position.y > leftY;
     }
 
     void Start()
     {
         //Смотрим границы поля
-        leftX = -mapWidth/2;
-        leftY = -mapHeight/2;
-        rightX = mapWidth/2;
-        rightY = mapHeight/2;
+        leftX = -mapWidth / 2;
+        leftY = -mapHeight / 2;
+        rightX = mapWidth / 2;
+        rightY = mapHeight / 2;
     }
 
     private Vector3 GetNewCameraPosition(Vector3 direction)
     {
         //Получаем координаты куда переместилась камера
         //Делаем проверку не выходит ли она за границы
-        var leftDownAngle = transform.position - Camera.main.ScreenToWorldPoint(Vector2.zero);
-        var rightUpAngle = 
-        Camera.main.ScreenToWorldPoint(
-            new Vector2(Screen.width, Screen.height)
-        ) - transform.position;
-        var k = transform.position + direction / 25;
+        var position = transform.position;
+        var leftDownAngle = position - Camera.main.ScreenToWorldPoint(Vector2.zero);
+        var rightUpAngle =
+            Camera.main.ScreenToWorldPoint(
+                new Vector2(Screen.width, Screen.height)
+            ) - position;
+        var k = position + direction / 25;
         return new Vector3
         (
             Mathf.Clamp(k.x, leftX + leftDownAngle.x, rightX - rightUpAngle.x),
@@ -48,31 +47,31 @@ public class MainCamera : MonoBehaviour
     void Update()
     {
         //Смотрим игра на паузе или нет
-        if(PauseMenu.GameIsPause)
+        if (PauseMenu.GameIsPause)
             return;
-        
+
         var scroll = Input.GetAxis("Mouse ScrollWheel");
         var leftDownAngle = Camera.main.ScreenToWorldPoint(Vector2.zero);
         var rightUpAngle = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-        if(leftX - leftDownAngle.x > 0.5
-        && rightX - rightUpAngle.x < 0.5
-        || leftY - leftDownAngle.y > 0.5
-        && rightY - rightUpAngle.y < 0.5)
-            maxZoom = GetComponent<Camera>().orthographicSize - (float)0.5;
+        if (leftX - leftDownAngle.x > 0.5
+            && rightX - rightUpAngle.x < 0.5
+            || leftY - leftDownAngle.y > 0.5
+            && rightY - rightUpAngle.y < 0.5)
+            maxZoom = GetComponent<Camera>().orthographicSize - (float) 0.5;
 
-        if(scroll != 0)
-            GetComponent<Camera>().orthographicSize 
-            = Mathf.Clamp(GetComponent<Camera>().orthographicSize - scroll * 5, minZoom, maxZoom);
+        if (scroll != 0)
+            GetComponent<Camera>().orthographicSize
+                = Mathf.Clamp(GetComponent<Camera>().orthographicSize - scroll * 5, minZoom, maxZoom);
 
         var mousePosition = Input.mousePosition;
         var direction = Vector3.zero;
-        if(mousePosition.x > Screen.width - 10)
+        if (mousePosition.x > Screen.width - 10)
             direction += Vector3.right;
-        if(mousePosition.y > Screen.height - 10)
+        if (mousePosition.y > Screen.height - 10)
             direction += Vector3.up;
-        if(mousePosition.x < 1)
+        if (mousePosition.x < 1)
             direction += Vector3.left;
-        if(mousePosition.y < 1)
+        if (mousePosition.y < 1)
             direction += Vector3.down;
         transform.position = GetNewCameraPosition(direction);
     }
@@ -80,9 +79,9 @@ public class MainCamera : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(new Vector2(-mapWidth/2, mapHeight/2), new Vector2(mapWidth/2, mapHeight/2));
-        Gizmos.DrawLine(new Vector2(-mapWidth/2, -mapHeight/2), new Vector2(mapWidth/2, -mapHeight/2));
-        Gizmos.DrawLine(new Vector2(-mapWidth/2, -mapHeight/2), new Vector2(-mapWidth/2, mapHeight/2));
-        Gizmos.DrawLine(new Vector2(mapWidth/2, -mapHeight/2), new Vector2(mapWidth/2, mapHeight/2));
+        Gizmos.DrawLine(new Vector2(-mapWidth / 2, mapHeight / 2), new Vector2(mapWidth / 2, mapHeight / 2));
+        Gizmos.DrawLine(new Vector2(-mapWidth / 2, -mapHeight / 2), new Vector2(mapWidth / 2, -mapHeight / 2));
+        Gizmos.DrawLine(new Vector2(-mapWidth / 2, -mapHeight / 2), new Vector2(-mapWidth / 2, mapHeight / 2));
+        Gizmos.DrawLine(new Vector2(mapWidth / 2, -mapHeight / 2), new Vector2(mapWidth / 2, mapHeight / 2));
     }
 }

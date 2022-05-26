@@ -13,8 +13,8 @@ public class Health : MonoBehaviour
         if(objectHP.CurrentHealth < 0.1)
             objectHP.DestroyObject();
         var scale = transform.localScale;
-        var helthLen = objectHP.CurrentHealth / objectHP.MaxHealth;
-        transform.localScale = new Vector3(1 - helthLen, 1, 0);
-        transform.localPosition = new Vector3(helthLen / 2, 0, 0);
+        var healthLen = objectHP.CurrentHealth / objectHP.MaxHealth;
+        transform.localScale = new Vector3(1 - healthLen, 1, 0);
+        transform.localPosition = new Vector3(healthLen / 2, 0, 0);
     }
 }
