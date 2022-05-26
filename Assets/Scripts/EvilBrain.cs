@@ -161,7 +161,8 @@ public class EvilBrain : MonoBehaviour
             var y = Random.Range(-right, right);
             var allBildings = GameObject
             .FindGameObjectsWithTag(gameObject.tag);
-            var buildingPlace = bot.transform.position;
+            var buildingPlace = allBildings[Random.Range(0, allBildings.Length)]
+                                    .transform.position;;
             var newBuildPlace = new Vector3(-x,-y,0) 
                 + buildingPlace;
             if((new Vector3(-x,-y,0)).magnitude < 7
