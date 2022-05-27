@@ -11,13 +11,17 @@ public class BuildPanel : MonoBehaviour, IPointerDownHandler
     [SerializeField] private MainBuilding mainBuilding;
     [SerializeField] private Texture2D cursor;
     [SerializeField] private Build build;
+    public GameObject resource;
+    private float lastTime = 0;
 
     public void Update()
     {
-        if (circle.fillAmount - Time.deltaTime / 15 < 0)
+        var deltaTime = Time.time - lastTime;
+        lastTime = Time.time;
+        if (circle.fillAmount - deltaTime / 15 < 0)
             circle.fillAmount = 0;
         else
-            circle.fillAmount -= Time.deltaTime / 15;
+            circle.fillAmount -= deltaTime / 15;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -30,6 +34,7 @@ public class BuildPanel : MonoBehaviour, IPointerDownHandler
             build.Cost = Cost;
             build.panel = this;
             CursorControl.SetBuildingCursor(cursor);
+            resource.SetActive(!resource.activeSelf);
         }
     }
 }
