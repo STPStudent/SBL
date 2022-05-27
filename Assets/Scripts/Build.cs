@@ -16,6 +16,14 @@ public class Build : MonoBehaviour
     {
         if (isBuilding)
         {
+            if (Input.GetKeyDown(KeyCode.R)
+                || Input.GetKeyDown(KeyCode.Escape))
+            {
+                isBuilding = false;
+                CursorControl.IsBuilding = false;
+                CursorControl.SetNormalCursor();
+                return;
+            }
             var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var t = true;
             var allBuildings = GameObject
