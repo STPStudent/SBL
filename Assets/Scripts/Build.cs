@@ -18,9 +18,9 @@ public class Build : MonoBehaviour
         {
             var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var t = true;
-            var allBildings = GameObject
+            var allBuildings = GameObject
                 .FindGameObjectsWithTag(Fabric.tag);
-            foreach (var obj in allBildings)
+            foreach (var build in allBuildings)
             {
                 if ((obj.name.Contains("PlayerMainBuild")
                      && (obj.transform.position - coordinates).magnitude < 30

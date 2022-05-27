@@ -11,106 +11,108 @@ public class UnitControl : MonoBehaviour
     private Vector2 startPosition, endPosition;
     private Color original, clear, curColor;
     private bool canDraw;
-	public static UnitComponent units;
-	private static List<UnitComponent> unitSelected;
-	public static int unitCount = 0;
-	
-	public static void AddUnit(UnitComponent comp)
-	{
-		//Добовляет юнита в связаный список
-		units.nextComponent = comp;
-		comp.previousComponent = units;
-		units = comp;
-		unitCount++;
-	}
+    public static UnitComponent units;
+    private static List<UnitComponent> unitSelected;
+    public static int unitCount = 0;
+
+    public static void AddUnit(UnitComponent comp)
+    {
+        //Добовляет юнита в связаный список
+        units.nextComponent = comp;
+        comp.previousComponent = units;
+        units = comp;
+        unitCount++;
+    }
+
     void Awake()
     {
-		//Запускается до начала прогрузки обьктов
-		//устанавливает начальные значения
-		unitCount = 0;
-		units = new UnitComponent();
-		unitSelected = new List<UnitComponent>();
-		original = mainRect.color;
-		clear = original;
-		clear.a = 0;
-		curColor = clear;
-		mainRect.color = clear;
+        //Запускается до начала прогрузки обьктов
+        //устанавливает начальные значения
+        unitCount = 0;
+        units = new UnitComponent();
+        unitSelected = new List<UnitComponent>();
+        original = mainRect.color;
+        clear = original;
+        clear.a = 0;
+        curColor = clear;
+        mainRect.color = clear;
     }
 
     void Draw()
-	{
-		//Рисует прямоугольник по координатам верторов start position и endposition
-		endPosition = Input.mousePosition;
-		if(startPosition == endPosition || !canDraw) 
+    {
+        //Рисует прямоугольник по координатам верторов start position и endposition
+        endPosition = Input.mousePosition;
+        if (startPosition == endPosition || !canDraw)
             return;
 
-		curColor = original;
+        curColor = original;
 
-		rect = new Rect(Mathf.Min(endPosition.x, startPosition.x),
-			Screen.height - Mathf.Max(endPosition.y, startPosition.y),
-			Mathf.Max(endPosition.x, startPosition.x) - Mathf.Min(endPosition.x, startPosition.x),
-			Mathf.Max(endPosition.y, startPosition.y) - Mathf.Min(endPosition.y, startPosition.y)
-		);
+        rect = new Rect(Mathf.Min(endPosition.x, startPosition.x),
+            Screen.height - Mathf.Max(endPosition.y, startPosition.y),
+            Mathf.Max(endPosition.x, startPosition.x) - Mathf.Min(endPosition.x, startPosition.x),
+            Mathf.Max(endPosition.y, startPosition.y) - Mathf.Min(endPosition.y, startPosition.y)
+        );
 
-		mainRect.rectTransform.sizeDelta = new Vector2(rect.width, rect.height);
-		var sizeDelta = mainRect.rectTransform.sizeDelta;
+        mainRect.rectTransform.sizeDelta = new Vector2(rect.width, rect.height);
+        var sizeDelta = mainRect.rectTransform.sizeDelta;
 
-		mainRect.rectTransform.anchoredPosition = new Vector2(rect.x + sizeDelta.x/2, 
-			Mathf.Max(endPosition.y, startPosition.y) - sizeDelta.y/2);
-	}
+        mainRect.rectTransform.anchoredPosition = new Vector2(rect.x + sizeDelta.x / 2,
+            Mathf.Max(endPosition.y, startPosition.y) - sizeDelta.y / 2);
+    }
 
-	void SetSelect()
-	{
-		//Ищет какие юниты находятся внутри прямоугольника и выделяет их
-		foreach(var unit in units)
-		{
-			if(unit != null)
-			{
-				var position = Camera.main.WorldToScreenPoint(unit.transform.position);
-				if(rect.Contains(new Vector2(position.x, Screen.height - position.y)))
-				{
-					unit.Select();
-					unitSelected.Add(unit);
-				}
-			}
-		}
-	}
-
-	public static void SetDeselect()
-	{
-		//Отменяет выделение юнитов
-		foreach(var unit in unitSelected)
-			if(unit != null)
-				unit.Deselect();
-		unitSelected = new List<UnitComponent>();
-	}
-
-	void Update()
+    void SetSelect()
     {
-		//Когда нажимают левую кнопку мыши отменяет выделеине
-		//и говорит что мы можем рисовать прямоугольник
-        if(Input.GetMouseButtonDown(0))
+        //Ищет какие юниты находятся внутри прямоугольника и выделяет их
+        foreach (var unit in units)
+        {
+            if (unit != null)
+            {
+                var position = Camera.main.WorldToScreenPoint(unit.transform.position);
+                if (rect.Contains(new Vector2(position.x, Screen.height - position.y)))
+                {
+                    unit.Select();
+                    unitSelected.Add(unit);
+                }
+            }
+        }
+    }
+
+    public static void SetDeselect()
+    {
+        //Отменяет выделение юнитов
+        foreach (var unit in unitSelected)
+            if (unit != null)
+                unit.Deselect();
+        unitSelected = new List<UnitComponent>();
+    }
+
+    void Update()
+    {
+        //Когда нажимают левую кнопку мыши отменяет выделеине
+        //и говорит что мы можем рисовать прямоугольник
+        if (Input.GetMouseButtonDown(0))
         {
             rect = new Rect();
             startPosition = Input.mousePosition;
             canDraw = true;
-			SetDeselect();
-			
+            SetDeselect();
         }
-		//Когда отпускают левую кнопку мыши
-		//убирает цвет нарисованому прямоугольнику
+
+        //Когда отпускают левую кнопку мыши
+        //убирает цвет нарисованому прямоугольнику
         if (Input.GetMouseButtonUp(0))
         {
             curColor = clear;
             canDraw = false;
-			SetSelect();
+            SetSelect();
         }
-		//Когда нажимают правую кнопку мыши для каждого выбраного юника меняет финишную позицию
-		if(Input.GetMouseButtonDown(1))
-		{
-			foreach (var comp in unitSelected)
-            	comp.finishPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		}
+
+        //Когда нажимают правую кнопку мыши для каждого выбраного юника меняет финишную позицию
+        if (Input.GetMouseButtonDown(1))
+        {
+            foreach (var comp in unitSelected)
+                comp.finishPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
 
         Draw();
 

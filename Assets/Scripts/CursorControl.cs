@@ -37,6 +37,7 @@ public class CursorControl : MonoBehaviour
             Cursor.SetCursor(staticCursorCross, Vector2.zero, CursorMode.Auto);
             isObject = true;
         }
+        
     }
 
     public static void OutOfRadius()

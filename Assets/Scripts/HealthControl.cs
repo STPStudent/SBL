@@ -14,11 +14,10 @@ public class HealthControl : MonoBehaviour
         CurrentHealth = MaxHealth;
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnTriggerEnter2D(Collider2D other)
     {
         //Сейчас проверяет тег если это юнит то выполняются условия 
-        if (!other.gameObject.CompareTag(gameObject.tag)
-            && !other.gameObject.CompareTag("Untagged"))
+        if (!other.gameObject.CompareTag(gameObject.tag) && !other.gameObject.CompareTag("Untagged"))
         {
             //Вычитает из здоровья значение урона
             //если здоровье меньше нуля делает его нулем
@@ -40,15 +39,15 @@ public class HealthControl : MonoBehaviour
         CurrentHealth = Mathf.Max(0, CurrentHealth);
     }
 
-    private void OnMouseOver()
-    {
-        CursorControl.SetAttackCursor();
-    }
-
-    private void OnMouseExit()
-    {
-        CursorControl.SetNormalCursor();
-    }
+    // private void OnMouseOver()
+    // {
+    //     CursorControl.SetAttackCursor();
+    // }
+    //
+    // private void OnMouseExit()
+    // {
+    //     CursorControl.SetNormalCursor();
+    // }
 
     public virtual void DestroyObject()
     {

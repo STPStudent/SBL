@@ -21,8 +21,7 @@ public class UnitFactory : HealthControl
     void Spawn()
     {
         var time = Time.time;
-        if (spawnCount == 0
-            || time - lastTime < deltaTime)
+        if (spawnCount == 0 || time - lastTime < deltaTime)
             return;
         spawnCount--;
         Instantiate(unit, transform.position + Vector3.right, Quaternion.identity);
