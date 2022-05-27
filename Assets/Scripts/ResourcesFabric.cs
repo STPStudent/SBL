@@ -20,16 +20,17 @@ public class ResourcesFabric : HealthControl
 
     void Update()
     {
-        if(PauseMenu.GameIsPause)
+        if (PauseMenu.GameIsPause)
             return;
-        
+
         var timeNow = Time.time;
-        if(timeNow - lastTime > secondsWait)
+        if (timeNow - lastTime > secondsWait)
         {
             lastTime = timeNow;
             mainBuilding.resourcesCount += countAddAfterWait;
         }
-        if(text != null)
+
+        if (text != null)
             text.text = mainBuilding.resourcesCount.ToString();
     }
 }

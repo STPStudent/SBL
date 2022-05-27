@@ -4441,7 +4441,7 @@ MonoBehaviour:
   circle: {fileID: 1899807823}
   Cost: 25
   mainBuilding: {fileID: 92637464}
-  cursor: {fileID: 2800000, guid: 3ba387706a916624ca65e3aab3ae8470, type: 3}
+  cursor: {fileID: 2800000, guid: 8b4e22a6aba4d5a4c93a9b472acfe846, type: 3}
 --- !u!114 &665178886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9461,7 +9461,7 @@ MonoBehaviour:
   player: {fileID: 92637464}
   bot: {fileID: 1407459589}
   Tower: {fileID: 2119968673}
-  resourcesCount: 0
+  resourcesCount: 20
 --- !u!50 &1407459587
 Rigidbody2D:
   serializedVersion: 4
@@ -14038,6 +14038,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
+      propertyPath: secondsWait
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: mainBuilding
       value: 
       objectReference: {fileID: 1407459589}
@@ -14106,6 +14110,10 @@ PrefabInstance:
       propertyPath: text
       value: 
       objectReference: {fileID: 529602478}
+    - target: {fileID: 8047044713554680502, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
+      propertyPath: secondsWait
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8047044713554680502, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: mainBuilding
       value: 

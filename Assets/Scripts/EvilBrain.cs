@@ -161,20 +161,21 @@ public class EvilBrain : MonoBehaviour
             var x = Random.Range(-10.0f, 10.0f);
             var right = Mathf.Sqrt(10.0f * 10.0f - x * x);
             var y = Random.Range(-right, right);
-            var allBildings = GameObject
+            var allBuildings = GameObject
                 .FindGameObjectsWithTag(gameObject.tag);
-            var buildingPlace = allBildings[Random.Range(0, allBildings.Length)]
+            var buildingPlace = allBuildings[Random.Range(0, allBuildings.Length)]
                 .transform.position;
-            ;
+            
             var newBuildPlace = new Vector3(-x, -y, 0)
                                 + buildingPlace;
-            if ((new Vector3(-x, -y, 0)).magnitude < 7
-                || !MainCamera.IsBounds(newBuildPlace))
+            if ((new Vector3(-x, -y, 0)).magnitude < 7 || !MainCamera.IsBounds(newBuildPlace))
                 return 0;
-            foreach (var obj in allBildings)
-                if ((obj.transform.position - newBuildPlace).magnitude < 7
-                    && obj.gameObject.name.Contains("Unit"))
+
+            foreach (var build in allBuildings)
+                if ((build.transform.position - newBuildPlace).magnitude < 7
+                    && build.gameObject.name.Contains("Unit"))
                     return 0;
+            
             Instantiate(building,
                 newBuildPlace,
                 Quaternion.identity);

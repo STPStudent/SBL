@@ -41,9 +41,7 @@ public class EvilSpawner : HealthControl
     {
         //Если выполняются условие делает спавн юнита бота
         var time = Time.time;
-        if (unitCost <= mainBuilding.resourcesCount
-            && spawnCount > 0
-            && time - lastTime > deltaTime)
+        if (unitCost <= mainBuilding.resourcesCount && spawnCount > 0 && time - lastTime > deltaTime)
         {
             lastTime = time;
             spawnCount--;

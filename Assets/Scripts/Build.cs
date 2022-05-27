@@ -18,15 +18,15 @@ public class Build : MonoBehaviour, IPointerDownHandler
         {
             var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var t = true;
-            var allBildings = GameObject
+            var allBuildings = GameObject
                 .FindGameObjectsWithTag(Fabric.tag);
-            foreach (var obj in allBildings)
+            foreach (var build in allBuildings)
             {
-                Debug.Log(obj.name);
-                if ((obj.name.Contains("PlayerMainBuild")
-                     && (obj.transform.position - coordinates).magnitude < 30
-                     || (obj.transform.position - coordinates).magnitude < 20)
-                    && !obj.gameObject.name.Contains("Unit"))
+                Debug.Log(build.name);
+                if ((build.name.Contains("PlayerMainBuild")
+                     && (build.transform.position - coordinates).magnitude < 30
+                     || (build.transform.position - coordinates).magnitude < 20)
+                    && !build.gameObject.name.Contains("Unit"))
                 {
                     t = false;
                     break;

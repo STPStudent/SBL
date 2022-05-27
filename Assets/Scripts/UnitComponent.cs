@@ -104,15 +104,15 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
         rigidBodyComponent.velocity = vectorDifference.normalized * acceleration;
     }
 
-    private void OnMouseOver()
-    {
-        CursorControl.SetAttackCursor();
-    }
-
-    private void OnMouseExit()
-    {
-        CursorControl.SetNormalCursor();
-    }
+    // private void OnMouseOver()
+    // {
+    //     CursorControl.SetAttackCursor();
+    // }
+    //
+    // private void OnMouseExit()
+    // {
+    //     CursorControl.SetNormalCursor();
+    // }
 
     void OnTriggerStay2D(Collider2D other)
     {

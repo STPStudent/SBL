@@ -53,10 +53,8 @@ public class MainCamera : MonoBehaviour
         var scroll = Input.GetAxis("Mouse ScrollWheel");
         var leftDownAngle = Camera.main.ScreenToWorldPoint(Vector2.zero);
         var rightUpAngle = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-        if (leftX - leftDownAngle.x > 0.5
-            && rightX - rightUpAngle.x < 0.5
-            || leftY - leftDownAngle.y > 0.5
-            && rightY - rightUpAngle.y < 0.5)
+        if (leftX - leftDownAngle.x > 0.5 && rightX - rightUpAngle.x < 0.5 ||
+            leftY - leftDownAngle.y > 0.5 && rightY - rightUpAngle.y < 0.5)
             maxZoom = GetComponent<Camera>().orthographicSize - (float) 0.5;
 
         if (scroll != 0)

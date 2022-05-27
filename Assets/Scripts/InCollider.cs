@@ -18,6 +18,6 @@ public class InCollider : MonoBehaviour
             && !other.name.Contains("Bomb")
             && other.gameObject.GetComponent<InCollider>() != null
             && other.gameObject.GetComponent<InCollider>().spawnTime < spawnTime)
-            transform.position = transform.position + Vector3.left;
+            transform.position += Vector3.left;
     }
 }
