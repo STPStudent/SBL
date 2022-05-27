@@ -491,12 +491,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e2d67e853bac2488cb919b8e3945c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fabric: {fileID: 0}
-  circle: {fileID: 0}
-  Cost: 0
-  mainBuilding: {fileID: 0}
-  cursor: {fileID: 0}
-  build: {fileID: 0}
+  Fabric: {fileID: 804773373}
+  circle: {fileID: 547878427}
+  Cost: 20
+  mainBuilding: {fileID: 92637464}
+  cursor: {fileID: 2800000, guid: 3ba387706a916624ca65e3aab3ae8470, type: 3}
+  build: {fileID: 1893021865}
 --- !u!114 &45969089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,12 +1696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e2d67e853bac2488cb919b8e3945c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fabric: {fileID: 0}
-  circle: {fileID: 0}
-  Cost: 0
-  mainBuilding: {fileID: 0}
-  cursor: {fileID: 0}
-  build: {fileID: 0}
+  Fabric: {fileID: 1609624836}
+  circle: {fileID: 840660843}
+  Cost: 18
+  mainBuilding: {fileID: 92637464}
+  cursor: {fileID: 2800000, guid: 27612be2af01d4947b33eaf4078e6713, type: 3}
+  build: {fileID: 1893021865}
 --- !u!114 &196986283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4468,11 +4468,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Fabric: {fileID: 57560243}
-  circle: {fileID: 0}
+  circle: {fileID: 1899807823}
   Cost: 25
   mainBuilding: {fileID: 92637464}
-  cursor: {fileID: 0}
-  build: {fileID: 0}
+  cursor: {fileID: 2800000, guid: 8b4e22a6aba4d5a4c93a9b472acfe846, type: 3}
+  build: {fileID: 1893021865}
 --- !u!114 &665178886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10893,12 +10893,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e2d67e853bac2488cb919b8e3945c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fabric: {fileID: 0}
-  circle: {fileID: 0}
-  Cost: 0
-  mainBuilding: {fileID: 0}
-  cursor: {fileID: 0}
-  build: {fileID: 0}
+  Fabric: {fileID: 1475393178}
+  circle: {fileID: 1101481208}
+  Cost: 15
+  mainBuilding: {fileID: 92637464}
+  cursor: {fileID: 2800000, guid: a708ebc0b6319f742a0cde44f9338434, type: 3}
+  build: {fileID: 1893021865}
 --- !u!1 &1609624836
 GameObject:
   m_ObjectHideFlags: 0
