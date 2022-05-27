@@ -3,14 +3,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Build : MonoBehaviour, IPointerDownHandler
+public class Build : MonoBehaviour
 {
-    private bool isBuilding;
-    public GameObject Fabric;
-    [SerializeField] private Image circle;
-    public int Cost;
+    internal bool isBuilding;
+    internal GameObject Fabric{ get; set; }
+    internal int Cost;
+    internal BuildPanel panel;
     [SerializeField] private MainBuilding mainBuilding;
-    [SerializeField] private Texture2D cursor;
     [SerializeField] private Text text;
 
     public void Update()
@@ -42,7 +41,7 @@ public class Build : MonoBehaviour, IPointerDownHandler
                 Instantiate(Fabric, new Vector3(coordinates.x, coordinates.y, 0), Quaternion.identity);
                 mainBuilding.resourcesCount -= Cost;
                 CursorControl.SetNormalCursor();
-                circle.fillAmount = 1f;
+                panel.circle.fillAmount = 1f;
                 if(Fabric.gameObject.name.Contains("Recourse"))
                 {
                     Cost *= 2;
@@ -51,21 +50,6 @@ public class Build : MonoBehaviour, IPointerDownHandler
             }
             else
                 CursorControl.SetNormalCursor();
-        }
-
-        if (circle.fillAmount - Time.deltaTime / 15 < 0)
-            circle.fillAmount = 0;
-        else
-            circle.fillAmount -= Time.deltaTime / 15;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (mainBuilding.resourcesCount >= Cost && circle.fillAmount == 0)
-        {
-            isBuilding = true;
-            CursorControl.IsBuilding = true;
-            CursorControl.SetBuildingCursor(cursor);
         }
     }
 }
