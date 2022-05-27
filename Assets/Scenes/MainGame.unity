@@ -497,6 +497,7 @@ MonoBehaviour:
   mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 3ba387706a916624ca65e3aab3ae8470, type: 3}
   build: {fileID: 1893021865}
+  resource: {fileID: 1804388357}
 --- !u!114 &45969089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,6 +1703,7 @@ MonoBehaviour:
   mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 27612be2af01d4947b33eaf4078e6713, type: 3}
   build: {fileID: 1893021865}
+  resource: {fileID: 1804388357}
 --- !u!114 &196986283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4473,6 +4475,7 @@ MonoBehaviour:
   mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 8b4e22a6aba4d5a4c93a9b472acfe846, type: 3}
   build: {fileID: 1893021865}
+  resource: {fileID: 1804388357}
 --- !u!114 &665178886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10899,6 +10902,7 @@ MonoBehaviour:
   mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: a708ebc0b6319f742a0cde44f9338434, type: 3}
   build: {fileID: 1893021865}
+  resource: {fileID: 1804388357}
 --- !u!1 &1609624836
 GameObject:
   m_ObjectHideFlags: 0
@@ -14124,7 +14128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: secondsWait
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: mainBuilding

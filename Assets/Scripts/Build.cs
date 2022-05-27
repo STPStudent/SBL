@@ -16,16 +16,24 @@ public class Build : MonoBehaviour
     {
         if (isBuilding)
         {
+            if (Input.GetKeyDown(KeyCode.R)
+                || Input.GetKeyDown(KeyCode.Escape))
+            {
+                isBuilding = false;
+                CursorControl.IsBuilding = false;
+                CursorControl.SetNormalCursor();
+                return;
+            }
             var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var t = true;
             var allBuildings = GameObject
                 .FindGameObjectsWithTag(Fabric.tag);
             foreach (var build in allBuildings)
             {
-                if ((obj.name.Contains("PlayerMainBuild")
-                     && (obj.transform.position - coordinates).magnitude < 30
-                     || (obj.transform.position - coordinates).magnitude < 20)
-                    && !obj.gameObject.name.Contains("Unit"))
+                if ((build.name.Contains("PlayerMainBuild")
+                     && (build.transform.position - coordinates).magnitude < 30
+                     || (build.transform.position - coordinates).magnitude < 20)
+                    && !build.gameObject.name.Contains("Unit"))
                 {
                     t = false;
                     break;

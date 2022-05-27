@@ -163,15 +163,14 @@ public class EvilBrain : MonoBehaviour
     {
         if (resourcesCount > cost)
         {
-            var x = Random.Range(-15.0f, 5.0f);
-            var right = Mathf.Sqrt(15.0f * 15.0f - x * x);
-            var y = Random.Range(-right, 5.0f);
+            var x = Random.Range(-10.0f, 5);
+            var right = Mathf.Sqrt(10.0f * 10.0f - x * x);
+            var y = Random.Range(-right, 5);
             var allBildings = GameObject
                 .FindGameObjectsWithTag(gameObject.tag);
             var buildingPlace = allBildings[Random.Range(0, allBildings.Length)]
                 .transform.position;
-            ;
-            var newBuildPlace = new Vector3(-x, -y, 0)
+            var newBuildPlace = new Vector3(x, y, 0)
                                 + buildingPlace;
             if ((new Vector3(-x, -y, 0)).magnitude < 7
                 || !MainCamera.IsBounds(newBuildPlace))
@@ -186,7 +185,6 @@ public class EvilBrain : MonoBehaviour
             bot.resourcesCount -= cost;
             return 1;
         }
-
         return 0;
     }
 
@@ -205,7 +203,7 @@ public class EvilBrain : MonoBehaviour
         if(fabricCount == 0)
             return;
         var spawner = Spawners[Random.Range(0, 2)];
-        if ((spawnerCount + towerCount) % 3 == 0)
+        if ((spawnerCount + towerCount) % 3 == 1)
             towerCount += CreateBilding(towerCost, Tower.gameObject);
         else
             spawnerCount += CreateBilding(spawnerCost, spawner.gameObject);
