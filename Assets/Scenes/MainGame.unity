@@ -14128,7 +14128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: secondsWait
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: mainBuilding
