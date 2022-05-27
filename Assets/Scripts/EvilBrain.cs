@@ -8,11 +8,16 @@ public class EvilBrain : MonoBehaviour
     [SerializeField] private MainBuilding player;
     [SerializeField] private MainBuilding bot;
     [SerializeField] private TowerScript Tower;
+    [SerializeField] private ResourcesFabric Fabric;
     public static List<EvilSpawner> Spawners;
+    [SerializeField] private int spawnerCost;
+    [SerializeField] private int towerCost;
+    [SerializeField] private int fabricCost;
     private UnitComponent playerUnits;
     public static UnitComponent units;
     public static int unitCount = 0;
     public int resourcesCount = 0;
+    private int fabricCount = 0;
     private int bildingCount = 0;
     private int spawnerCount = 0;
     private int towerCount = 0;
@@ -52,7 +57,7 @@ public class EvilBrain : MonoBehaviour
         {
             foreach (var unit in units)
                 if (unit != null && comp != null &&
-                    (unit.transform.position - comp.transform.position).magnitude < 7)
+                    (unit.transform.position - comp.transform.position).magnitude < 10)
                     unit.finishPosition = comp.transform.position;
         }
     }
@@ -152,34 +157,33 @@ public class EvilBrain : MonoBehaviour
     }
 
     private int CreateBilding(
-        int coust,
+        int cost,
         GameObject building
     )
     {
-        if (resourcesCount > coust)
+        if (resourcesCount > cost)
         {
-            var x = Random.Range(-10.0f, 10.0f);
-            var right = Mathf.Sqrt(10.0f * 10.0f - x * x);
-            var y = Random.Range(-right, right);
-            var allBuildings = GameObject
+            var x = Random.Range(-15.0f, 5.0f);
+            var right = Mathf.Sqrt(15.0f * 15.0f - x * x);
+            var y = Random.Range(-right, 5.0f);
+            var allBildings = GameObject
                 .FindGameObjectsWithTag(gameObject.tag);
-            var buildingPlace = allBuildings[Random.Range(0, allBuildings.Length)]
+            var buildingPlace = allBildings[Random.Range(0, allBildings.Length)]
                 .transform.position;
-            
+            ;
             var newBuildPlace = new Vector3(-x, -y, 0)
                                 + buildingPlace;
-            if ((new Vector3(-x, -y, 0)).magnitude < 7 || !MainCamera.IsBounds(newBuildPlace))
+            if ((new Vector3(-x, -y, 0)).magnitude < 7
+                || !MainCamera.IsBounds(newBuildPlace))
                 return 0;
-
-            foreach (var build in allBuildings)
-                if ((build.transform.position - newBuildPlace).magnitude < 7
-                    && build.gameObject.name.Contains("Unit"))
+            foreach (var obj in allBildings)
+                if ((obj.transform.position - newBuildPlace).magnitude < 7
+                    && obj.gameObject.name.Contains("Unit"))
                     return 0;
-            
             Instantiate(building,
                 newBuildPlace,
                 Quaternion.identity);
-            bot.resourcesCount -= coust;
+            bot.resourcesCount -= cost;
             return 1;
         }
 
@@ -193,10 +197,17 @@ public class EvilBrain : MonoBehaviour
         playerUnits = UnitControl.units;
         if (Spawners.Count > 2)
             ControlArmy();
+        if(CreateBilding(fabricCost, Fabric.gameObject) == 1)
+        {
+            fabricCost *= 2;
+            fabricCount++;
+        }
+        if(fabricCount == 0)
+            return;
         var spawner = Spawners[Random.Range(0, 2)];
         if ((spawnerCount + towerCount) % 3 == 0)
-            towerCount += CreateBilding(10, Tower.gameObject);
+            towerCount += CreateBilding(towerCost, Tower.gameObject);
         else
-            spawnerCount += CreateBilding(5, spawner.gameObject);
+            spawnerCount += CreateBilding(spawnerCost, spawner.gameObject);
     }
 }

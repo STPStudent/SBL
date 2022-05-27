@@ -488,7 +488,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 45969086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ea5ecb6e08c8a4197a6b9eb799f82f, type: 3}
+  m_Script: {fileID: 11500000, guid: 75e2d67e853bac2488cb919b8e3945c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Fabric: {fileID: 804773373}
@@ -496,6 +496,7 @@ MonoBehaviour:
   Cost: 20
   mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 3ba387706a916624ca65e3aab3ae8470, type: 3}
+  build: {fileID: 1893021865}
 --- !u!114 &45969089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,7 +905,7 @@ Transform:
   - {fileID: 919115095}
   - {fileID: 1031204516}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &78747139
 GameObject:
@@ -1040,7 +1041,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1003142659
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e27158a3d0328bc4cb721e5b1bdcdc46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1066,7 +1067,7 @@ Transform:
   m_Children:
   - {fileID: 1371844838}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &92637463
 Rigidbody2D:
@@ -1104,9 +1105,9 @@ MonoBehaviour:
   MaxHealth: 2000
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   result: {fileID: 1686699924}
-  resourcesCount: 20
+  resourcesCount: 50
 --- !u!58 &92637465
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1692,7 +1693,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 196986280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ea5ecb6e08c8a4197a6b9eb799f82f, type: 3}
+  m_Script: {fileID: 11500000, guid: 75e2d67e853bac2488cb919b8e3945c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Fabric: {fileID: 1609624836}
@@ -1700,6 +1701,7 @@ MonoBehaviour:
   Cost: 18
   mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 27612be2af01d4947b33eaf4078e6713, type: 3}
+  build: {fileID: 1893021865}
 --- !u!114 &196986283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2471,7 +2473,7 @@ Transform:
   m_LocalScale: {x: 1.028, y: 1.028, z: 1.028}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &281281861
 GameObject:
@@ -2908,6 +2910,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315597626}
   m_CullTransparentMesh: 1
+--- !u!1 &341408065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5850805196630399195, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
+  m_PrefabInstance: {fileID: 5850805195451318397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &341408068 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
+  m_PrefabInstance: {fileID: 5850805195451318397}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341408065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbbb131cb75dd14c91939b80c5aff3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &341408071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341408065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d12da0e23f4a1442858d9204cea0f1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &391492185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4434,7 +4464,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 665178883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ea5ecb6e08c8a4197a6b9eb799f82f, type: 3}
+  m_Script: {fileID: 11500000, guid: 75e2d67e853bac2488cb919b8e3945c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Fabric: {fileID: 57560243}
@@ -4442,6 +4472,7 @@ MonoBehaviour:
   Cost: 25
   mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: 8b4e22a6aba4d5a4c93a9b472acfe846, type: 3}
+  build: {fileID: 1893021865}
 --- !u!114 &665178886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4692,7 +4723,7 @@ RectTransform:
   m_Children:
   - {fileID: 1426762296}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4867,7 +4898,7 @@ RectTransform:
   m_Children:
   - {fileID: 1981977875}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5150,7 +5181,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &752273719
 MonoBehaviour:
@@ -5276,7 +5307,7 @@ MonoBehaviour:
   MaxHealth: 400
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   unitCount: 16
   unitCost: 1
   unit: {fileID: 7978428832090662827, guid: 94d6b72b739b2db409bd778c27f354cf, type: 3}
@@ -5393,7 +5424,7 @@ Transform:
   m_Children:
   - {fileID: 178836483}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!250 &761031168
 PointEffector2D:
@@ -5546,7 +5577,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &792742790
 GameObject:
@@ -5658,7 +5689,7 @@ MonoBehaviour:
   MaxHealth: 2000
   CurrentHealth: 1
   DamageForceThreshold: 1
-  DamageForceScale: 10
+  DamageForceScale: 0
   bomb: {fileID: 6327449400938858878, guid: b37b5658a2ca29d4a8da2c168101faef, type: 3}
   deltaTime: 2
 --- !u!212 &804773375
@@ -5725,7 +5756,7 @@ Transform:
   m_Children:
   - {fileID: 480116347}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &804773377
 PolygonCollider2D:
@@ -6880,7 +6911,7 @@ Transform:
   - {fileID: 1190519128}
   - {fileID: 521164725}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &974067942
 GameObject:
@@ -6919,7 +6950,7 @@ MonoBehaviour:
   MaxHealth: 400
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   unitCount: 16
   unitCost: 1
   unit: {fileID: 4161244359718295051, guid: 1960ce6013c29334bbd932ed5a20975d, type: 3}
@@ -7073,7 +7104,7 @@ Transform:
   m_Children:
   - {fileID: 2071207534}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!250 &974067948
 PointEffector2D:
@@ -8231,7 +8262,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1209214045
 GameObject:
@@ -9444,7 +9475,7 @@ Transform:
   m_Children:
   - {fileID: 2046151397}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1407459586
 MonoBehaviour:
@@ -9461,7 +9492,11 @@ MonoBehaviour:
   player: {fileID: 92637464}
   bot: {fileID: 1407459589}
   Tower: {fileID: 2119968673}
-  resourcesCount: 20
+  Fabric: {fileID: 341408068}
+  spawnerCost: 15
+  towerCost: 20
+  fabricCost: 25
+  resourcesCount: 50
 --- !u!50 &1407459587
 Rigidbody2D:
   serializedVersion: 4
@@ -9627,9 +9662,9 @@ MonoBehaviour:
   MaxHealth: 2000
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   result: {fileID: 670656099}
-  resourcesCount: 0
+  resourcesCount: 50
 --- !u!250 &1407459590
 PointEffector2D:
   m_ObjectHideFlags: 0
@@ -9991,7 +10026,7 @@ MonoBehaviour:
   MaxHealth: 400
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   unitCost: 2
   unit: {fileID: 2266968258551286439, guid: d7d2bd48e56c29b4a874287dcc98a4f7, type: 3}
   mainBuilding: {fileID: 92637464}
@@ -10113,7 +10148,7 @@ Transform:
   m_Children:
   - {fileID: 1307600460}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!250 &1475393184
 PointEffector2D:
@@ -10855,7 +10890,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1571083187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ea5ecb6e08c8a4197a6b9eb799f82f, type: 3}
+  m_Script: {fileID: 11500000, guid: 75e2d67e853bac2488cb919b8e3945c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Fabric: {fileID: 1475393178}
@@ -10863,6 +10898,7 @@ MonoBehaviour:
   Cost: 15
   mainBuilding: {fileID: 92637464}
   cursor: {fileID: 2800000, guid: a708ebc0b6319f742a0cde44f9338434, type: 3}
+  build: {fileID: 1893021865}
 --- !u!1 &1609624836
 GameObject:
   m_ObjectHideFlags: 0
@@ -11015,7 +11051,7 @@ Transform:
   m_Children:
   - {fileID: 7552933}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!250 &1609624842
 PointEffector2D:
@@ -11288,7 +11324,7 @@ RectTransform:
   m_Children:
   - {fileID: 261121494}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12100,6 +12136,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891720903}
   m_CullTransparentMesh: 1
+--- !u!1 &1893021864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1893021866}
+  - component: {fileID: 1893021865}
+  m_Layer: 0
+  m_Name: Build
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1893021865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893021864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ea5ecb6e08c8a4197a6b9eb799f82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainBuilding: {fileID: 92637464}
+  text: {fileID: 1742320628}
+--- !u!4 &1893021866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893021864}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 44.200012, y: -95.5, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1897187246
 GameObject:
   m_ObjectHideFlags: 0
@@ -13872,7 +13953,7 @@ MonoBehaviour:
   MaxHealth: 2000
   CurrentHealth: 1
   DamageForceThreshold: 1
-  DamageForceScale: 10
+  DamageForceScale: 0
   bomb: {fileID: 8268424299518160429, guid: 0024e0c74bb450748b16812231aa96b1, type: 3}
   deltaTime: 2
 --- !u!212 &2119968674
@@ -13939,7 +14020,7 @@ Transform:
   m_Children:
   - {fileID: 1897187247}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2119968676
 Rigidbody2D:
@@ -13993,17 +14074,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5850805196630399188, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399190, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399190, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.74
+      value: 44.2
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399190, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 36.62
+      value: -95.5
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399190, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14039,7 +14124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: secondsWait
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: mainBuilding
@@ -14068,11 +14153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8047044713554680501, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44
+      value: -44.7
       objectReference: {fileID: 0}
     - target: {fileID: 8047044713554680501, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 36.7
+      value: -97.6
       objectReference: {fileID: 0}
     - target: {fileID: 8047044713554680501, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14112,7 +14197,7 @@ PrefabInstance:
       objectReference: {fileID: 529602478}
     - target: {fileID: 8047044713554680502, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: secondsWait
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8047044713554680502, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: mainBuilding

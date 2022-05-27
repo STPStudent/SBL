@@ -116,9 +116,7 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
 
     void OnTriggerStay2D(Collider2D other)
     {
-        var vectorDifference = 
-                (transform.position - other.transform.position).normalized;
-        Debug.Log(vectorDifference);
-        transform.position = transform.position + vectorDifference;
+        transform.position += (transform.position - other.transform.position)
+                        .normalized;
     }
 }
