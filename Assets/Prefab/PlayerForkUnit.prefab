@@ -290,7 +290,7 @@ MonoBehaviour:
   MaxHealth: 100
   CurrentHealth: 0
   DamageForceThreshold: 100
-  DamageForceScale: 10
+  DamageForceScale: 30
   PlayerIndex: 0
   acceleration: 6
 --- !u!95 &2266968258551286429

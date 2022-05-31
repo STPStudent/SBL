@@ -304,6 +304,7 @@ MonoBehaviour:
   DamageForceThreshold: 1
   DamageForceScale: 20
   PlayerIndex: 1
+  acceleration: 3
 --- !u!60 &7978428832090662824
 PolygonCollider2D:
   m_ObjectHideFlags: 0

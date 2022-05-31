@@ -3,27 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitSpawner : HealthControl
+public class EvilSpawner : HealthControl
 {
+    [SerializeField] public int unitCount = 16;
     [SerializeField] public int unitCost = 5;
     [SerializeField] public UnitComponent unit;
     [SerializeField] public MainBuilding mainBuilding;
     [SerializeField] private float deltaTime;
-    public UnitPanel unitPanel;
     private float lastTime;
     private int spawnCount;
 
     void Start()
     {
         SetHealth();
-        if(gameObject.tag == "Bot")
-        {
-            EvilBrain.Spawners.Add(this);
-            spawnCount = 5;
-        }
-        else
-            unitPanel.Spawners.Add(this);
+        EvilBrain.Spawners.Add(this);
         lastTime = Time.time;
+        spawnCount = 5;
     }
 
     void Update()
