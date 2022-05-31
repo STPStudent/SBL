@@ -9,7 +9,7 @@ public class EvilBrain : MonoBehaviour
     [SerializeField] private MainBuilding bot;
     [SerializeField] private TowerScript Tower;
     [SerializeField] private ResourcesFabric Fabric;
-    public static List<EvilSpawner> Spawners;
+    public static List<UnitSpawner> Spawners;
     [SerializeField] private int spawnerCost;
     [SerializeField] private int towerCost;
     [SerializeField] private int fabricCost;
@@ -32,13 +32,13 @@ public class EvilBrain : MonoBehaviour
         unitCount++;
     }
 
-    public static void DeleteSpawner(EvilSpawner spawner)
+    public static void DeleteSpawner(UnitSpawner spawner)
         => Spawners.Remove(spawner);
 
     void Awake()
     {
         units = null;
-        Spawners = new List<EvilSpawner>();
+        Spawners = new List<UnitSpawner>();
     }
 
     private Vector3 SetPoint(string goal, GameObject[] k)
