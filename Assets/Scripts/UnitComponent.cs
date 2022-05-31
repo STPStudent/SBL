@@ -41,7 +41,7 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
         if (nextComponent != null)
             nextComponent.previousComponent = previousComponent;
         Destroy(gameObject);
-        
+
         if (PlayerIndex == 0)
             UnitControl.unitCount--;
         else
@@ -82,10 +82,10 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
     void Update()
     {
         var k = new Vector2(
-			Mathf.Clamp(transform.position.x, MainCamera.leftX, MainCamera.rightX),
-			Mathf.Clamp(transform.position.y,MainCamera.leftY, MainCamera.rightY)
-		);
-		transform.position = k;
+            Mathf.Clamp(transform.position.x, MainCamera.leftX, MainCamera.rightX),
+            Mathf.Clamp(transform.position.y, MainCamera.leftY, MainCamera.rightY)
+        );
+        transform.position = k;
         //находит вектор направления из текущей точки в указаную
         var startPosition = rigidBodyComponent.position;
         var vectorDifference = finishPosition - startPosition;
@@ -117,6 +117,6 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
     void OnTriggerStay2D(Collider2D other)
     {
         transform.position += (transform.position - other.transform.position)
-                        .normalized;
+            .normalized;
     }
 }

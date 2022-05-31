@@ -30,8 +30,7 @@ public class UnitFactory : HealthControl
 
     void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0)
-            && unitCost <= mainBuilding.resourcesCount)
+        if (Input.GetMouseButtonDown(0) && unitCost <= mainBuilding.resourcesCount)
         {
             mainBuilding.resourcesCount -= unitCost;
             spawnCount++;

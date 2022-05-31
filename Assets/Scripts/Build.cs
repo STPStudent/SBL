@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Build : MonoBehaviour
 {
     internal bool isBuilding;
-    internal GameObject Fabric{ get; set; }
+    internal GameObject Fabric { get; set; }
     internal int Cost;
     internal BuildPanel panel;
     [SerializeField] private MainBuilding mainBuilding;
@@ -24,6 +24,7 @@ public class Build : MonoBehaviour
                 CursorControl.SetNormalCursor();
                 return;
             }
+
             var coordinates = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var t = true;
             var allBuildings = GameObject
@@ -50,7 +51,7 @@ public class Build : MonoBehaviour
                 mainBuilding.resourcesCount -= Cost;
                 CursorControl.SetNormalCursor();
                 panel.circle.fillAmount = 1f;
-                if(Fabric.gameObject.name.Contains("Recourse"))
+                if (Fabric.gameObject.name.Contains("Recourse"))
                 {
                     Cost *= 2;
                     text.text = Cost.ToString();

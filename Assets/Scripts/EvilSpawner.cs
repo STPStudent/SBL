@@ -25,9 +25,9 @@ public class EvilSpawner : HealthControl
     {
         if (transform.position.y < -70)
             return;
-        
-        if(spawnCount > 0 && Spawn())
-            spawnCount --;
+
+        if (spawnCount > 0 && Spawn())
+            spawnCount--;
     }
 
     public override void DestroyObject()
@@ -35,13 +35,13 @@ public class EvilSpawner : HealthControl
         EvilBrain.DeleteSpawner(this);
         Destroy(gameObject);
     }
-    
+
     public bool Spawn()
     {
         //Если выполняются условие делает спавн юнита бота
         var time = Time.time;
-        if(unitCost <= mainBuilding.resourcesCount
-        && time - lastTime > deltaTime)
+        if (unitCost <= mainBuilding.resourcesCount
+            && time - lastTime > deltaTime)
         {
             lastTime = time;
             spawnCount--;
@@ -49,6 +49,7 @@ public class EvilSpawner : HealthControl
             Instantiate(unit, transform.position + Vector3.left, Quaternion.identity);
             return true;
         }
+
         return false;
     }
 }

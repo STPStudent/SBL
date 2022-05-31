@@ -8,8 +8,6 @@ public class MainCamera : MonoBehaviour
 
     public static bool IsBounds(Vector3 position)
     {
-        var first = leftX + " < " + position.x + " < " + rightX;
-        var second = leftY + " < " + position.y + " < " + rightY;
         return position.x > leftX
                && position.x < rightX
                && position.y < rightY

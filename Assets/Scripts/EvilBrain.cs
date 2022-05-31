@@ -185,6 +185,7 @@ public class EvilBrain : MonoBehaviour
             bot.resourcesCount -= cost;
             return 1;
         }
+
         return 0;
     }
 
@@ -195,12 +196,13 @@ public class EvilBrain : MonoBehaviour
         playerUnits = UnitControl.units;
         if (Spawners.Count > 2)
             ControlArmy();
-        if(CreateBilding(fabricCost, Fabric.gameObject) == 1)
+        if (CreateBilding(fabricCost, Fabric.gameObject) == 1)
         {
             fabricCost *= 2;
             fabricCount++;
         }
-        if(fabricCount == 0)
+
+        if (fabricCount == 0)
             return;
         var spawner = Spawners[Random.Range(0, 2)];
         if ((spawnerCount + towerCount) % 3 == 1)

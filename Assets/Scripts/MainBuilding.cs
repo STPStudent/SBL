@@ -6,6 +6,7 @@ public class MainBuilding : HealthControl
 {
     [SerializeField] private GameObject result;
     [SerializeField] public int resourcesCount;
+    private bool isFirst = true;
     
     void Start()
     {

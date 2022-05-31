@@ -14,7 +14,6 @@ public class DialogueManager : MonoBehaviour
     private int count;
 
     [SerializeField] private GameObject enemy;
-    [SerializeField] private Image introBg;
     [SerializeField] private Image blackBg;
     [SerializeField] private Image mainBg;
 
@@ -119,6 +118,6 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         animator.SetBool(IsOpenDialogue, false);
-        SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene("Tutorial");
     }
 }
