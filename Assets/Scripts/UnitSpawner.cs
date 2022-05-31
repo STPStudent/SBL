@@ -22,7 +22,7 @@ public class UnitSpawner : HealthControl
             spawnCount = 5;
         }
         else
-            UnitPanel.Spawners.Add(this);
+            unitPanel.Spawners.Add(this);
         lastTime = Time.time;
     }
 

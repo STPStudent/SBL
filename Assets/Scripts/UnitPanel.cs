@@ -13,7 +13,7 @@ public class UnitPanel : MonoBehaviour, IPointerDownHandler
     public int Cost;
     [SerializeField] private MainBuilding mainBuilding;
     [SerializeField] private Text text;
-    public static List<UnitSpawner> Spawners;
+    public List<UnitSpawner> Spawners;
     private float lastTime = 0;
     private int unitToSpawn = 0;
     private bool enabled = false;
