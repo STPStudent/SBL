@@ -30,9 +30,7 @@ public class CursorControl : MonoBehaviour
 
     public static void SetAttackCursor()
     {
-        if (!isBuilding)
-            Cursor.SetCursor(staticCursorAttackTexture, Vector2.zero, CursorMode.Auto);
-        else
+        if (isBuilding)
         {
             Cursor.SetCursor(staticCursorCross, Vector2.zero, CursorMode.Auto);
             isObject = true;
@@ -40,9 +38,7 @@ public class CursorControl : MonoBehaviour
     }
 
     public static void OutOfRadius()
-    {
-        Cursor.SetCursor(staticCursorCross, Vector2.zero, CursorMode.Auto);
-    }
+        => Cursor.SetCursor(staticCursorCross, Vector2.zero, CursorMode.Auto);
 
     public static void SetBuildingCursor(Texture2D texture)
     {

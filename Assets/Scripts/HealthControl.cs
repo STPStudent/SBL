@@ -39,18 +39,13 @@ public class HealthControl : MonoBehaviour
         CurrentHealth = Mathf.Max(0, CurrentHealth);
     }
 
-    // private void OnMouseOver()
-    // {
-    //     CursorControl.SetAttackCursor();
-    // }
-    //
-    // private void OnMouseExit()
-    // {
-    //     CursorControl.SetNormalCursor();
-    // }
+    private void OnMouseOver()
+        => CursorControl.SetAttackCursor();
+    
+    private void OnMouseExit()
+        => CursorControl.SetNormalCursor();
+    
 
     public virtual void DestroyObject()
-    {
-        Destroy(gameObject);
-    }
+        => Destroy(gameObject);
 }

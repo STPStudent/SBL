@@ -1042,7 +1042,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1003142659
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e27158a3d0328bc4cb721e5b1bdcdc46, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10939,7 +10939,7 @@ MonoBehaviour:
   MaxHealth: 500
   CurrentHealth: 0
   DamageForceThreshold: 1
-  DamageForceScale: 5
+  DamageForceScale: 0
   unitCost: 1
   unit: {fileID: 5638681313489024860, guid: 472c002b484679c4ca0b2a148989f96d, type: 3}
   mainBuilding: {fileID: 92637464}
@@ -14128,12 +14128,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: secondsWait
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: mainBuilding
       value: 
       objectReference: {fileID: 1407459589}
+    - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
+      propertyPath: DamageForceScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5850805196630399194, guid: 8938400f4b87a6546a18f1428264da1d, type: 3}
       propertyPath: countAddAfterWait
       value: 1
@@ -14205,12 +14209,16 @@ PrefabInstance:
       objectReference: {fileID: 529602478}
     - target: {fileID: 8047044713554680502, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: secondsWait
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8047044713554680502, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: mainBuilding
       value: 
       objectReference: {fileID: 92637464}
+    - target: {fileID: 8047044713554680502, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
+      propertyPath: DamageForceScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8047044714228393673, guid: 1b090d886bed7794ea11797ee648a771, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.011

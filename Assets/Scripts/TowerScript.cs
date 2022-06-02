@@ -33,7 +33,7 @@ public class TowerScript : HealthControl
                     if ((position - unit.transform.position).magnitude > radius)
                         continue;
                     var newBomb = Instantiate(bomb, position, Quaternion.identity) as Bomb;
-                    newBomb.Direction = unit.transform.position;
+                    newBomb.unit = unit;
                     break;
                 }
             }

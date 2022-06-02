@@ -9,9 +9,7 @@ public class MainBuilding : HealthControl
     private bool isFirst = true;
     
     void Start()
-    {
-        SetHealth();
-    }
+        => SetHealth();
 
     public override void DestroyObject()
     {

@@ -93,7 +93,6 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
         //Отражает спрайт по горизонтали во время смены движения
         renderer.flipX = !(vectorDifference.x < 0);
 
-
         if (vectorDifference.magnitude < 2
             || finishPosition == Vector2.zero)
         {
@@ -118,5 +117,7 @@ public class UnitComponent : HealthControl, IEnumerable<UnitComponent>
     {
         transform.position += (transform.position - other.transform.position)
             .normalized;
+        if(other.gameObject.name.Contains("Bomb"))
+            Destroy(other.gameObject);
     }
 }

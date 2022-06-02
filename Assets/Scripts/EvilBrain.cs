@@ -113,7 +113,9 @@ public class EvilBrain : MonoBehaviour
             if (comp == null)
                 continue;
             var len = (comp.transform.position - transform.position).magnitude;
-            if (len < 20 && (nearPlayer == Vector3.zero || (nearPlayer - transform.position).magnitude < len))
+            if (len < 20 
+            && (nearPlayer == Vector3.zero 
+                || (nearPlayer - transform.position).magnitude < len))
             {
                 nearPlayer = comp.transform.position;
                 attackCount++;
